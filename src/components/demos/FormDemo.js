@@ -20,7 +20,6 @@ import {
 import {
   ContainerOutlined,
   PlusOutlined,
-  GlobalOutlined,
   CopyOutlined,
   ImportOutlined,
   DeleteOutlined,
@@ -34,8 +33,7 @@ const { Title, Text, Link } = Typography;
 const { Option } = Select;
 const { Panel } = Collapse;
 
-// This component is now self-contained and is imported into content.js
-const FormDocumentation = ({ t, language, content, setContent }) => {
+const FormDocumentation = ({ t }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [form] = Form.useForm();
     const showModal = () => setIsModalVisible(true);
@@ -64,8 +62,19 @@ const FormDocumentation = ({ t, language, content, setContent }) => {
             >
                 <div style={{ background: 'linear-gradient(90deg, rgba(79, 161, 71, 0.10) 0%, rgba(69, 99, 191, 0.10) 100%)', padding: '16px 24px' }}>
                     <Row justify="space-between" align="middle">
-                        <Col><Space align="center" size="middle"><Avatar shape="square" size={48} style={{ backgroundColor: '#27ae60' }} icon={<ContainerOutlined />} /><div><Title level={4} style={{ margin: 0 }}>{t.createOrderTitle}</Title><Text type="secondary">{t.createOrderSubtitle}</Text></div></Space></Col>
-                        <Col><Space><Select value={language} onChange={(lang) => setContent({ ...content, currentLang: lang })} suffixIcon={<GlobalOutlined />}><Option value="en">English</Option><Option value="zh">中文</Option></Select><Button type="text" icon={<CloseOutlined />} onClick={handleCancel} /></Space></Col>
+                        <Col>
+                            <Space align="center" size="middle">
+                                <Avatar shape="square" size={48} style={{ backgroundColor: '#27ae60' }} icon={<ContainerOutlined />} />
+                                <div>
+                                    <Title level={4} style={{ margin: 0 }}>{t.createOrderTitle}</Title>
+                                    <Text type="secondary">{t.createOrderSubtitle}</Text>
+                                </div>
+                            </Space>
+                        </Col>
+                        {/* The language switcher is removed from here and is now only in App.js */}
+                        <Col>
+                            <Button type="text" icon={<CloseOutlined />} onClick={handleCancel} />
+                        </Col>
                     </Row>
                 </div>
                 <div style={{ padding: '24px', background: '#FFFFFF', maxHeight: '65vh', overflowY: 'auto' }}>

@@ -10,6 +10,9 @@ import {
 import {
   AppstoreOutlined,
 } from '@ant-design/icons';
+// Import Ant Design locales for full i18n support
+import enUS from 'antd/locale/en_US';
+import zhCN from 'antd/locale/zh_CN';
 import { initialContent, componentData } from './content';
 import DocPage from './components/DocPage';
 
@@ -85,6 +88,8 @@ const App = () => {
       code: componentData[selectedKey]?.code,
   };
 
+  const antdLocale = content.currentLang === 'zh' ? zhCN : enUS;
+
   return (
     <>
       <style>{`
@@ -96,6 +101,7 @@ const App = () => {
         .markdown-body img { max-width: 100%; }
       `}</style>
       <ConfigProvider 
+        locale={antdLocale}
         theme={{ 
           token: { 
             colorPrimary: '#27ae60', 
@@ -126,8 +132,28 @@ const App = () => {
               <Menu mode="inline" selectedKeys={[selectedKey]} style={{ height: '100%', borderRight: 0 }} onClick={({key}) => setSelectedKey(key)}>
                 <Menu.Item key="overview">{t.overview}</Menu.Item>
                 <Menu.ItemGroup key="g1" title={t.general}><Menu.Item key="button">{t.button}</Menu.Item><Menu.Item key="icon">{t.icon}</Menu.Item><Menu.Item key="typography">{t.typography}</Menu.Item></Menu.ItemGroup>
-                <Menu.ItemGroup key="g2" title={t.layout}><Menu.Item key="grid">{t.grid}</Menu.Item><Menu.Item key="space">{t.space}</Menu.Item></Menu.ItemGroup>
-                <Menu.ItemGroup key="g3" title={t.dataDisplay}><Menu.Item key="table">{t.table}</Menu.Item><Menu.Item key="tag">{t.tag}</Menu.Item><Menu.Item key="dropdown">{t.dropdown}</Menu.Item></Menu.ItemGroup>
+                <Menu.ItemGroup key="g2" title={t.layout}><Menu.Item key="divider">{t.divider}</Menu.Item><Menu.Item key="grid">{t.grid}</Menu.Item><Menu.Item key="layout">{t.layout}</Menu.Item><Menu.Item key="space">{t.space}</Menu.Item></Menu.ItemGroup>
+                <Menu.ItemGroup key="g3" title={t.dataDisplay}>
+                    <Menu.Item key="avatar">{t.avatar}</Menu.Item>
+                    <Menu.Item key="badge">{t.badge}</Menu.Item>
+                    <Menu.Item key="calendar">{t.calendar}</Menu.Item>
+                    <Menu.Item key="card">{t.card}</Menu.Item>
+                    <Menu.Item key="carousel">{t.carousel}</Menu.Item>
+                    <Menu.Item key="collapse">{t.collapse}</Menu.Item>
+                    <Menu.Item key="descriptions">{t.descriptions}</Menu.Item>
+                    <Menu.Item key="empty">{t.empty}</Menu.Item>
+                    <Menu.Item key="image">{t.image}</Menu.Item>
+                    <Menu.Item key="list">{t.list}</Menu.Item>
+                    <Menu.Item key="popover">{t.popover}</Menu.Item>
+                    <Menu.Item key="segmented">{t.segmented}</Menu.Item>
+                    <Menu.Item key="statistic">{t.statistic}</Menu.Item>
+                    <Menu.Item key="table">{t.table}</Menu.Item>
+                    <Menu.Item key="tag">{t.tag}</Menu.Item>
+                    <Menu.Item key="timeline">{t.timeline}</Menu.Item>
+                    <Menu.Item key="tooltip">{t.tooltip}</Menu.Item>
+                    <Menu.Item key="tree">{t.tree}</Menu.Item>
+                    <Menu.Item key="dropdown">{t.dropdown}</Menu.Item>
+                </Menu.ItemGroup>
                 <Menu.ItemGroup key="g4" title={t.dataEntry}><Menu.Item key="form">{t.form}</Menu.Item><Menu.Item key="checkbox">{t.checkbox}</Menu.Item></Menu.ItemGroup>
               </Menu>
             </Sider>

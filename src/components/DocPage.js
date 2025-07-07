@@ -85,7 +85,8 @@ const DocPage = ({
             {content.demo && (
                 <>
                     <Title level={2} id="demo" style={{ marginTop: 24 }}>{t.liveDemo}</Title>
-                    {typeof DemoComponent === 'function' ? <DemoComponent t={t} language={currentLang} content={content} setContent={() => {}} /> : DemoComponent}
+                    {/* Simplified the props passed to the demo component */}
+                    {typeof DemoComponent === 'function' ? <DemoComponent t={t} /> : DemoComponent}
                     <Text type="secondary" style={{display: 'block', marginTop: '1rem'}}>Note: The live demo does not update in real-time from the editor. This requires a local development environment.</Text>
                 </>
             )}
