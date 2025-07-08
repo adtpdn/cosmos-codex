@@ -1,43 +1,43 @@
 import React, { useState } from 'react';
 import {
-  Layout,
-  Menu,
-  Typography,
-  Avatar,
-  Space,
-  Input,
-  Select,
-  DatePicker,
-  Table,
-  Tag,
-  Row,
-  Col,
-  Button,
-  Badge,
+    Layout,
+    Menu,
+    Typography,
+    Avatar,
+    Space,
+    Input,
+    Select,
+    DatePicker,
+    Table,
+    Tag,
+    Row,
+    Col,
+    Button,
+    Badge,
 } from 'antd';
 import {
-  AppstoreOutlined,
-  ContainerOutlined,
-  UserOutlined,
-  DownOutlined,
-  PlusOutlined,
-  SearchOutlined,
-  FilterOutlined,
-  CalendarOutlined,
-  MoreOutlined,
-  WarningFilled,
-  LeftOutlined,
-  FundProjectionScreenOutlined,
-  InteractionOutlined,
-  DatabaseOutlined,
-  BarChartOutlined,
-  TeamOutlined,
-  ExperimentOutlined,
-  ToolOutlined,
-  FileDoneOutlined,
-  GatewayOutlined,
-  ShopOutlined,
-  ClockCircleOutlined,
+    AppstoreOutlined,
+    ContainerOutlined,
+    UserOutlined,
+    DownOutlined,
+    PlusOutlined,
+    SearchOutlined,
+    FilterOutlined,
+    CalendarOutlined,
+    MoreOutlined,
+    WarningFilled,
+    LeftOutlined,
+    FundProjectionScreenOutlined,
+    InteractionOutlined,
+    DatabaseOutlined,
+    BarChartOutlined,
+    TeamOutlined,
+    ExperimentOutlined,
+    ToolOutlined,
+    FileDoneOutlined,
+    GatewayOutlined,
+    ShopOutlined,
+    ClockCircleOutlined,
 } from '@ant-design/icons';
 
 const { Header, Sider, Content } = Layout;
@@ -69,26 +69,34 @@ const StatusTag = ({ status, t }) => {
         default: color = 'default'; text = status;
     }
     return <Tag color={color}>{text.toUpperCase()}</Tag>;
-}
+};
 
 const inventoryData = [
-    { key: '1', orderNumber: 'SO2503170002', customer: '666-555', plannedDelivery: '2025-03-04', route: '1111', weight: '63 kg', priority: 'normal', status: 'not dispatched', urgent: false, },
-    { key: '2', orderNumber: 'SO2503170001', customer: 'This is a test - Go to Taste', plannedDelivery: '2025-03-04', route: '', weight: '1 kg', priority: 'high', status: 'not dispatched', urgent: true, },
-    { key: '3', orderNumber: 'SO2501130001', customer: 'This is a test - Go to Taste', plannedDelivery: '2025-03-13', route: '1111', weight: '355 kg', priority: 'urgent', status: 'not dispatched', urgent: true, },
-    { key: '4', orderNumber: 'SO2501120003', customer: 'This is a test - Go to Taste', plannedDelivery: '2025-03-05', route: '1111', weight: '12 kg', priority: 'normal', status: 'collected', urgent: false, },
-    { key: '5', orderNumber: 'SO2501120002', customer: 'test - C02', plannedDelivery: '2025-03-19', route: '#Sales', weight: '-', priority: 'normal', status: 'collected', urgent: false, },
-    { key: '6', orderNumber: 'SO2501120001', customer: 'This is a test - Go to Taste', plannedDelivery: '2025-03-12', route: '#222', weight: '122 kg', priority: 'normal', status: 'collected', urgent: false, },
-    { key: '7', orderNumber: 'SO2501050002', customer: 'This is a test - Go to Taste', plannedDelivery: '2025-03-05', route: '#222', weight: '2 kg', priority: 'low', status: 'collected', urgent: false, },
+    { key: '1', orderNumber: 'SO2503170002', customer: '666-555', plannedDelivery: '2025-03-04', route: '1111', weight: '63 kg', priority: 'normal', status: 'not dispatched', urgent: false },
+    { key: '2', orderNumber: 'SO2503170001', customer: 'This is a test - Go to Taste', plannedDelivery: '2025-03-04', route: '', weight: '1 koska', priority: 'high', status: 'not dispatched', urgent: true },
+    { key: '3', orderNumber: 'SO2501130001', customer: 'This is a test - Go to Taste', plannedDelivery: '2025-03-13', route: '1111', weight: '355 kg', priority: 'urgent', status: 'not dispatched', urgent: true },
+    { key: '4', orderNumber: 'SO2501120003', customer: 'This is a test - Go to Taste', plannedDelivery: '2025-03-05', route: '1111', weight: '12 kg', priority: 'normal', status: 'collected', urgent: false },
+    { key: '5', orderNumber: 'SO2501120002', customer: 'test - C02', plannedDelivery: '2025-03-19', route: '#Sales', weight: '-', priority: 'normal', status: 'collected', urgent: false },
+    { key: '6', orderNumber: 'SO2501120001', customer: 'This is a test - Go to Taste', plannedDelivery: '2025-03-12', route: '#222', weight: '122 kg', priority: 'normal', status: 'collected', urgent: false },
+    { key: '7', orderNumber: 'SO2501050002', customer: 'This is a test - Go to Taste', plannedDelivery: '2025-03-05', route: '#222', weight: '2 kg', priority: 'low', status: 'collected', urgent: false },
 ];
 
 const InventoryStandalone = ({ t, onClose }) => {
     const [activeTab, setActiveTab] = useState('all');
+    const [selectedMenuKey, setSelectedMenuKey] = useState('orderInformation');
+
+    const handleMenuClick = ({ key }) => {
+        const submenuItems = ['orderInformation', 'materialInformation', 'warehouseInformation', 'inventoryReports', 'operationReports'];
+        if (submenuItems.includes(key)) {
+            setSelectedMenuKey(key);
+        }
+    };
 
     const columns = [
-        { title: '', dataIndex: 'urgent', key: 'urgent', render: (urgent) => urgent ? <WarningFilled style={{ color: '#f5222d' }} /> : null, width: 40, },
-        { title: t.orderNumber, dataIndex: 'orderNumber', key: 'orderNumber', sorter: (a, b) => a.orderNumber.localeCompare(b.orderNumber), },
-        { title: t.customer, dataIndex: 'customer', key: 'customer', },
-        { title: t.plannedDelivery, dataIndex: 'plannedDelivery', key: 'plannedDelivery', sorter: (a, b) => new Date(a.plannedDelivery) - new Date(b.plannedDelivery), },
+        { title: '', dataIndex: 'urgent', key: 'urgent', render: (urgent) => urgent ? <WarningFilled style={{ color: '#f5222d' }} /> : null, width: 40 },
+        { title: t.orderNumber, dataIndex: 'orderNumber', key: 'orderNumber', sorter: (a, b) => a.orderNumber.localeCompare(b.orderNumber) },
+        { title: t.customer, dataIndex: 'customer', key: 'customer' },
+        { title: t.plannedDelivery, dataIndex: 'plannedDelivery', key: 'plannedDelivery', sorter: (a, b) => new Date(a.plannedDelivery) - new Date(b.plannedDelivery) },
         {
             title: t.route,
             dataIndex: 'route',
@@ -103,12 +111,12 @@ const InventoryStandalone = ({ t, onClose }) => {
                 return '-';
             }
         },
-        { title: t.weight, dataIndex: 'weight', key: 'weight', },
-        { title: t.priority, dataIndex: 'priority', key: 'priority', render: (priority) => <PriorityTag priority={priority} t={t} />, },
-        { title: t.status, dataIndex: 'status', key: 'status', render: (status) => <StatusTag status={status} t={t} />, },
-        { title: t.actions, key: 'actions', render: () => <Space size="middle"><Link>{t.details}</Link><MoreOutlined /></Space>, },
+        { title: t.weight, dataIndex: 'weight', key: 'weight' },
+        { title: t.priority, dataIndex: 'priority', key: 'priority', render: (priority) => <PriorityTag priority={priority} t={t} /> },
+        { title: t.status, dataIndex: 'status', key: 'status', render: (status) => <StatusTag status={status} t={t} /> },
+        { title: t.actions, key: 'actions', render: () => <Space size="middle"><Link>{t.details}</Link><MoreOutlined /></Space> },
     ];
-    
+
     const tabData = [
         { key: 'all', label: t.all, count: 247 },
         { key: 'pending', label: t.pending, count: 0 },
@@ -124,7 +132,14 @@ const InventoryStandalone = ({ t, onClose }) => {
                     <Title level={3} style={{ color: '#fff', margin: 0 }}><LeftOutlined /> COSMOS Smart Future</Title>
                     <Text style={{ color: 'rgba(255,255,255,0.8)' }}>{t.agriInfoSystem}</Text>
                 </div>
-                <Menu theme="dark" mode="inline" defaultOpenKeys={['inventoryManagement']} defaultSelectedKeys={['orderInformation']} style={{ background: '#27ae60' }}>
+                <Menu
+                    theme="dark"
+                    mode="inline"
+                    defaultOpenKeys={['inventoryManagement']}
+                    selectedKeys={[selectedMenuKey]}
+                    onClick={handleMenuClick}
+                    style={{ background: '#27ae60' }}
+                >
                     <Menu.Item key="basicInfo" icon={<DatabaseOutlined />}>{t.basicInfo}</Menu.Item>
                     <Menu.Item key="seedManagement" icon={<ToolOutlined />}>{t.seedManagement}</Menu.Item>
                     <Menu.Item key="envMonitoring" icon={<ExperimentOutlined />}>{t.envMonitoring}</Menu.Item>
@@ -134,25 +149,79 @@ const InventoryStandalone = ({ t, onClose }) => {
                     <Menu.Item key="yieldForecasting" icon={<BarChartOutlined />}>{t.yieldForecasting}</Menu.Item>
                     <Menu.Item key="realtimeDashboard" icon={<AppstoreOutlined />}>{t.realtimeDashboard}</Menu.Item>
                     <Menu.SubMenu key="inventoryManagement" icon={<ContainerOutlined />} title={t.inventoryManagement}>
-                        <Menu.Item key="orderInformation">{t.orderInfo}</Menu.Item>
-                        <Menu.Item key="materialInformation" 
-                        style={{
-                            backgroundColor: "#14532D",
-                            width: "80%",
-                            margin: "1rem auto",
-                            padding: "0",
-                            textAlign: "center",
-                        }}>Material Information</Menu.Item>
-                        <Menu.Item key="warehouseInformation">Warehouse Information</Menu.Item>
-                        <Menu.Item key="inventoryReports">Inventory Reports</Menu.Item>
-                        <Menu.Item key="operationReports">Operation Reports</Menu.Item>
+                        <Menu.Item
+                            key="orderInformation"
+                            style={{
+                                backgroundColor: selectedMenuKey === 'orderInformation' ? '#14532D' : '#000c17',
+                                width: '80%',
+                                margin: '1rem auto',
+                                padding: '0',
+                                textAlign: 'center',
+                                transition: 'background-color 0.3s ease',
+
+                            }}
+                        >
+                            {t.orderInfo}
+                        </Menu.Item>
+                        <Menu.Item
+                            key="materialInformation"
+                            style={{
+                                backgroundColor: selectedMenuKey === 'materialInformation' ? '#14532D' : '#000c17',
+                                width: '80%',
+                                margin: '1rem auto',
+                                padding: '0',
+                                textAlign: 'center',
+                                transition: 'background-color 0.3s ease',
+                            }}
+                        >
+                            Material Information
+                        </Menu.Item>
+                        <Menu.Item
+                            key="warehouseInformation"
+                            style={{
+                                backgroundColor: selectedMenuKey === 'warehouseInformation' ? '#14532D' : '#000c17',
+                                width: '80%',
+                                margin: '1rem auto',
+                                padding: '0',
+                                textAlign: 'center',
+                                transition: 'background-color 0.3s ease',
+                            }}
+                        >
+                            Warehouse Information
+                        </Menu.Item>
+                        <Menu.Item
+                            key="inventoryReports"
+                            style={{
+                                backgroundColor: selectedMenuKey === 'inventoryReports' ? '#14532D' : '#000c17',
+                                width: '80%',
+                                margin: '1rem auto',
+                                padding: '0',
+                                textAlign: 'center',
+                                transition: 'background-color 0.3s ease',
+                            }}
+                        >
+                            Inventory Reports
+                        </Menu.Item>
+                        <Menu.Item
+                            key="operationReports"
+                            style={{
+                                backgroundColor: selectedMenuKey === 'operationReports' ? '#14532D' : '#000c17',
+                                width: '80%',
+                                margin: '1rem auto',
+                                padding: '0',
+                                textAlign: 'center',
+                                transition: 'background-color 0.3s ease',
+                            }}
+                        >
+                            Operation Reports
+                        </Menu.Item>
                     </Menu.SubMenu>
                     <Menu.Item key="packaging" icon={<FileDoneOutlined />}>{t.packaging}</Menu.Item>
                 </Menu>
             </Sider>
             <Layout>
-                <Header style={{ padding: '0 24px', background: '#fff', borderBottom: '1px solid #f0f0f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', }}>
-                    <Title level={4} style={{ margin: 0 }}>{t.prodMgmtSystem}<br/><Text type="secondary" style={{fontSize: '14px'}}>{t.inventoryManagement} / {t.orderInfo}</Text></Title>
+                <Header style={{ padding: '0 24px', background: '#fff', borderBottom: '1px solid #f0f0f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Title level={4} style={{ margin: 0 }}>{t.prodMgmtSystem}<br /><Text type="secondary" style={{ fontSize: '14px' }}>{t.inventoryManagement} / {t.orderInfo}</Text></Title>
                     <Space size="large">
                         <Badge dot color="red"><Text strong>{t.bayerBase}</Text></Badge>
                         <Space>
@@ -179,7 +248,7 @@ const InventoryStandalone = ({ t, onClose }) => {
                             <Col><Space><Link>{t.scheduledReports}</Link><Link>{t.customerInfo}</Link><Button type="primary" icon={<PlusOutlined />}>{t.createOrder}</Button></Space></Col>
                         </Row>
                     </div>
-                    
+
                     <div style={{ marginBottom: 24 }}>
                         <Space size="small">
                             {tabData.map(tab => (
@@ -221,7 +290,7 @@ const InventoryStandalone = ({ t, onClose }) => {
                             <Select defaultValue="any_route" style={{ width: 150 }}><Option value="any_route">{t.anyRoute}</Option></Select>
                             <Button icon={<FilterOutlined />} />
                         </Space>
-                        <div style={{marginTop: '16px'}}><Text type="secondary">{t.activeFilters}: </Text><Tag closable color="blue">{t.dispatched}</Tag><Tag closable color="blue">{t.notDispatched}</Tag><Link>{t.clearAll}</Link></div>
+                        <div style={{ marginTop: '16px' }}><Text type="secondary">{t.activeFilters}: </Text><Tag closable color="blue">{t.dispatched}</Tag><Tag closable color="blue">{t.notDispatched}</Tag><Link>{t.clearAll}</Link></div>
                     </div>
                     <Table columns={columns} dataSource={inventoryData} rowSelection={{}} pagination={{ pageSize: 10 }} />
                 </Content>
