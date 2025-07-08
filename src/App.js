@@ -6,11 +6,13 @@ import {
   Select,
   ConfigProvider,
   Anchor,
+  Drawer,
+  Button,
 } from 'antd';
 import {
   AppstoreOutlined,
+  MenuOutlined,
 } from '@ant-design/icons';
-// Import Ant Design locales for full i18n support
 import enUS from 'antd/locale/en_US';
 import zhCN from 'antd/locale/zh_CN';
 import { initialContent, componentData } from './content';
@@ -21,12 +23,30 @@ const { Title } = Typography;
 const { Option } = Select;
 const { Link: AnchorLink } = Anchor;
 
+// Custom hook to get window size
+const useWindowSize = () => {
+  const [size, setSize] = useState([window.innerWidth, window.innerHeight]);
+  useEffect(() => {
+    const handleResize = () => {
+      setSize([window.innerWidth, window.innerHeight]);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  return size;
+};
+
 const App = () => {
   const [selectedKey, setSelectedKey] = useState('overview');
   const [content, setContent] = useState({ ...initialContent, currentLang: 'en' });
   const [isEditing, setIsEditing] = useState(false);
   const [tempContent, setTempContent] = useState(null);
   const [toc, setToc] = useState([]);
+  const [drawerVisible, setDrawerVisible] = useState(false);
+  const [width] = useWindowSize();
+
+  const isMobile = width < 768;
+  const isTablet = width >= 768 && width < 1024;
 
   const t = content[content.currentLang];
   const descriptionKey = `${selectedKey}Description`;
@@ -90,6 +110,48 @@ const App = () => {
 
   const antdLocale = content.currentLang === 'zh' ? zhCN : enUS;
 
+  const siderWidth = isTablet ? 150 : 200;
+
+  const SiderMenu = (
+    <Menu 
+        mode="inline" 
+        selectedKeys={[selectedKey]} 
+        style={{ height: '100%', borderRight: 0 }} 
+        onClick={({key}) => {
+            setSelectedKey(key);
+            if (isMobile) {
+                setDrawerVisible(false);
+            }
+        }}
+    >
+        <Menu.Item key="overview">{t.overview}</Menu.Item>
+        <Menu.ItemGroup key="g1" title={t.general}><Menu.Item key="button">{t.button}</Menu.Item><Menu.Item key="icon">{t.icon}</Menu.Item><Menu.Item key="typography">{t.typography}</Menu.Item></Menu.ItemGroup>
+        <Menu.ItemGroup key="g2" title={t.layout}><Menu.Item key="divider">{t.divider}</Menu.Item><Menu.Item key="grid">{t.grid}</Menu.Item><Menu.Item key="layout">{t.layout}</Menu.Item><Menu.Item key="space">{t.space}</Menu.Item></Menu.ItemGroup>
+        <Menu.ItemGroup key="g3" title={t.dataDisplay}>
+            <Menu.Item key="avatar">{t.avatar}</Menu.Item>
+            <Menu.Item key="badge">{t.badge}</Menu.Item>
+            <Menu.Item key="calendar">{t.calendar}</Menu.Item>
+            <Menu.Item key="card">{t.card}</Menu.Item>
+            <Menu.Item key="carousel">{t.carousel}</Menu.Item>
+            <Menu.Item key="collapse">{t.collapse}</Menu.Item>
+            <Menu.Item key="descriptions">{t.descriptions}</Menu.Item>
+            <Menu.Item key="empty">{t.empty}</Menu.Item>
+            <Menu.Item key="image">{t.image}</Menu.Item>
+            <Menu.Item key="list">{t.list}</Menu.Item>
+            <Menu.Item key="popover">{t.popover}</Menu.Item>
+            <Menu.Item key="segmented">{t.segmented}</Menu.Item>
+            <Menu.Item key="statistic">{t.statistic}</Menu.Item>
+            <Menu.Item key="table">{t.table}</Menu.Item>
+            <Menu.Item key="tag">{t.tag}</Menu.Item>
+            <Menu.Item key="timeline">{t.timeline}</Menu.Item>
+            <Menu.Item key="tooltip">{t.tooltip}</Menu.Item>
+            <Menu.Item key="tree">{t.tree}</Menu.Item>
+            <Menu.Item key="dropdown">{t.dropdown}</Menu.Item>
+        </Menu.ItemGroup>
+        <Menu.ItemGroup key="g4" title={t.dataEntry}><Menu.Item key="form">{t.form}</Menu.Item><Menu.Item key="checkbox">{t.checkbox}</Menu.Item></Menu.ItemGroup>
+    </Menu>
+  );
+
   return (
     <>
       <style>{`
@@ -120,46 +182,50 @@ const App = () => {
         }}
       >
         <Layout style={{ minHeight: '100vh' }}>
-          <Header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#fff', borderBottom: '1px solid #f0f0f0', padding: '0 24px' }}>
-              <Title level={3} style={{ color: '#27ae60', margin: 0 }}><AppstoreOutlined style={{marginRight: 8}}/>{t.appTitle}</Title>
+          <Header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#fff', borderBottom: '1px solid #f0f0f0', padding: isMobile ? '0 16px' : '0 24px' }}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                {isMobile && (
+                    <Button
+                        type="text"
+                        icon={<MenuOutlined />}
+                        onClick={() => setDrawerVisible(true)}
+                        style={{ marginRight: 8 }}
+                    />
+                )}
+                <Title 
+                  level={3} 
+                  style={{ 
+                    color: '#27ae60', 
+                    margin: 0,
+                    fontSize: isMobile ? '15px' : undefined,
+                  }}
+                >
+                    <AppstoreOutlined style={{marginRight: 8}}/>{t.appTitle}
+                </Title>
+              </div>
               <Select value={content.currentLang} onChange={(lang) => setContent({ ...content, currentLang: lang })}>
                   <Option value="en">English</Option>
                   <Option value="zh">中文</Option>
               </Select>
           </Header>
           <Layout>
-            <Sider width={240} style={{ background: '#fff', borderRight: '1px solid #f0f0f0' }}>
-              <Menu mode="inline" selectedKeys={[selectedKey]} style={{ height: '100%', borderRight: 0 }} onClick={({key}) => setSelectedKey(key)}>
-                <Menu.Item key="overview">{t.overview}</Menu.Item>
-                <Menu.ItemGroup key="g1" title={t.general}><Menu.Item key="button">{t.button}</Menu.Item><Menu.Item key="icon">{t.icon}</Menu.Item><Menu.Item key="typography">{t.typography}</Menu.Item></Menu.ItemGroup>
-                <Menu.ItemGroup key="g2" title={t.layout}><Menu.Item key="divider">{t.divider}</Menu.Item><Menu.Item key="grid">{t.grid}</Menu.Item><Menu.Item key="layout">{t.layout}</Menu.Item><Menu.Item key="space">{t.space}</Menu.Item></Menu.ItemGroup>
-                <Menu.ItemGroup key="g3" title={t.dataDisplay}>
-                    <Menu.Item key="avatar">{t.avatar}</Menu.Item>
-                    <Menu.Item key="badge">{t.badge}</Menu.Item>
-                    <Menu.Item key="calendar">{t.calendar}</Menu.Item>
-                    <Menu.Item key="card">{t.card}</Menu.Item>
-                    <Menu.Item key="carousel">{t.carousel}</Menu.Item>
-                    <Menu.Item key="collapse">{t.collapse}</Menu.Item>
-                    <Menu.Item key="descriptions">{t.descriptions}</Menu.Item>
-                    <Menu.Item key="empty">{t.empty}</Menu.Item>
-                    <Menu.Item key="image">{t.image}</Menu.Item>
-                    <Menu.Item key="list">{t.list}</Menu.Item>
-                    <Menu.Item key="popover">{t.popover}</Menu.Item>
-                    <Menu.Item key="segmented">{t.segmented}</Menu.Item>
-                    <Menu.Item key="statistic">{t.statistic}</Menu.Item>
-                    <Menu.Item key="table">{t.table}</Menu.Item>
-                    <Menu.Item key="tag">{t.tag}</Menu.Item>
-                    <Menu.Item key="timeline">{t.timeline}</Menu.Item>
-                    <Menu.Item key="tooltip">{t.tooltip}</Menu.Item>
-                    <Menu.Item key="tree">{t.tree}</Menu.Item>
-                    <Menu.Item key="dropdown">{t.dropdown}</Menu.Item>
-                    <Menu.Item key="productionManagement">{t.productionManagement}</Menu.Item>
-                </Menu.ItemGroup>
-                <Menu.ItemGroup key="g4" title={t.dataEntry}><Menu.Item key="form">{t.form}</Menu.Item><Menu.Item key="checkbox">{t.checkbox}</Menu.Item></Menu.ItemGroup>
-              </Menu>
-            </Sider>
+            {!isMobile ? (
+                <Sider width={siderWidth} style={{ background: '#fff', borderRight: '1px solid #f0f0f0' }}>
+                    {SiderMenu}
+                </Sider>
+            ) : (
+                <Drawer
+                    placement="left"
+                    onClose={() => setDrawerVisible(false)}
+                    open={drawerVisible}
+                    bodyStyle={{ padding: 0 }}
+                    width={200}
+                >
+                    {SiderMenu}
+                </Drawer>
+            )}
             <Content style={{ padding: '24px', background: '#fff', display: 'flex' }}>
-               <div style={{ flex: 1, minWidth: 0, paddingRight: '24px' }}>
+               <div style={{ flex: 1, minWidth: 0, paddingRight: isMobile ? 0 : '24px' }}>
                     <DocPage 
                         pageKey={selectedKey}
                         content={pageContent}
@@ -173,14 +239,16 @@ const App = () => {
                         currentLang={content.currentLang}
                     />
                </div>
-               <div style={{ width: 200, flexShrink: 0 }}>
-                    <Anchor affix={true} offsetTop={80} targetOffset={80}>
-                        <AnchorLink href="#overview" title={t[selectedKey]} />
-                        {toc.map(item => (
-                            <AnchorLink key={item.href} href={item.href} title={item.title} style={{ paddingLeft: (item.level - 1) * 16 }} />
-                        ))}
-                    </Anchor>
-               </div>
+               {!isMobile && (
+                    <div style={{ width: siderWidth, flexShrink: 0 }}>
+                        <Anchor affix={true} offsetTop={80} targetOffset={80}>
+                            <AnchorLink href="#overview" title={t[selectedKey]} />
+                            {toc.map(item => (
+                                <AnchorLink key={item.href} href={item.href} title={item.title} style={{ paddingLeft: (item.level - 1) * 16 }} />
+                            ))}
+                        </Anchor>
+                    </div>
+               )}
             </Content>
           </Layout>
         </Layout>
