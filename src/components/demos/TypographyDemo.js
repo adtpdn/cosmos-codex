@@ -10,53 +10,52 @@ const TypographyDemo = () => {
         <Card>
             <Title>Introduction</Title>
             <Paragraph>
-                In the process of internal desktop applications, a list of applications visualized under the Ant Design design system is presented.
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
             </Paragraph>
             <Paragraph>
-                Ant Design, a design language for background applications, is refined by Ant UED Team. Ant
-                Design, a design language for background applications, is refined by Ant UED Team. Ant
-                Design, a design language for background applications, is refined by Ant UED Team. Ant
-                Design, a design language for background applications, is refined by Ant UED Team. Ant
-                Design, a design language for background applications, is refined by Ant UED Team. Ant
-                Design, a design language for background applications, is refined by Ant UED Team.
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
             </Paragraph>
             <Title level={2}>Title</Title>
             <Space direction="vertical">
-                <Title level={1}>h1. Ant Design</Title>
-                <Title level={2}>h2. Ant Design</Title>
-                <Title level={3}>h3. Ant Design</Title>
-                <Title level={4}>h4. Ant Design</Title>
-                <Title level={5}>h5. Ant Design</Title>
+                <Title level={1}>h1. 38px</Title>
+                <Title level={2}>h2. 30px</Title>
+                <Title level={3}>h3. 24px</Title>
+                <Title level={4}>h4. 20px</Title>
+                <Title level={5}>h5. 16px</Title>
             </Space>
             <Title level={2}>Text & Link</Title>
             <Space direction="vertical">
-                <Text>Ant Design (default)</Text>
-                <Text type="secondary">Ant Design (secondary)</Text>
-                <Text type="success">Ant Design (success)</Text>
-                <Text type="warning">Ant Design (warning)</Text>
-                <Text type="danger">Ant Design (danger)</Text>
-                <Text disabled>Ant Design (disabled)</Text>
-                <Text mark>Ant Design (mark)</Text>
-                <Text code>Ant Design (code)</Text>
-                <Text keyboard>Ant Design (keyboard)</Text>
-                <Text underline>Ant Design (underline)</Text>
-                <Text delete>Ant Design (delete)</Text>
-                <Text strong>Ant Design (strong)</Text>
-                <Text italic>Ant Design (italic)</Text>
+                <Text>Lorem Ipsum (default)</Text>
+                <Text type="secondary">Lorem Ipsum (secondary)</Text>
+                <Text type="success">Lorem Ipsum (success)</Text>
+                <Text type="warning">Lorem Ipsum (warning)</Text>
+                <Text type="danger">Lorem Ipsum (danger)</Text>
+                <Text disabled>Lorem Ipsum (disabled)</Text>
+                <Text mark>Lorem Ipsum (mark)</Text>
+                <Text code>Lorem Ipsum (code)</Text>
+                <Text keyboard>Lorem Ipsum (keyboard)</Text>
+                <Text underline>Lorem Ipsum (underline)</Text>
+                <Text delete>Lorem Ipsum (delete)</Text>
+                <Text strong>Lorem Ipsum (strong)</Text>
+                <Text italic>Lorem Ipsum (italic)</Text>
                 <Link href="https://ant.design" target="_blank">
-                Ant Design (Link)
+                Lorem Ipsum (Link)
                 </Link>
             </Space>
-            <Title level={2}>Ellipsis</Title>
+            {/* <Title level={2}>Ellipsis</Title>
             <Switch checked={ellipsis} onChange={() => setEllipsis(!ellipsis)} />
             <Paragraph ellipsis={ellipsis}>
-                Ant Design, a design language for background applications, is refined by Ant UED Team. Ant
+                Lorem Ipsum, a design language for background applications, is refined by Ant UED Team. Ant
                 Design, a design language for background applications, is refined by Ant UED Team. Ant
                 Design, a design language for background applications, is refined by Ant UED Team. Ant
                 Design, a design language for background applications, is refined by Ant UED Team. Ant
                 Design, a design language for background applications, is refined by Ant UED Team. Ant
                 Design, a design language for background applications, is refined by Ant UED Team.
-            </Paragraph>
+            </Paragraph> */}
         </Card>
     );
 };
