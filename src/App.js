@@ -109,7 +109,6 @@ const App = () => {
   };
 
   const antdLocale = content.currentLang === 'zh' ? zhCN : enUS;
-
   const siderWidth = isTablet ? 150 : 200;
 
   const SiderMenu = (
@@ -125,9 +124,12 @@ const App = () => {
         }}
     >
         <Menu.Item key="overview">{t.overview}</Menu.Item>
+        <Menu.Item key="inventory">{t.inventory}</Menu.Item>
+        <Menu.Item key="form">{t.form}</Menu.Item>
         <Menu.ItemGroup key="g1" title={t.general}><Menu.Item key="button">{t.button}</Menu.Item><Menu.Item key="icon">{t.icon}</Menu.Item><Menu.Item key="typography">{t.typography}</Menu.Item></Menu.ItemGroup>
         <Menu.ItemGroup key="g2" title={t.layout}><Menu.Item key="divider">{t.divider}</Menu.Item><Menu.Item key="grid">{t.grid}</Menu.Item><Menu.Item key="layout">{t.layout}</Menu.Item><Menu.Item key="space">{t.space}</Menu.Item></Menu.ItemGroup>
         <Menu.ItemGroup key="g3" title={t.dataDisplay}>
+            <Menu.Item key="avatar">{t.avatar}</Menu.Item>
             <Menu.Item key="avatar">{t.avatar}</Menu.Item>
             <Menu.Item key="badge">{t.badge}</Menu.Item>
             <Menu.Item key="calendar">{t.calendar}</Menu.Item>
@@ -148,7 +150,7 @@ const App = () => {
             <Menu.Item key="tree">{t.tree}</Menu.Item>
             <Menu.Item key="dropdown">{t.dropdown}</Menu.Item>
         </Menu.ItemGroup>
-        <Menu.ItemGroup key="g4" title={t.dataEntry}><Menu.Item key="form">{t.form}</Menu.Item><Menu.Item key="checkbox">{t.checkbox}</Menu.Item></Menu.ItemGroup>
+        <Menu.ItemGroup key="g4" title={t.dataEntry}><Menu.Item key="checkbox">{t.checkbox}</Menu.Item></Menu.ItemGroup>
     </Menu>
   );
 

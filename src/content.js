@@ -29,6 +29,7 @@ import TimelineDemo from './components/demos/TimelineDemo';
 import TooltipDemo from './components/demos/TooltipDemo';
 import TreeDemo from './components/demos/TreeDemo';
 import TypographyDemo from './components/demos/TypographyDemo';
+import InventoryDemo from './components/demos/InventoryDemo'; // <-- Import the new demo
 
 // This object holds the JSX for live demos and the corresponding code strings.
 export const componentData = {
@@ -43,6 +44,7 @@ export const componentData = {
     layout: { demo: <LayoutDemo />, code: `import { Layout } from 'antd';` },
     space: { demo: <SpaceDemo />, code: `import { Space } from 'antd';` },
     // Data Display
+    inventory: { demo: InventoryDemo, code: `<Modal open={...} width="95%"><InventoryStandalone /></Modal>` },
     avatar: { demo: <AvatarDemo />, code: `import { Avatar } from 'antd';` },
     badge: { demo: <BadgeDemo />, code: `import { Badge } from 'antd';` },
     calendar: { demo: <CalendarDemo />, code: `import { Calendar } from 'antd';` },
@@ -77,6 +79,7 @@ export const initialContent = {
         dataDisplay: 'Data Display',
         dataEntry: 'Data Entry',
         // Components
+        inventory: 'Inventory',
         avatar: 'Avatar', badge: 'Badge', button: 'Button', calendar: 'Calendar', card: 'Card', carousel: 'Carousel', checkbox: 'Checkbox', collapse: 'Collapse', descriptions: 'Descriptions', divider: 'Divider', dropdown: 'Dropdown', empty: 'Empty', form: 'Form', grid: 'Grid', icon: 'Icon', image: 'Image', layout: 'Layout', list: 'List', popover: 'Popover', segmented: 'Segmented', space: 'Space', statistic: 'Statistic', table: 'Table', tag: 'Tag', timeline: 'Timeline', tooltip: 'Tooltip', tree: 'Tree', typography: 'Typography',
         // Descriptions
         overviewDescription: `
@@ -121,6 +124,7 @@ What we're presenting here fixes the obvious problems and establishes a solid fo
 
 This roadmap starts with understanding what we're really working with, then builds toward a comprehensive agricultural platform that serves users in all conditions and contexts. We are very excited to advance in the next step of this project.
 `,
+        inventoryDescription: 'A full-page inventory management interface, launched in a wide modal.',
         avatarDescription: 'Avatars can be used to represent people or objects.',
         badgeDescription: 'Small numerical value or status descriptor for UI elements.',
         buttonDescription: 'To trigger an operation.',
@@ -133,7 +137,7 @@ This roadmap starts with understanding what we're really working with, then buil
         dividerDescription: 'A divider line separates content.',
         dropdownDescription: 'A dropdown menu.',
         emptyDescription: 'Empty state placeholder.',
-        formDescription: 'The Form component provides data collection, validation, and submission functionality in a modal.',
+        formDescription: 'Form provides data collection functionality in a modal.',
         gridDescription: '24-column responsive grid system.',
         iconDescription: 'To represent actions and concepts.',
         imageDescription: 'Image display component.',
@@ -181,6 +185,50 @@ This roadmap starts with understanding what we're really working with, then buil
         createOrder: 'Create Order',
         complete: 'Complete',
         seasonal: 'Seasonal',
+        // Standalone Page Translations
+        prodMgmtSystem: 'Production Management System',
+        agriInfoSystem: 'Agricultural Information System',
+        orderInfo: 'Order Information',
+        bayerBase: 'Bayer Kanguru Base',
+        bayerProduct: 'Bayer Product (Group Management)',
+        totalOrders: (n) => `Total ${n} orders`,
+        updated: (m) => `Updated ${m} min ago`,
+        urgent: 'urgent',
+        scheduledReports: 'Order Scheduled Reports',
+        customerInfo: 'Customer Information',
+        all: 'All',
+        pending: 'Pending',
+        dispatched: 'Dispatched',
+        canceled: 'Canceled',
+        searchPlaceholder: 'Search orders, customers, routes...',
+        returnStatus: 'Return status',
+        collectionStatus: 'Collection status',
+        dispatch: 'Dispatch',
+        anyCustomer: 'Any customer',
+        dates: 'Dates',
+        anyRoute: 'Any route',
+        activeFilters: 'Active filters',
+        notDispatched: 'not dispatched',
+        clearAll: 'Clear all',
+        route: 'ROUTE',
+        weight: 'WEIGHT',
+        status: 'STATUS',
+        actions: 'ACTIONS',
+        details: 'Details',
+        high: 'High',
+        low: 'Low',
+        normal: 'Normal',
+        collected: 'Collected',
+        basicInfo: 'Basic Information',
+        seedManagement: 'Seed Management',
+        envMonitoring: 'Environmental Monitoring',
+        cropProtection: 'Crop Protection',
+        fieldOps: 'Field Operations',
+        payroll: 'Payroll Management',
+        yieldForecasting: 'Yield Forecasting',
+        realtimeDashboard: 'Real-time Dashboard',
+        inventoryManagement: 'Inventory Management',
+        packaging: 'Packaging Management',
     },
     zh: {
         appTitle: 'Cosmos Codex',
@@ -190,8 +238,10 @@ This roadmap starts with understanding what we're really working with, then buil
         dataDisplay: '数据展示',
         dataEntry: '数据录入',
         // Components
+        inventory: '库存',
         avatar: '头像', badge: '徽标数', button: '按钮', calendar: '日历', card: '卡片', carousel: '走马灯', checkbox: '复选框', collapse: '折叠面板', descriptions: '描述列表', divider: '分割线', dropdown: '下拉菜单', empty: '空状态', form: '表单', grid: '栅格', icon: '图标', image: '图片', layout: '布局', list: '列表', popover: '气泡卡片', segmented: '分段控制器', space: '间距', statistic: '统计数值', table: '表格', tag: '标签', timeline: '时间轴', tooltip: '文字提示', tree: '树形控件', typography: '排版',
         // Descriptions
+        inventoryDescription: '一个在宽模态框中启动的完整库存管理界面演示。',
         overviewDescription: `
 # COSMOS 农业设计系统
 
@@ -294,5 +344,49 @@ This roadmap starts with understanding what we're really working with, then buil
         createOrder: '创建订单',
         complete: '完成',
         seasonal: '季节性',
+        // Standalone Page Translations
+        prodMgmtSystem: '生产管理系统',
+        agriInfoSystem: '农业信息系统',
+        orderInfo: '订单信息',
+        bayerBase: '拜耳康古鲁基地',
+        bayerProduct: '拜耳产品（集团管理）',
+        totalOrders: (n) => `共 ${n} 个订单`,
+        updated: (m) => `${m} 分钟前更新`,
+        urgent: '紧急',
+        scheduledReports: '订单预定报告',
+        customerInfo: '客户信息',
+        all: '全部',
+        pending: '待处理',
+        dispatched: '已发货',
+        canceled: '已取消',
+        searchPlaceholder: '搜索订单、客户、路线...',
+        returnStatus: '退货状态',
+        collectionStatus: '收款状态',
+        dispatch: '发货',
+        anyCustomer: '任何客户',
+        dates: '日期',
+        anyRoute: '任何路线',
+        activeFilters: '活动过滤器',
+        notDispatched: '未发货',
+        clearAll: '全部清除',
+        route: '路线',
+        weight: '重量',
+        status: '状态',
+        actions: '操作',
+        details: '详情',
+        high: '高',
+        low: '低',
+        normal: '正常',
+        collected: '已收款',
+        basicInfo: '基础信息',
+        seedManagement: '种子管理',
+        envMonitoring: '环境监测',
+        cropProtection: '作物保护',
+        fieldOps: '田间作业',
+        payroll: '薪资管理',
+        yieldForecasting: '产量预测',
+        realtimeDashboard: '实时仪表板',
+        inventoryManagement: '库存管理',
+        packaging: '包装管理',
     }
 };
