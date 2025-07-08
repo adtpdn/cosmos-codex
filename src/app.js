@@ -8,6 +8,7 @@ import {
   Anchor,
   Drawer,
   Button,
+  Image,
 } from 'antd';
 import {
   AppstoreOutlined,
@@ -130,7 +131,6 @@ const App = () => {
           <Menu.Item key="button">{t.button}</Menu.Item>
           <Menu.Item key="icon">{t.icon}</Menu.Item>
           <Menu.Item key="typography">{t.typography}</Menu.Item>
-          <Menu.Item key="colors">{t.color}</Menu.Item>
         </Menu.ItemGroup>
         
         <Menu.ItemGroup key="g2" title={t.layout}>

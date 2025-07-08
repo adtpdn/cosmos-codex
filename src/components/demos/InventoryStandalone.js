@@ -160,11 +160,13 @@ const InventoryStandalone = ({ t, onClose }) => {
                     <div style={{ marginBottom: 24 }}>
                         <Row justify="space-between" align="bottom">
                             <Col>
-                                <Title level={2} style={{ margin: 0 }}>{t.orderInfo}</Title>
-                                <Space size="middle" style={{ marginTop: 8 }}>
-                                    <Text type="secondary"><DatabaseOutlined /> {t.totalOrders(247)}</Text>
-                                    <Text type="secondary"><ClockCircleOutlined /> {t.updated(2)}</Text>
-                                    <Text type="danger"><WarningFilled /> 2 {t.urgent}</Text>
+                                <Space align="baseline" size="large">
+                                    <Title level={2} style={{ margin: 0 }}>{t.orderInfo}</Title>
+                                    <Space size="middle">
+                                        <Text type="secondary"><DatabaseOutlined /> {t.totalOrders(247)}</Text>
+                                        <Text type="secondary"><ClockCircleOutlined /> {t.updated(2)}</Text>
+                                        <Text type="danger"><WarningFilled /> 2 {t.urgent}</Text>
+                                    </Space>
                                 </Space>
                             </Col>
                             <Col><Space><Link>{t.scheduledReports}</Link><Link>{t.customerInfo}</Link><Button type="primary" icon={<PlusOutlined />}>{t.createOrder}</Button></Space></Col>
@@ -177,14 +179,14 @@ const InventoryStandalone = ({ t, onClose }) => {
                                 <Button
                                     key={tab.key}
                                     type={activeTab === tab.key ? 'primary' : 'default'}
-                                    style={activeTab === tab.key ? { backgroundColor: '#4285F4', borderColor: '#4285F4', borderRadius: 8 } : { borderRadius: 8 }}
+                                    style={activeTab === tab.key ? { backgroundColor: '#4285F4', borderColor: '#4285F4', borderRadius: 16 } : { borderRadius: 16, color: '#595959', borderColor: '#d9d9d9' }}
                                     onClick={() => setActiveTab(tab.key)}
                                 >
                                     <Space size="small">
                                         {tab.label}
                                         <span style={{
                                             backgroundColor: activeTab === tab.key ? 'rgba(255,255,255,0.2)' : '#f0f0f0',
-                                            color: activeTab === tab.key ? '#fff' : '#000',
+                                            color: activeTab === tab.key ? '#fff' : '#595959',
                                             borderRadius: '50%',
                                             padding: '0px 6px',
                                             fontSize: '12px',
