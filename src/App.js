@@ -153,6 +153,7 @@ const App = () => {
                     <Menu.Item key="tooltip">{t.tooltip}</Menu.Item>
                     <Menu.Item key="tree">{t.tree}</Menu.Item>
                     <Menu.Item key="dropdown">{t.dropdown}</Menu.Item>
+                    <Menu.Item key="productionManagement">{t.productionManagement}</Menu.Item>
                 </Menu.ItemGroup>
                 <Menu.ItemGroup key="g4" title={t.dataEntry}><Menu.Item key="form">{t.form}</Menu.Item><Menu.Item key="checkbox">{t.checkbox}</Menu.Item></Menu.ItemGroup>
               </Menu>
