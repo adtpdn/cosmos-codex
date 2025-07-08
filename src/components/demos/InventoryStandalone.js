@@ -28,8 +28,6 @@ import {
   MoreOutlined,
   WarningFilled,
   LeftOutlined,
-  BellOutlined,
-  QuestionCircleOutlined,
   FundProjectionScreenOutlined,
   InteractionOutlined,
   DatabaseOutlined,
@@ -39,6 +37,8 @@ import {
   ToolOutlined,
   FileDoneOutlined,
   ScheduleOutlined,
+  GatewayOutlined,
+  ShopOutlined,
 } from '@ant-design/icons';
 
 const { Header, Sider, Content } = Layout;
@@ -89,7 +89,20 @@ const InventoryStandalone = ({ t, onClose }) => {
         { title: t.orderNumber, dataIndex: 'orderNumber', key: 'orderNumber', sorter: (a, b) => a.orderNumber.localeCompare(b.orderNumber), },
         { title: t.customer, dataIndex: 'customer', key: 'customer', },
         { title: t.plannedDelivery, dataIndex: 'plannedDelivery', key: 'plannedDelivery', sorter: (a, b) => new Date(a.plannedDelivery) - new Date(b.plannedDelivery), },
-        { title: t.route, dataIndex: 'route', key: 'route', },
+        { 
+            title: t.route, 
+            dataIndex: 'route', 
+            key: 'route',
+            render: (route) => {
+                if (route === '#Sales') {
+                    return <Space><ShopOutlined /> {route}</Space>;
+                }
+                if (route) {
+                    return <Space><GatewayOutlined /> {route}</Space>;
+                }
+                return '-';
+            }
+        },
         { title: t.weight, dataIndex: 'weight', key: 'weight', },
         { title: t.priority, dataIndex: 'priority', key: 'priority', render: (priority) => <PriorityTag priority={priority} t={t} />, },
         { title: t.status, dataIndex: 'status', key: 'status', render: (status) => <StatusTag status={status} t={t} />, },
@@ -97,69 +110,98 @@ const InventoryStandalone = ({ t, onClose }) => {
     ];
 
     return (
-        <Layout style={{ minHeight: '100vh' }}>
-            <Sider width={240} style={{ background: '#27ae60', color: '#fff' }}>
-                <div style={{ padding: '16px', cursor: 'pointer' }} onClick={onClose}>
-                    <Title level={3} style={{ color: '#fff', margin: 0 }}><LeftOutlined /> COSMOS Smart Future</Title>
-                    <Text style={{ color: 'rgba(255,255,255,0.8)' }}>{t.agriInfoSystem}</Text>
-                </div>
-                <Menu theme="dark" mode="inline" defaultSelectedKeys={['inventoryManagement']} style={{ background: '#27ae60' }}>
-                    <Menu.Item key="basicInfo" icon={<DatabaseOutlined />}>{t.basicInfo}</Menu.Item>
-                    <Menu.Item key="seedManagement" icon={<ToolOutlined />}>{t.seedManagement}</Menu.Item>
-                    <Menu.Item key="envMonitoring" icon={<ExperimentOutlined />}>{t.envMonitoring}</Menu.Item>
-                    <Menu.Item key="cropProtection" icon={<InteractionOutlined />}>{t.cropProtection}</Menu.Item>
-                    <Menu.Item key="fieldOps" icon={<FundProjectionScreenOutlined />}>{t.fieldOps}</Menu.Item>
-                    <Menu.Item key="payroll" icon={<TeamOutlined />}>{t.payroll}</Menu.Item>
-                    <Menu.Item key="yieldForecasting" icon={<BarChartOutlined />}>{t.yieldForecasting}</Menu.Item>
-                    <Menu.Item key="realtimeDashboard" icon={<AppstoreOutlined />}>{t.realtimeDashboard}</Menu.Item>
-                    <Menu.Item key="inventoryManagement" icon={<ContainerOutlined />}>{t.inventoryManagement}</Menu.Item>
-                    <Menu.Item key="packaging" icon={<FileDoneOutlined />}>{t.packaging}</Menu.Item>
-                </Menu>
-            </Sider>
-            <Layout>
-                <Header style={{ padding: '0 24px', background: '#fff', borderBottom: '1px solid #f0f0f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', }}>
-                    <Title level={4} style={{ margin: 0 }}>{t.prodMgmtSystem}<br/><Text type="secondary" style={{fontSize: '14px'}}>{t.inventoryManagement} / {t.orderInfo}</Text></Title>
-                    <Space size="large">
-                        <Badge dot color="red"><Text strong>{t.bayerBase}</Text></Badge>
-                        <Space>
-                            <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
-                            <Text>BP</Text>
-                            <Text strong>{t.bayerProduct}</Text>
-                            <DownOutlined style={{ cursor: 'pointer' }} />
-                        </Space>
-                    </Space>
-                </Header>
-                <Content style={{ padding: '24px', background: '#fff' }}>
-                    <div style={{ marginBottom: 24 }}>
-                        <Row justify="space-between" align="middle">
-                            <Col><Title level={2} style={{ margin: 0 }}>{t.orderInfo}</Title><Text type="secondary">{t.totalOrders(247)} <Badge status="processing" /> {t.updated(2)} <Badge color="red" count={`${t.urgent}(2)`} /></Text></Col>
-                            <Col><Space><Link>{t.scheduledReports}</Link><Link>{t.customerInfo}</Link><Button type="primary" icon={<PlusOutlined />}>{t.createOrder}</Button></Space></Col>
-                        </Row>
+        <>
+            <style>{`
+                .custom-sider .ant-menu-dark.ant-menu-inline .ant-menu-item {
+                    background-color: transparent !important;
+                    margin-inline: 0 !important;
+                    margin-block: 0 !important;
+                    width: 100% !important;
+                    border-radius: 0 !important;
+                }
+                .custom-sider .ant-menu-dark.ant-menu-inline .ant-menu-item-selected {
+                    background-color: #14532D !important;
+                    border-left: 4px solid #49DC7F;
+                    padding-left: 20px !important; /* 24px default - 4px border */
+                }
+                .custom-sider .ant-menu-dark.ant-menu-inline .ant-menu-item:hover,
+                .custom-sider .ant-menu-dark.ant-menu-inline .ant-menu-submenu-title:hover {
+                    background-color: #166534 !important;
+                }
+                .custom-sider .ant-menu-dark.ant-menu-submenu-selected > .ant-menu-submenu-title {
+                    background-color: #166534 !important;
+                }
+            `}</style>
+            <Layout style={{ minHeight: '100vh' }}>
+                <Sider width={240} className="custom-sider" style={{ background: '#27ae60', color: '#fff' }}>
+                    <div style={{ padding: '16px', cursor: 'pointer' }} onClick={onClose}>
+                        <Title level={3} style={{ color: '#fff', margin: 0 }}><LeftOutlined /> COSMOS Smart Future</Title>
+                        <Text style={{ color: 'rgba(255,255,255,0.8)' }}>{t.agriInfoSystem}</Text>
                     </div>
-                    <Tabs defaultActiveKey="1">
-                        <TabPane tab={<Badge count={247} offset={[10, -2]} size="small"><Text>{t.all}</Text></Badge>} key="1" />
-                        <TabPane tab={<Badge count={7} offset={[10, -2]} size="small"><Text>{t.pending}</Text></Badge>} key="2" />
-                        <TabPane tab={<Badge count={9} offset={[10, -2]} size="small"><Text>{t.dispatched}</Text></Badge>} key="3" />
-                        <TabPane tab={<Badge count={199} offset={[10, -2]} size="small"><Text>{t.completed}</Text></Badge>} key="4" />
-                        <TabPane tab={<Badge count={18} offset={[10, -2]} size="small"><Text>{t.canceled}</Text></Badge>} key="5" />
-                    </Tabs>
-                    <div style={{ margin: '16px 0' }}>
-                        <Space wrap size="middle">
-                            <Input placeholder={t.searchPlaceholder} prefix={<SearchOutlined />} style={{ width: 300 }} />
-                            <Select defaultValue="status" style={{ width: 150 }}><Option value="status">{t.returnStatus} <Tag>3</Tag></Option></Select>
-                            <Select defaultValue="collection" style={{ width: 150 }}><Option value="collection">{t.collectionStatus} <Tag>2</Tag></Option></Select>
-                            <Button>{t.dispatch} <Tag>3</Tag></Button>
-                            <Select defaultValue="any_customer" style={{ width: 150 }}><Option value="any_customer">{t.anyCustomer}</Option></Select>
-                            <DatePicker placeholder={t.dates} suffixIcon={<CalendarOutlined />} />
-                            <Select defaultValue="any_route" style={{ width: 150 }}><Option value="any_route">{t.anyRoute}</Option></Select>
-                            <Button icon={<FilterOutlined />} />
+                    <Menu theme="dark" mode="inline" defaultOpenKeys={['inventoryManagement']} defaultSelectedKeys={['orderInformation']} style={{ background: '#27ae60' }}>
+                        <Menu.Item key="basicInfo" icon={<DatabaseOutlined />}>{t.basicInfo}</Menu.Item>
+                        <Menu.Item key="seedManagement" icon={<ToolOutlined />}>{t.seedManagement}</Menu.Item>
+                        <Menu.Item key="envMonitoring" icon={<ExperimentOutlined />}>{t.envMonitoring}</Menu.Item>
+                        <Menu.Item key="cropProtection" icon={<InteractionOutlined />}>{t.cropProtection}</Menu.Item>
+                        <Menu.Item key="fieldOps" icon={<FundProjectionScreenOutlined />}>{t.fieldOps}</Menu.Item>
+                        <Menu.Item key="payroll" icon={<TeamOutlined />}>{t.payroll}</Menu.Item>
+                        <Menu.Item key="yieldForecasting" icon={<BarChartOutlined />}>{t.yieldForecasting}</Menu.Item>
+                        <Menu.Item key="realtimeDashboard" icon={<AppstoreOutlined />}>{t.realtimeDashboard}</Menu.Item>
+                        <Menu.SubMenu key="inventoryManagement" icon={<ContainerOutlined />} title={t.inventoryManagement}>
+                            <Menu.Item key="orderInformation">{t.orderInfo}</Menu.Item>
+                            <Menu.Item key="materialInformation">Material Information</Menu.Item>
+                            <Menu.Item key="warehouseInformation">Warehouse Information</Menu.Item>
+                            <Menu.Item key="inventoryReports">Inventory Reports</Menu.Item>
+                            <Menu.Item key="operationReports">Operation Reports</Menu.Item>
+                        </Menu.SubMenu>
+                        <Menu.Item key="packaging" icon={<FileDoneOutlined />}>{t.packaging}</Menu.Item>
+                    </Menu>
+                </Sider>
+                <Layout>
+                    <Header style={{ padding: '0 24px', background: '#fff', borderBottom: '1px solid #f0f0f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', }}>
+                        <Title level={4} style={{ margin: 0 }}>{t.prodMgmtSystem}<br/><Text type="secondary" style={{fontSize: '14px'}}>{t.inventoryManagement} / {t.orderInfo}</Text></Title>
+                        <Space size="large">
+                            <Badge dot color="red"><Text strong>{t.bayerBase}</Text></Badge>
+                            <Space>
+                                <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+                                <Text>BP</Text>
+                                <Text strong>{t.bayerProduct}</Text>
+                                <DownOutlined style={{ cursor: 'pointer' }} />
+                            </Space>
                         </Space>
-                        <div style={{marginTop: '16px'}}><Text type="secondary">{t.activeFilters}: </Text><Tag closable color="blue">{t.dispatched}</Tag><Tag closable color="blue">{t.notDispatched}</Tag><Link>{t.clearAll}</Link></div>
-                    </div>
-                    <Table columns={columns} dataSource={inventoryData} rowSelection={{}} pagination={{ pageSize: 10 }} />
-                </Content>
+                    </Header>
+                    <Content style={{ padding: '24px', background: '#fff', overflow: 'auto' }}>
+                        <div style={{ marginBottom: 24 }}>
+                            <Row justify="space-between" align="middle">
+                                <Col><Title level={2} style={{ margin: 0 }}>{t.orderInfo}</Title><Text type="secondary">{t.totalOrders(247)} <Badge status="processing" /> {t.updated(2)} <Badge color="red" count={`${t.urgent}(2)`} /></Text></Col>
+                                <Col><Space><Link>{t.scheduledReports}</Link><Link>{t.customerInfo}</Link><Button type="primary" icon={<PlusOutlined />}>{t.createOrder}</Button></Space></Col>
+                            </Row>
+                        </div>
+                        <Tabs defaultActiveKey="1">
+                            <TabPane tab={<Badge count={247} offset={[10, -2]} size="small"><Text>{t.all}</Text></Badge>} key="1" />
+                            <TabPane tab={<Badge count={7} offset={[10, -2]} size="small"><Text>{t.pending}</Text></Badge>} key="2" />
+                            <TabPane tab={<Badge count={9} offset={[10, -2]} size="small"><Text>{t.dispatched}</Text></Badge>} key="3" />
+                            <TabPane tab={<Badge count={199} offset={[10, -2]} size="small"><Text>{t.completed}</Text></Badge>} key="4" />
+                            <TabPane tab={<Badge count={18} offset={[10, -2]} size="small"><Text>{t.canceled}</Text></Badge>} key="5" />
+                        </Tabs>
+                        <div style={{ margin: '16px 0' }}>
+                            <Space wrap size="middle">
+                                <Input placeholder={t.searchPlaceholder} prefix={<SearchOutlined />} style={{ width: 300 }} />
+                                <Select defaultValue="status" style={{ width: 150 }}><Option value="status">{t.returnStatus} <Tag>3</Tag></Option></Select>
+                                <Select defaultValue="collection" style={{ width: 150 }}><Option value="collection">{t.collectionStatus} <Tag>2</Tag></Option></Select>
+                                <Button color="blue" variant="solid">{t.dispatch}<Tag color="blue">2</Tag></Button>
+                                <Select defaultValue="any_customer" style={{ width: 150 }}><Option value="any_customer">{t.anyCustomer}</Option></Select>
+                                <DatePicker placeholder={t.dates} suffixIcon={<CalendarOutlined />} />
+                                <Select defaultValue="any_route" style={{ width: 150 }}><Option value="any_route">{t.anyRoute}</Option></Select>
+                                <Button icon={<FilterOutlined />} />
+                            </Space>
+                            <div style={{marginTop: '16px'}}><Text type="secondary">{t.activeFilters}: </Text><Tag closable color="blue">{t.dispatched}</Tag><Tag closable color="blue">{t.notDispatched}</Tag><Link>{t.clearAll}</Link></div>
+                        </div>
+                        <Table columns={columns} dataSource={inventoryData} rowSelection={{}} pagination={{ pageSize: 10 }} />
+                    </Content>
+                </Layout>
             </Layout>
-        </Layout>
+        </>
     );
 };
 
