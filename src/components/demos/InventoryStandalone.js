@@ -45,21 +45,21 @@ const { Title, Text, Link } = Typography;
 const { Option } = Select;
 
 const PriorityTag = ({ priority, t }) => {
-  let color;
-  let text;
-  switch (priority) {
-    case 'urgent': color = 'volcano'; text = t.urgent; break;
-    case 'high': color = 'red'; text = t.high; break;
-    case 'low': color = 'geekblue'; text = t.low; break;
-    default: color = 'default'; text = t.normal;
-  }
-  return <Tag color={color}>{text}</Tag>;
+    let color;
+    let text;
+    switch (priority) {
+        case 'urgent': color = 'volcano'; text = t.urgent; break;
+        case 'high': color = 'red'; text = t.high; break;
+        case 'low': color = 'geekblue'; text = t.low; break;
+        default: color = 'default'; text = t.normal;
+    }
+    return <Tag color={color}>{text}</Tag>;
 };
 
 const StatusTag = ({ status, t }) => {
     let color;
     let text;
-    switch(status) {
+    switch (status) {
         case 'not dispatched': color = 'orange'; text = t.notDispatched; break;
         case 'collected': color = 'green'; text = t.collected; break;
         case 'pending': color = 'gold'; text = t.pending; break;
@@ -72,13 +72,13 @@ const StatusTag = ({ status, t }) => {
 }
 
 const inventoryData = [
-  { key: '1', orderNumber: 'SO2503170002', customer: '666-555', plannedDelivery: '2025-03-04', route: '1111', weight: '63 kg', priority: 'normal', status: 'not dispatched', urgent: false, },
-  { key: '2', orderNumber: 'SO2503170001', customer: 'This is a test - Go to Taste', plannedDelivery: '2025-03-04', route: '', weight: '1 kg', priority: 'high', status: 'not dispatched', urgent: true, },
-  { key: '3', orderNumber: 'SO2501130001', customer: 'This is a test - Go to Taste', plannedDelivery: '2025-03-13', route: '1111', weight: '355 kg', priority: 'urgent', status: 'not dispatched', urgent: true, },
-  { key: '4', orderNumber: 'SO2501120003', customer: 'This is a test - Go to Taste', plannedDelivery: '2025-03-05', route: '1111', weight: '12 kg', priority: 'normal', status: 'collected', urgent: false, },
-  { key: '5', orderNumber: 'SO2501120002', customer: 'test - C02', plannedDelivery: '2025-03-19', route: '#Sales', weight: '-', priority: 'normal', status: 'collected', urgent: false, },
-  { key: '6', orderNumber: 'SO2501120001', customer: 'This is a test - Go to Taste', plannedDelivery: '2025-03-12', route: '#222', weight: '122 kg', priority: 'normal', status: 'collected', urgent: false, },
-  { key: '7', orderNumber: 'SO2501050002', customer: 'This is a test - Go to Taste', plannedDelivery: '2025-03-05', route: '#222', weight: '2 kg', priority: 'low', status: 'collected', urgent: false, },
+    { key: '1', orderNumber: 'SO2503170002', customer: '666-555', plannedDelivery: '2025-03-04', route: '1111', weight: '63 kg', priority: 'normal', status: 'not dispatched', urgent: false, },
+    { key: '2', orderNumber: 'SO2503170001', customer: 'This is a test - Go to Taste', plannedDelivery: '2025-03-04', route: '', weight: '1 kg', priority: 'high', status: 'not dispatched', urgent: true, },
+    { key: '3', orderNumber: 'SO2501130001', customer: 'This is a test - Go to Taste', plannedDelivery: '2025-03-13', route: '1111', weight: '355 kg', priority: 'urgent', status: 'not dispatched', urgent: true, },
+    { key: '4', orderNumber: 'SO2501120003', customer: 'This is a test - Go to Taste', plannedDelivery: '2025-03-05', route: '1111', weight: '12 kg', priority: 'normal', status: 'collected', urgent: false, },
+    { key: '5', orderNumber: 'SO2501120002', customer: 'test - C02', plannedDelivery: '2025-03-19', route: '#Sales', weight: '-', priority: 'normal', status: 'collected', urgent: false, },
+    { key: '6', orderNumber: 'SO2501120001', customer: 'This is a test - Go to Taste', plannedDelivery: '2025-03-12', route: '#222', weight: '122 kg', priority: 'normal', status: 'collected', urgent: false, },
+    { key: '7', orderNumber: 'SO2501050002', customer: 'This is a test - Go to Taste', plannedDelivery: '2025-03-05', route: '#222', weight: '2 kg', priority: 'low', status: 'collected', urgent: false, },
 ];
 
 const InventoryStandalone = ({ t, onClose }) => {
@@ -89,9 +89,9 @@ const InventoryStandalone = ({ t, onClose }) => {
         { title: t.orderNumber, dataIndex: 'orderNumber', key: 'orderNumber', sorter: (a, b) => a.orderNumber.localeCompare(b.orderNumber), },
         { title: t.customer, dataIndex: 'customer', key: 'customer', },
         { title: t.plannedDelivery, dataIndex: 'plannedDelivery', key: 'plannedDelivery', sorter: (a, b) => new Date(a.plannedDelivery) - new Date(b.plannedDelivery), },
-        { 
-            title: t.route, 
-            dataIndex: 'route', 
+        {
+            title: t.route,
+            dataIndex: 'route',
             key: 'route',
             render: (route) => {
                 if (route === '#Sales') {
@@ -135,7 +135,14 @@ const InventoryStandalone = ({ t, onClose }) => {
                     <Menu.Item key="realtimeDashboard" icon={<AppstoreOutlined />}>{t.realtimeDashboard}</Menu.Item>
                     <Menu.SubMenu key="inventoryManagement" icon={<ContainerOutlined />} title={t.inventoryManagement}>
                         <Menu.Item key="orderInformation">{t.orderInfo}</Menu.Item>
-                        <Menu.Item key="materialInformation">Material Information</Menu.Item>
+                        <Menu.Item key="materialInformation" 
+                        style={{
+                            backgroundColor: "#14532D",
+                            width: "80%",
+                            margin: "1rem auto",
+                            padding: "0",
+                            textAlign: "center",
+                        }}>Material Information</Menu.Item>
                         <Menu.Item key="warehouseInformation">Warehouse Information</Menu.Item>
                         <Menu.Item key="inventoryReports">Inventory Reports</Menu.Item>
                         <Menu.Item key="operationReports">Operation Reports</Menu.Item>
