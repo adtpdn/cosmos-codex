@@ -1,11 +1,13 @@
 import React, { useState, useRef } from 'react';
 import { Card, Typography } from 'antd';
 
-const { Text } = Typography;
+import bImage from '../../assets/before.png';
+import aImage from '../../assets/after.png';
 
+const { Text } = Typography;
 const ImageSlider = ({ 
-    beforeImage = "https://storage.googleapis.com/gemini-prod/images/05177a45-b778-4382-8208-4d37015b637c.png", 
-    afterImage = "https://storage.googleapis.com/gemini-prod/images/b2d5e396-4104-45ac-86b5-4271a3081e74" 
+    beforeImage = bImage, 
+    afterImage = aImage 
 }) => {
     const [sliderPosition, setSliderPosition] = useState(50);
     const containerRef = useRef(null);
