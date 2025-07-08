@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Layout,
   Menu,
   Typography,
   Avatar,
   Space,
-  Tabs,
   Input,
   Select,
   DatePicker,
@@ -36,15 +35,14 @@ import {
   ExperimentOutlined,
   ToolOutlined,
   FileDoneOutlined,
-  ScheduleOutlined,
   GatewayOutlined,
   ShopOutlined,
+  ClockCircleOutlined,
 } from '@ant-design/icons';
 
 const { Header, Sider, Content } = Layout;
 const { Title, Text, Link } = Typography;
 const { Option } = Select;
-const { TabPane } = Tabs;
 
 const PriorityTag = ({ priority, t }) => {
   let color;
@@ -84,6 +82,8 @@ const inventoryData = [
 ];
 
 const InventoryStandalone = ({ t, onClose }) => {
+    const [activeTab, setActiveTab] = useState('all');
+
     const columns = [
         { title: '', dataIndex: 'urgent', key: 'urgent', render: (urgent) => urgent ? <WarningFilled style={{ color: '#f5222d' }} /> : null, width: 40, },
         { title: t.orderNumber, dataIndex: 'orderNumber', key: 'orderNumber', sorter: (a, b) => a.orderNumber.localeCompare(b.orderNumber), },
@@ -108,100 +108,116 @@ const InventoryStandalone = ({ t, onClose }) => {
         { title: t.status, dataIndex: 'status', key: 'status', render: (status) => <StatusTag status={status} t={t} />, },
         { title: t.actions, key: 'actions', render: () => <Space size="middle"><Link>{t.details}</Link><MoreOutlined /></Space>, },
     ];
+    
+    const tabData = [
+        { key: 'all', label: t.all, count: 247 },
+        { key: 'pending', label: t.pending, count: 0 },
+        { key: 'dispatched', label: t.dispatched, count: 0 },
+        { key: 'completed', label: t.completed, count: 156 },
+        { key: 'canceled', label: t.canceled, count: 12 },
+    ];
 
     return (
-        <>
-            <style>{`
-                .custom-sider .ant-menu-dark.ant-menu-inline .ant-menu-item {
-                    background-color: transparent !important;
-                    margin-inline: 0 !important;
-                    margin-block: 0 !important;
-                    width: 100% !important;
-                    border-radius: 0 !important;
-                }
-                .custom-sider .ant-menu-dark.ant-menu-inline .ant-menu-item-selected {
-                    background-color: #14532D !important;
-                    border-left: 4px solid #49DC7F;
-                    padding-left: 20px !important; /* 24px default - 4px border */
-                }
-                .custom-sider .ant-menu-dark.ant-menu-inline .ant-menu-item:hover,
-                .custom-sider .ant-menu-dark.ant-menu-inline .ant-menu-submenu-title:hover {
-                    background-color: #166534 !important;
-                }
-                .custom-sider .ant-menu-dark.ant-menu-submenu-selected > .ant-menu-submenu-title {
-                    background-color: #166534 !important;
-                }
-            `}</style>
-            <Layout style={{ minHeight: '100vh' }}>
-                <Sider width={240} className="custom-sider" style={{ background: '#27ae60', color: '#fff' }}>
-                    <div style={{ padding: '16px', cursor: 'pointer' }} onClick={onClose}>
-                        <Title level={3} style={{ color: '#fff', margin: 0 }}><LeftOutlined /> COSMOS Smart Future</Title>
-                        <Text style={{ color: 'rgba(255,255,255,0.8)' }}>{t.agriInfoSystem}</Text>
-                    </div>
-                    <Menu theme="dark" mode="inline" defaultOpenKeys={['inventoryManagement']} defaultSelectedKeys={['orderInformation']} style={{ background: '#27ae60' }}>
-                        <Menu.Item key="basicInfo" icon={<DatabaseOutlined />}>{t.basicInfo}</Menu.Item>
-                        <Menu.Item key="seedManagement" icon={<ToolOutlined />}>{t.seedManagement}</Menu.Item>
-                        <Menu.Item key="envMonitoring" icon={<ExperimentOutlined />}>{t.envMonitoring}</Menu.Item>
-                        <Menu.Item key="cropProtection" icon={<InteractionOutlined />}>{t.cropProtection}</Menu.Item>
-                        <Menu.Item key="fieldOps" icon={<FundProjectionScreenOutlined />}>{t.fieldOps}</Menu.Item>
-                        <Menu.Item key="payroll" icon={<TeamOutlined />}>{t.payroll}</Menu.Item>
-                        <Menu.Item key="yieldForecasting" icon={<BarChartOutlined />}>{t.yieldForecasting}</Menu.Item>
-                        <Menu.Item key="realtimeDashboard" icon={<AppstoreOutlined />}>{t.realtimeDashboard}</Menu.Item>
-                        <Menu.SubMenu key="inventoryManagement" icon={<ContainerOutlined />} title={t.inventoryManagement}>
-                            <Menu.Item key="orderInformation">{t.orderInfo}</Menu.Item>
-                            <Menu.Item key="materialInformation">Material Information</Menu.Item>
-                            <Menu.Item key="warehouseInformation">Warehouse Information</Menu.Item>
-                            <Menu.Item key="inventoryReports">Inventory Reports</Menu.Item>
-                            <Menu.Item key="operationReports">Operation Reports</Menu.Item>
-                        </Menu.SubMenu>
-                        <Menu.Item key="packaging" icon={<FileDoneOutlined />}>{t.packaging}</Menu.Item>
-                    </Menu>
-                </Sider>
-                <Layout>
-                    <Header style={{ padding: '0 24px', background: '#fff', borderBottom: '1px solid #f0f0f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', }}>
-                        <Title level={4} style={{ margin: 0 }}>{t.prodMgmtSystem}<br/><Text type="secondary" style={{fontSize: '14px'}}>{t.inventoryManagement} / {t.orderInfo}</Text></Title>
-                        <Space size="large">
-                            <Badge dot color="red"><Text strong>{t.bayerBase}</Text></Badge>
-                            <Space>
-                                <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
-                                <Text>BP</Text>
-                                <Text strong>{t.bayerProduct}</Text>
-                                <DownOutlined style={{ cursor: 'pointer' }} />
-                            </Space>
+        <Layout style={{ minHeight: '100vh' }}>
+            <Sider width={240} style={{ background: '#27ae60', color: '#fff' }}>
+                <div style={{ padding: '16px', cursor: 'pointer' }} onClick={onClose}>
+                    <Title level={3} style={{ color: '#fff', margin: 0 }}><LeftOutlined /> COSMOS Smart Future</Title>
+                    <Text style={{ color: 'rgba(255,255,255,0.8)' }}>{t.agriInfoSystem}</Text>
+                </div>
+                <Menu theme="dark" mode="inline" defaultOpenKeys={['inventoryManagement']} defaultSelectedKeys={['orderInformation']} style={{ background: '#27ae60' }}>
+                    <Menu.Item key="basicInfo" icon={<DatabaseOutlined />}>{t.basicInfo}</Menu.Item>
+                    <Menu.Item key="seedManagement" icon={<ToolOutlined />}>{t.seedManagement}</Menu.Item>
+                    <Menu.Item key="envMonitoring" icon={<ExperimentOutlined />}>{t.envMonitoring}</Menu.Item>
+                    <Menu.Item key="cropProtection" icon={<InteractionOutlined />}>{t.cropProtection}</Menu.Item>
+                    <Menu.Item key="fieldOps" icon={<FundProjectionScreenOutlined />}>{t.fieldOps}</Menu.Item>
+                    <Menu.Item key="payroll" icon={<TeamOutlined />}>{t.payroll}</Menu.Item>
+                    <Menu.Item key="yieldForecasting" icon={<BarChartOutlined />}>{t.yieldForecasting}</Menu.Item>
+                    <Menu.Item key="realtimeDashboard" icon={<AppstoreOutlined />}>{t.realtimeDashboard}</Menu.Item>
+                    <Menu.SubMenu key="inventoryManagement" icon={<ContainerOutlined />} title={t.inventoryManagement}>
+                        <Menu.Item key="orderInformation">{t.orderInfo}</Menu.Item>
+                        <Menu.Item key="materialInformation">Material Information</Menu.Item>
+                        <Menu.Item key="warehouseInformation">Warehouse Information</Menu.Item>
+                        <Menu.Item key="inventoryReports">Inventory Reports</Menu.Item>
+                        <Menu.Item key="operationReports">Operation Reports</Menu.Item>
+                    </Menu.SubMenu>
+                    <Menu.Item key="packaging" icon={<FileDoneOutlined />}>{t.packaging}</Menu.Item>
+                </Menu>
+            </Sider>
+            <Layout>
+                <Header style={{ padding: '0 24px', background: '#fff', borderBottom: '1px solid #f0f0f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', }}>
+                    <Title level={4} style={{ margin: 0 }}>{t.prodMgmtSystem}<br/><Text type="secondary" style={{fontSize: '14px'}}>{t.inventoryManagement} / {t.orderInfo}</Text></Title>
+                    <Space size="large">
+                        <Badge dot color="red"><Text strong>{t.bayerBase}</Text></Badge>
+                        <Space>
+                            <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
+                            <Text>BP</Text>
+                            <Text strong>{t.bayerProduct}</Text>
+                            <DownOutlined style={{ cursor: 'pointer' }} />
                         </Space>
-                    </Header>
-                    <Content style={{ padding: '24px', background: '#fff', overflow: 'auto' }}>
-                        <div style={{ marginBottom: 24 }}>
-                            <Row justify="space-between" align="middle">
-                                <Col><Title level={2} style={{ margin: 0 }}>{t.orderInfo}</Title><Text type="secondary">{t.totalOrders(247)} <Badge status="processing" /> {t.updated(2)} <Badge color="red" count={`${t.urgent}(2)`} /></Text></Col>
-                                <Col><Space><Link>{t.scheduledReports}</Link><Link>{t.customerInfo}</Link><Button type="primary" icon={<PlusOutlined />}>{t.createOrder}</Button></Space></Col>
-                            </Row>
-                        </div>
-                        <Tabs defaultActiveKey="1">
-                            <TabPane tab={<Badge count={247} offset={[10, -2]} size="small"><Text>{t.all}</Text></Badge>} key="1" />
-                            <TabPane tab={<Badge count={7} offset={[10, -2]} size="small"><Text>{t.pending}</Text></Badge>} key="2" />
-                            <TabPane tab={<Badge count={9} offset={[10, -2]} size="small"><Text>{t.dispatched}</Text></Badge>} key="3" />
-                            <TabPane tab={<Badge count={199} offset={[10, -2]} size="small"><Text>{t.completed}</Text></Badge>} key="4" />
-                            <TabPane tab={<Badge count={18} offset={[10, -2]} size="small"><Text>{t.canceled}</Text></Badge>} key="5" />
-                        </Tabs>
-                        <div style={{ margin: '16px 0' }}>
-                            <Space wrap size="middle">
-                                <Input placeholder={t.searchPlaceholder} prefix={<SearchOutlined />} style={{ width: 300 }} />
-                                <Select defaultValue="status" style={{ width: 150 }}><Option value="status">{t.returnStatus} <Tag>3</Tag></Option></Select>
-                                <Select defaultValue="collection" style={{ width: 150 }}><Option value="collection">{t.collectionStatus} <Tag>2</Tag></Option></Select>
-                                <Button color="blue" variant="solid">{t.dispatch}<Tag color="blue">2</Tag></Button>
-                                <Select defaultValue="any_customer" style={{ width: 150 }}><Option value="any_customer">{t.anyCustomer}</Option></Select>
-                                <DatePicker placeholder={t.dates} suffixIcon={<CalendarOutlined />} />
-                                <Select defaultValue="any_route" style={{ width: 150 }}><Option value="any_route">{t.anyRoute}</Option></Select>
-                                <Button icon={<FilterOutlined />} />
-                            </Space>
-                            <div style={{marginTop: '16px'}}><Text type="secondary">{t.activeFilters}: </Text><Tag closable color="blue">{t.dispatched}</Tag><Tag closable color="blue">{t.notDispatched}</Tag><Link>{t.clearAll}</Link></div>
-                        </div>
-                        <Table columns={columns} dataSource={inventoryData} rowSelection={{}} pagination={{ pageSize: 10 }} />
-                    </Content>
-                </Layout>
+                    </Space>
+                </Header>
+                <Content style={{ padding: '24px', background: '#fff', overflow: 'auto' }}>
+                    <div style={{ marginBottom: 24 }}>
+                        <Row justify="space-between" align="bottom">
+                            <Col>
+                                <Title level={2} style={{ margin: 0 }}>{t.orderInfo}</Title>
+                                <Space size="middle" style={{ marginTop: 8 }}>
+                                    <Text type="secondary"><DatabaseOutlined /> {t.totalOrders(247)}</Text>
+                                    <Text type="secondary"><ClockCircleOutlined /> {t.updated(2)}</Text>
+                                    <Text type="danger"><WarningFilled /> 2 {t.urgent}</Text>
+                                </Space>
+                            </Col>
+                            <Col><Space><Link>{t.scheduledReports}</Link><Link>{t.customerInfo}</Link><Button type="primary" icon={<PlusOutlined />}>{t.createOrder}</Button></Space></Col>
+                        </Row>
+                    </div>
+                    
+                    <div style={{ marginBottom: 24 }}>
+                        <Space size="small">
+                            {tabData.map(tab => (
+                                <Button
+                                    key={tab.key}
+                                    type={activeTab === tab.key ? 'primary' : 'default'}
+                                    style={activeTab === tab.key ? { backgroundColor: '#4285F4', borderColor: '#4285F4', borderRadius: 8 } : { borderRadius: 8 }}
+                                    onClick={() => setActiveTab(tab.key)}
+                                >
+                                    <Space size="small">
+                                        {tab.label}
+                                        <span style={{
+                                            backgroundColor: activeTab === tab.key ? 'rgba(255,255,255,0.2)' : '#f0f0f0',
+                                            color: activeTab === tab.key ? '#fff' : '#000',
+                                            borderRadius: '50%',
+                                            padding: '0px 6px',
+                                            fontSize: '12px',
+                                            display: 'inline-block',
+                                            lineHeight: '18px',
+                                            minWidth: '18px',
+                                            textAlign: 'center'
+                                        }}>
+                                            {tab.count}
+                                        </span>
+                                    </Space>
+                                </Button>
+                            ))}
+                        </Space>
+                    </div>
+
+                    <div style={{ margin: '16px 0' }}>
+                        <Space wrap size="middle">
+                            <Input placeholder={t.searchPlaceholder} prefix={<SearchOutlined />} style={{ width: 300 }} />
+                            <Select defaultValue="status" style={{ width: 150 }}><Option value="status">{t.returnStatus} <Tag>3</Tag></Option></Select>
+                            <Select defaultValue="collection" style={{ width: 150 }}><Option value="collection">{t.collectionStatus} <Tag>2</Tag></Option></Select>
+                            <Button>{t.dispatch} <Tag>2</Tag></Button>
+                            <Select defaultValue="any_customer" style={{ width: 150 }}><Option value="any_customer">{t.anyCustomer}</Option></Select>
+                            <DatePicker placeholder={t.dates} suffixIcon={<CalendarOutlined />} />
+                            <Select defaultValue="any_route" style={{ width: 150 }}><Option value="any_route">{t.anyRoute}</Option></Select>
+                            <Button icon={<FilterOutlined />} />
+                        </Space>
+                        <div style={{marginTop: '16px'}}><Text type="secondary">{t.activeFilters}: </Text><Tag closable color="blue">{t.dispatched}</Tag><Tag closable color="blue">{t.notDispatched}</Tag><Link>{t.clearAll}</Link></div>
+                    </div>
+                    <Table columns={columns} dataSource={inventoryData} rowSelection={{}} pagination={{ pageSize: 10 }} />
+                </Content>
             </Layout>
-        </>
+        </Layout>
     );
 };
 
