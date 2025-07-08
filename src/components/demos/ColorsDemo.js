@@ -4,16 +4,16 @@ import { Card, Row, Col, Typography, message, Divider } from 'antd';
 const { Title, Text } = Typography;
 
 // --- Helper function to generate a color palette ---
-// This is a simplified version. A real design system might use a more complex algorithm.
 const generatePalette = (baseHex) => {
   const palette = [];
-  // A simple approach to generate tints and shades
-  for (let i = -4; i <= 5; i++) {
+  // Loop changed to generate 3 shades: darker, base, lighter
+  for (let i = -1; i <= 1; i++) {
     let newHex = '#';
     for (let j = 0; j < 3; j++) {
       const sub = baseHex.substring(1 + j * 2, 3 + j * 2);
       let dec = parseInt(sub, 16);
-      dec = Math.min(255, Math.max(0, dec + i * 20)); // Adjust brightness
+      // Increased brightness step for more distinct shades
+      dec = Math.min(255, Math.max(0, dec + i * 40)); 
       newHex += dec.toString(16).padStart(2, '0');
     }
     palette.push(newHex.toUpperCase());
@@ -51,7 +51,8 @@ const ColorSwatch = ({ colorHex }) => {
   };
 
   return (
-    <Col span={24 / 10} key={colorHex}>
+    // Changed span to accommodate 3 swatches per row
+    <Col span={8} key={colorHex}> 
       <div
         onClick={copyToClipboard}
         style={{
