@@ -129,7 +129,7 @@ const InventoryStandalone = ({ t, onClose }) => {
         <Layout style={{ minHeight: '100vh' }}>
             <Sider width={240} style={{ background: '#27ae60', color: '#fff' }}>
                 <div style={{ padding: '16px', cursor: 'pointer' }} onClick={onClose}>
-                    <Title level={3} style={{ color: '#fff', margin: 0 }}><LeftOutlined /> COSMOS Smart Future</Title>
+                    <Title level={5} style={{ color: '#fff', margin: 0 }}>COSMOS Smart Future</Title>
                     <Text style={{ color: 'rgba(255,255,255,0.8)' }}>{t.agriInfoSystem}</Text>
                 </div>
                 <Menu
