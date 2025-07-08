@@ -135,8 +135,8 @@ const App = () => {
         <Menu.ItemGroup key="g2" title={t.layout}>
           <Menu.Item key="divider">{t.divider}</Menu.Item>
           <Menu.Item key="grid">{t.grid}</Menu.Item>
-          <Menu.Item key="layout">{t.layout}</Menu.Item>
-          <Menu.Item key="space">{t.space}</Menu.Item>
+          {/* <Menu.Item key="layout">{t.layout}</Menu.Item>
+          <Menu.Item key="space">{t.space}</Menu.Item> */}
         </Menu.ItemGroup>
 
         {/* <Menu.ItemGroup key="g3" title={t.dataDisplay}>
