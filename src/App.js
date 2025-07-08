@@ -127,17 +127,18 @@ const App = () => {
         <Menu.Item key="inventory">{t.inventory}</Menu.Item>
         <Menu.Item key="form">{t.form}</Menu.Item>
         <Menu.ItemGroup key="g1" title={t.general}>
+          <Menu.Item key="colors">{t.colors}</Menu.Item>
           <Menu.Item key="button">{t.button}</Menu.Item>
           <Menu.Item key="icon">{t.icon}</Menu.Item>
           <Menu.Item key="typography">{t.typography}</Menu.Item>
         </Menu.ItemGroup>
-        
+{/*         
         <Menu.ItemGroup key="g2" title={t.layout}>
           <Menu.Item key="divider">{t.divider}</Menu.Item>
           <Menu.Item key="grid">{t.grid}</Menu.Item>
-          {/* <Menu.Item key="layout">{t.layout}</Menu.Item>
-          <Menu.Item key="space">{t.space}</Menu.Item> */}
-        </Menu.ItemGroup>
+          <Menu.Item key="layout">{t.layout}</Menu.Item>
+          <Menu.Item key="space">{t.space}</Menu.Item>
+        </Menu.ItemGroup> */}
 
         {/* <Menu.ItemGroup key="g3" title={t.dataDisplay}>
             <Menu.Item key="avatar">{t.avatar}</Menu.Item>

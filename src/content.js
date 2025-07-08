@@ -29,22 +29,27 @@ import TimelineDemo from './components/demos/TimelineDemo';
 import TooltipDemo from './components/demos/TooltipDemo';
 import TreeDemo from './components/demos/TreeDemo';
 import TypographyDemo from './components/demos/TypographyDemo';
-import InventoryDemo from './components/demos/InventoryDemo'; // <-- Import the new demo
+import InventoryDemo from './components/demos/InventoryDemo';
+import ImageSlider from './components/demos/ImageSlider';
+import ColorsDemo from './components/demos/ColorsDemo';
 
 // This object holds the JSX for live demos and the corresponding code strings.
 export const componentData = {
-    overview: { demo: null, code: null },
+    overview: { 
+        demo: <ImageSlider />
+    },
     // General
-    button: { demo: <ButtonDemo />, code: `import { Button } from 'antd';` },
-    icon: { demo: <IconDemo />, code: `import { HomeOutlined } from '@ant-design/icons';` },
-    typography: { demo: <TypographyDemo />, code: `import { Typography } from 'antd';` },
+    button: { demo: <ButtonDemo /> },
+    icon: { demo: <IconDemo /> },
+    typography: { demo: <TypographyDemo /> },
+    colors: { demo: <ColorsDemo />},
     // Layout
     divider: { demo: <DividerDemo />, code: `import { Divider } from 'antd';` },
     grid: { demo: <GridDemo />, code: `import { Row, Col } from 'antd';` },
     layout: { demo: <LayoutDemo />, code: `import { Layout } from 'antd';` },
     space: { demo: <SpaceDemo />, code: `import { Space } from 'antd';` },
     // Data Display
-    inventory: { demo: InventoryDemo, code: `<Modal open={...} width="95%"><InventoryStandalone /></Modal>` },
+    inventory: { demo: InventoryDemo },
     avatar: { demo: <AvatarDemo />, code: `import { Avatar } from 'antd';` },
     badge: { demo: <BadgeDemo />, code: `import { Badge } from 'antd';` },
     calendar: { demo: <CalendarDemo />, code: `import { Calendar } from 'antd';` },
@@ -65,8 +70,9 @@ export const componentData = {
     tree: { demo: <TreeDemo />, code: `import { Tree } from 'antd';` },
     dropdown: { demo: <DropdownDemo />, code: `import { Dropdown } from 'antd';` },
     // Data Entry
-    checkbox: { demo: <CheckboxDemo />, code: `import { Checkbox } from 'antd';` },
-    form: { demo: FormDocumentation, code: `<Modal><Form>...</Form></Modal>` },
+    checkbox: { demo: <CheckboxDemo />, code: `import { Checkbox } from 'antd';import ColorsDemo from './components/demos/ColorsDemo';
+` },
+    form: { demo: FormDocumentation },
 };
 
 // This object holds all the editable text content (titles and descriptions).
@@ -124,6 +130,8 @@ What we're presenting here fixes the obvious problems and establishes a solid fo
 
 This roadmap starts with understanding what we're really working with, then builds toward a comprehensive agricultural platform that serves users in all conditions and contexts. We are very excited to advance in the next step of this project.
 `,
+        colors: 'Colors',
+        colorsDescription: 'This page showcases the color palette used throughout the application.',
         inventoryDescription: 'A full-page inventory management interface, launched in a wide modal.',
         avatarDescription: 'Avatars can be used to represent people or objects.',
         badgeDescription: 'Small numerical value or status descriptor for UI elements.',
@@ -237,6 +245,7 @@ This roadmap starts with understanding what we're really working with, then buil
         dataDisplay: '数据展示',
         dataEntry: '数据录入',
         // Components
+        colors: '颜色',
         inventory: '库存',
         avatar: '头像', badge: '徽标数', button: '按钮', calendar: '日历', card: '卡片', carousel: '走马灯', checkbox: '复选框', collapse: '折叠面板', descriptions: '描述列表', divider: '分割线', dropdown: '下拉菜单', empty: '空状态', form: '表单', grid: '栅格', icon: '图标', image: '图片', layout: '布局', list: '列表', popover: '气泡卡片', segmented: '分段控制器', space: '间距', statistic: '统计数值', table: '表格', tag: '标签', timeline: '时间轴', tooltip: '文字提示', tree: '树形控件', typography: '排版',
         // Descriptions
@@ -283,6 +292,7 @@ This roadmap starts with understanding what we're really working with, then buil
 
 这个路线图从了解我们真正的工作内容开始，然后逐步构建一个在所有条件和环境下为用户服务的综合性农业平台。我们非常期待进入这个项目的下一步。
 `,
+        colorsDescription: '此页面展示了整个应用程序中使用的调色板。',
         avatarDescription: '头像可用于代表人物或对象。',
         badgeDescription: '用于 UI 元素的小数值或状态描述符。',
         buttonDescription: '用于触发一个操作。',
