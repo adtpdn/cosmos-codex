@@ -114,6 +114,15 @@ demo: false
 })();
 </script>
 
+<!-- Ant Design style single Info Alert, icon and text same size, centered, font-family follows <p> element -->
+<div style="min-width: 280px; border-radius: 4px; border: 1px solid #bae7ff; background: #e6f7ff; display: flex; align-items: center; gap: 8px; padding: 12px 16px; justify-content: center; font-family: inherit;">
+  <span style="color: #1890ff; font-size: 24px; display: flex; align-items: center;">&#8505;</span>
+  <span style="color: #10239e; display: flex; align-items: center;">
+    请左右滑显示前后对比
+  </span>
+</div>
+<br>
+
 **文字优化** 
 
 - 统一字体规范，提升多语言适配性 

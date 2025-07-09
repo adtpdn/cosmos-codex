@@ -114,6 +114,15 @@ demo: false
 })();
 </script>
 
+<!-- Ant Design style single Info Alert, icon and text same size, centered, font-family follows <p> element -->
+<div style="min-width: 280px; border-radius: 4px; border: 1px solid #bae7ff; background: #e6f7ff; display: flex; align-items: center; gap: 8px; padding: 12px 16px; justify-content: center; font-family: inherit;">
+  <span style="color: #1890ff; font-size: 24px; display: flex; align-items: center;">&#8505;</span>
+  <span style="color: #10239e; display: flex; align-items: center;">
+    You can slide left/right to see the difference
+  </span>
+</div>
+<br>
+
 - **Made Text Readable and International-Friendly:** We standardized a font size that would make the layout friendly for different languages without losing readability. This helps everyone read better, especially when text gets longer in other languages. We also made input fields flexible, so they don't break when translating to languages that need more space.
 - **Replaced Tables with Smart Cards:** The biggest change was switching from rigid tables to flexible cards. Tables forced users to scroll sideways, which is frustrating on any device but impossible on phones. Cards flow naturally and show the most important info first, with details available when you need them.
 - **Added Show/Hide for Complex Information:** Not every user needs every detail every time. Essential info like product name and quantity stay visible. Pricing, specs, and compliance details expand when you click. This keeps the screen clean but gives power users access to everything.
