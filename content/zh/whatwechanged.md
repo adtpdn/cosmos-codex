@@ -64,8 +64,8 @@ demo: false
 <div class="center-container">
   <div class="comparison-slider-wrapper">
     <div class="comparison-slider" id="mySlider">
-      <img src="../../public/assets/before.png" alt="Before">
-      <img src="../../public/assets/after.png" class="after-image" alt="After">
+      <img src="https://raw.githubusercontent.com/adtpdn/cosmos-codex/refs/heads/main/src/assets/before.png" alt="Before">
+      <img src="https://raw.githubusercontent.com/adtpdn/cosmos-codex/refs/heads/main/src/assets/after.png" class="after-image" alt="After">
       <div class="slider-handle"></div>
     </div>
   </div>
