@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="<%= language %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Source+Han+Sans+CN:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/antd@5.17.4/dist/reset.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: <%= language === 'zh' ? "'Source Han Sans CN', sans-serif" : "'Quicksand', sans-serif" %>;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .ant-layout-header {
+            background: #fff;
+            padding: 0 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: 64px;
+            line-height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .ant-layout-sider {
+            position: fixed;
+            left: 0;
+            top: 64px;
+            bottom: 0;
+            overflow-y: auto;
+            background: #f0f2f5;
+            z-index: 999;
+        }
+        
+        .ant-layout-content {
+            margin-left: 250px;
+            margin-top: 64px;
+            padding: 24px;
+            background: #fff;
+            min-height: calc(100vh - 64px);
+        }
+        
+        .ant-menu {
+            border-right: none;
+            background: transparent;
+        }
+        
+        .markdown-body {
+            max-width: none;
+        }
+        
+        .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6 {
+            font-family: <%= language === 'zh' ? "'Source Han Sans CN', sans-serif" : "'Quicksand', sans-serif" %>;
+        }
+        
+        .markdown-body img {
+            max-width: 100%;
+        }
+        
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+        
+        .page-title {
+            margin: 0;
+            font-size: 32px;
+            font-weight: 600;
+            color: #1890ff;
+        }
+        
+        .edit-button {
+            background: #f0f2f5;
+            border: 1px solid #d9d9d9;
+            border-radius: 6px;
+            padding: 8px 16px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #666;
+            transition: all 0.3s;
+        }
+        
+        .edit-button:hover {
+            background: #e6f7ff;
+            border-color: #1890ff;
+            color: #1890ff;
+        }
+        
+        .content-wrapper {
+            display: flex;
+            gap: 24px;
+        }
+        
+        .main-content {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .toc {
+            width: 250px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 24px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+        
+        .toc h4 {
+            margin-bottom: 16px;
+            color: #666;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .toc ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .toc li {
+            margin-bottom: 8px;
+        }
+        
+        .toc a {
+            color: #666;
+            text-decoration: none;
+            padding: 4px 0;
+            display: block;
+            transition: color 0.3s;
+        }
+        
+        .toc a:hover {
+            color: #1890ff;
+        }
+        
+        .language-selector {
+            margin-left: 16px;
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            font-weight: 600;
+            color: #1890ff;
+        }
+        
+        .brand-icon {
+            margin-right: 8px;
+            font-size: 24px;
+        }
+        
+        @media (max-width: 768px) {
+            .ant-layout-sider {
+                display: none;
+            }
+            
+            .ant-layout-content {
+                margin-left: 0;
+            }
+            
+            .content-wrapper {
+                flex-direction: column;
+            }
+            
+            .toc {
+                display: none;
+            }
+        }
+    </style>
+    <script src="https://unpkg.com/antd@5.17.4/dist/antd.min.js"></script>
+</head>
+<body>
+    <div class="ant-layout">
+        <!-- Header -->
+        <header class="ant-layout-header">
+            <div class="brand">
+                <span class="brand-icon">🌐</span>
+                Cosmos Codex
+            </div>
+            <div>
+                <select class="language-selector" onchange="changeLanguage(this.value)">
+                    <option value="en" <%= language === 'en' ? 'selected' : '' %>>English</option>
+                    <option value="zh" <%= language === 'zh' ? 'selected' : '' %>>中文</option>
+                </select>
+                <% if (isAdmin) { %>
+                    <a href="/admin" style="margin-left: 16px; color: #1890ff;">Admin</a>
+                    <a href="/admin/logout" style="margin-left: 16px; color: #666;">Logout</a>
+                <% } else { %>
+                    <a href="/admin/login" style="margin-left: 16px; color: #666;">Admin Login</a>
+                <% } %>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="ant-layout-sider">
+            <nav class="ant-menu">
+                <% if (menuItems && menuItems.length > 0) { %>
+                    <% 
+                    const categories = {};
+                    menuItems.forEach(item => {
+                        if (!categories[item.category]) {
+                            categories[item.category] = [];
+                        }
+                        categories[item.category].push(item);
+                    });
+                    %>
+                    
+                    <% Object.keys(categories).forEach(category => { %>
+                        <div class="ant-menu-item-group">
+                            <div class="ant-menu-item-group-title"><%= category %></div>
+                            <% categories[category].forEach(item => { %>
+                                <div class="ant-menu-item <%= pageKey === item.key ? 'ant-menu-item-selected' : '' %>">
+                                    <a href="/docs/<%= item.key %>?lang=<%= language %>"><%= item.title %></a>
+                                </div>
+                            <% }); %>
+                        </div>
+                    <% }); %>
+                <% } %>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="ant-layout-content">
+            <% if (content) { %>
+                <div class="page-header">
+                    <h1 class="page-title"><%= content.frontMatter.title || pageKey %></h1>
+                    <% if (isAdmin) { %>
+                        <a href="/admin/edit/<%= pageKey %>?lang=<%= language %>" class="edit-button">
+                            ✏️ Edit
+                        </a>
+                    <% } %>
+                </div>
+
+                <div class="content-wrapper">
+                    <div class="main-content">
+                        <div class="markdown-body">
+                            <%- content.html %>
+                        </div>
+                        
+                        <% if (content.frontMatter.demo) { %>
+                            <h2 id="demo" style="margin-top: 24px;">Live Demo</h2>
+                            <div id="demo-container">
+                                <!-- Demo will be rendered here -->
+                            </div>
+                            <p style="color: #666; margin-top: 16px;">
+                                Note: The live demo does not update in real-time from the editor. This requires a local development environment.
+                            </p>
+                        <% } %>
+                    </div>
+
+                    <div class="toc">
+                        <h4>Table of Contents</h4>
+                        <ul id="toc-list">
+                            <!-- TOC will be generated by JavaScript -->
+                        </ul>
+                    </div>
+                </div>
+            <% } else { %>
+                <div class="page-header">
+                    <h1 class="page-title">Page not found</h1>
+                </div>
+                <p>The requested page could not be found.</p>
+            <% } %>
+        </main>
+    </div>
+
+    <script>
+        function changeLanguage(lang) {
+            const url = new URL(window.location);
+            url.searchParams.set('lang', lang);
+            window.location.href = url.toString();
+        }
+
+        // Generate table of contents
+        document.addEventListener('DOMContentLoaded', function() {
+            const headings = document.querySelectorAll('.markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6');
+            const tocList = document.getElementById('toc-list');
+            
+            if (headings.length > 0 && tocList) {
+                headings.forEach(function(heading, index) {
+                    const level = parseInt(heading.tagName.charAt(1));
+                    const text = heading.textContent;
+                    const id = text.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-');
+                    
+                    // Add ID to heading if it doesn't have one
+                    if (!heading.id) {
+                        heading.id = id;
+                    }
+                    
+                    // Create TOC item
+                    const li = document.createElement('li');
+                    li.style.paddingLeft = (level - 1) * 16 + 'px';
+                    
+                    const a = document.createElement('a');
+                    a.href = '#' + heading.id;
+                    a.textContent = text;
+                    
+                    li.appendChild(a);
+                    tocList.appendChild(li);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

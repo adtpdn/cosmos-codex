@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - Cosmos Codex</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f0f2f5;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .error-container {
+            background: white;
+            padding: 48px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .error-icon {
+            font-size: 64px;
+            margin-bottom: 24px;
+        }
+        
+        .error-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin: 0 0 16px 0;
+        }
+        
+        .error-message {
+            color: #666;
+            margin: 0 0 32px 0;
+            line-height: 1.5;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+        
+        .error-button {
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .error-button.primary {
+            background: #1890ff;
+            color: white;
+        }
+        
+        .error-button.primary:hover {
+            background: #40a9ff;
+        }
+        
+        .error-button.secondary {
+            background: #f0f2f5;
+            color: #666;
+        }
+        
+        .error-button.secondary:hover {
+            background: #d9d9d9;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-icon">⚠️</div>
+        <h1 class="error-title">Oops! Something went wrong</h1>
+        <p class="error-message"><%= error %></p>
+        <div class="error-actions">
+            <a href="/" class="error-button primary">Go Home</a>
+            <a href="javascript:history.back()" class="error-button secondary">Go Back</a>
+        </div>
+    </div>
+</body>
+</html>

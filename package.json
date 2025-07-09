@@ -5,18 +5,32 @@
   "dependencies": {
     "@ant-design/icons": "^5.3.7",
     "antd": "^5.17.4",
+    "bcrypt": "^5.1.1",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "gray-matter": "^4.0.3",
+    "marked": "^4.3.0",
+    "multer": "^1.4.5-lts.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-markdown": "^9.0.1",
     "react-scripts": "5.0.1",
     "rehype-raw": "^7.0.0",
-    "rehype-slug": "^6.0.0"
+    "rehype-slug": "^6.0.0",
+    "sqlite3": "^5.1.7"
   },
   "scripts": {
     "start": "react-scripts start",
+    "server": "node server/app.js",
+    "dev": "nodemon server/app.js",
+    "setup": "node setup.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   },
   "eslintConfig": {
     "extends": [
