@@ -1,12 +1,12 @@
 ---
-title: Typography
+title: 排版
 category: general
 order: 3
 demo: false
 ---
 
 <style>
-  /* Font imports would need to be added to your site's CSS */
+  /* 字体导入需要添加到您网站的CSS中 */
   .typography-demo {
     margin: 2em 0;
   }
@@ -67,25 +67,25 @@ demo: false
   }
 </style>
 
-# Typography
+# 排版
 
 <div class="typography-demo">
-  <div class="font-specs">Quicksand Bold &mdash; 30pt &mdash; Line H 40pt</div>
+  <div class="font-specs">Quicksand 粗体 &mdash; 30磅 &mdash; 行高 40磅</div>
   <div class="quicksand-bold-30">
-    Yet in many ways, our current situation<br>is an unfair representation of 2021.
+    然而在很多方面，我们当前的情况<br>是对2021年的不公平呈现。
   </div>
   
-  <div class="font-specs">Quicksand Bold &mdash; 68pt &mdash; Line H 80pt</div>
+  <div class="font-specs">Quicksand 粗体 &mdash; 68磅 &mdash; 行高 80磅</div>
   <div class="quicksand-bold-68">
-    The possibility<br>of agri-tech.
+    农业科技<br>的可能性。
   </div>
   
-  <div class="font-specs">Source Hans Medium &mdash; 68pt &mdash; Line H 80pt</div>
+  <div class="font-specs">思源黑体 中等 &mdash; 68磅 &mdash; 行高 80磅</div>
   <div class="source-hans-medium-68">
     未来农业技术
   </div>
   
-  <div class="font-specs">Source Hans Medium &mdash; 21pt &mdash; Line H 36pt</div>
+  <div class="font-specs">思源黑体 中等 &mdash; 21磅 &mdash; 行高 36磅</div>
   <div class="source-hans-medium-21">
     思源黑体 这一字体家族有七种字体粗细，完<br>
     全支持日文、韩文、繁体中文和简体中文，<br>
@@ -94,7 +94,7 @@ demo: false
     拉丁文、希腊文和西里尔文字形。
   </div>
   
-  <div class="font-specs">Source Hans Light &mdash; 14pt &mdash; Line H 24pt</div>
+  <div class="font-specs">思源黑体 细体 &mdash; 14磅 &mdash; 行高 24磅</div>
   <div class="source-hans-light-14">
     很多年以前，那时我的钱包瘪瘪的，陆地上看来没什么好 混得了，干脆下海吧，去在我们这个世界上占绝对面积的<br>
     大 海里逛逛吧!<br>
@@ -118,11 +118,10 @@ demo: false
     新的主要驱动力。
   </div>
   
-  <div class="font-specs">Quicksand Regular &mdash; 14pt &mdash; Line H 24pt</div>
+  <div class="font-specs">Quicksand 常规 &mdash; 14磅 &mdash; 行高 24磅</div>
   <div class="quicksand-regular-14">
-    Yet in many ways, our current situation is an unfair representation of 2021, a year when the creative world did<br>
-    manage (at least a few times) to focus on topics outside of Covid-19. Arguably the biggest of these was the<br>
-    climate crisis, as the issue returned to the top of the agenda, particularly around the Cop26 conference in<br>
-    November.
+    然而，从很多方面来看，我们目前的情况对2021年是一种不公平的呈现，在这一年里，创意世界确实<br>
+    成功地（至少几次）将注意力集中在了新冠疫情之外的话题上。可以说，其中最重要的议题就是<br>
+    气候危机，这一问题重返议程首位，特别是在11月举行的第26届联合国气候变化大会（COP26）期间。
   </div>
 </div>

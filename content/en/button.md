@@ -2,7 +2,7 @@
 title: Button
 category: general
 order: 3
-demo: true
+demo: false
 ---
 
 # Button
@@ -20,7 +20,7 @@ A button means an operation (or a series of operations). Clicking a button will 
 Buttons are used to trigger actions. They can be styled in different ways to indicate their importance and function.
 
 ```jsx
-import { Button } from 'antd';
+import { Button } from "antd";
 
 export default function ButtonExample() {
   return (
@@ -44,6 +44,7 @@ export default function ButtonExample() {
 ### Button States
 
 Buttons can be in different states:
+
 - Normal
 - Hover
 - Active
@@ -52,9 +53,9 @@ Buttons can be in different states:
 
 ## API
 
-| Property | Description | Type | Default |
-|----------|-------------|------|---------|
-| type | Button type | `primary` \| `default` \| `dashed` \| `link` | `default` |
-| size | Button size | `large` \| `middle` \| `small` | `middle` |
-| disabled | Disabled state | boolean | false |
-| loading | Loading state | boolean | false |
+| Property | Description    | Type                                         | Default   |
+| -------- | -------------- | -------------------------------------------- | --------- |
+| type     | Button type    | `primary` \| `default` \| `dashed` \| `link` | `default` |
+| size     | Button size    | `large` \| `middle` \| `small`               | `middle`  |
+| disabled | Disabled state | boolean                                      | false     |
+| loading  | Loading state  | boolean                                      | false     |

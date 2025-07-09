@@ -2,7 +2,7 @@
 title: Overview
 category: general
 order: 1
-demo: true
+demo: false
 ---
 
 # COSMOS Agricultural Design System

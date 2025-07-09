@@ -2,7 +2,7 @@
 title: Form
 category: data-entry
 order: 20
-demo: true
+demo: false
 ---
 
 # Form
@@ -16,24 +16,28 @@ The form component demonstrates the agricultural order creation interface with s
 ## Features
 
 ### Smart Form Design
+
 - Auto-generated order numbers
 - Intelligent field validation
 - Real-time error feedback
 - Mobile-optimized input controls
 
 ### Agricultural-Specific Fields
+
 - Farm location selection
 - Seasonal product categorization
 - Weather-dependent delivery options
 - Compliance requirement tracking
 
 ### Enhanced UX
+
 - Clear visual hierarchy
 - Contextual help text
 - Progressive disclosure
 - Auto-save functionality
 
 ### Validation & Feedback
+
 - Real-time validation
 - Clear error messages
 - Required field indicators
@@ -42,6 +46,7 @@ The form component demonstrates the agricultural order creation interface with s
 ## When To Use
 
 This form pattern is ideal for:
+
 - Order creation workflows
 - Data entry with complex validation
 - Mobile-first agricultural applications
@@ -50,6 +55,7 @@ This form pattern is ideal for:
 ## Key Improvements
 
 The form design addresses common agricultural industry pain points:
+
 - Seasonal workflow requirements
 - Field operation constraints
 - Weather-dependent logistics
