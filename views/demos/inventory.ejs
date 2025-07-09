@@ -24,6 +24,7 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
     }
     
     body {
@@ -48,6 +49,8 @@
       height: 100vh;
       overflow-y: auto;
       min-width: 180px;
+      transition: transform 0.3s, width 0.3s;
+      z-index: 100;
     }
     
     .logo-container {
@@ -80,6 +83,10 @@
       font-size: 14px;
     }
     
+    .menu-item:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
     .menu-item i {
       margin-right: 12px;
       width: 16px;
@@ -99,6 +106,10 @@
       padding-left: 48px;
     }
     
+    .sub-menu .menu-item:hover:not(.active) {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+    
     .sub-menu .menu-item.active {
       background-color: #14532D; /* Updated to exact color from image */
       position: relative;
@@ -116,6 +127,16 @@
     
     .package-management {
       background-color: #16A34A; /* Match main background */
+    }
+    
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #333;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 10px;
     }
     
     /* Content area */
@@ -164,6 +185,11 @@
     .user-info {
       display: flex;
       align-items: center;
+      cursor: pointer;
+    }
+    
+    .user-info:hover {
+      opacity: 0.9;
     }
     
     .location-info {
@@ -171,6 +197,11 @@
       align-items: center;
       font-size: 12px;
       color: #666;
+      cursor: pointer;
+    }
+    
+    .location-info:hover {
+      color: #333;
     }
     
     .location-info .dot {
@@ -189,6 +220,10 @@
       color: white;
       font-size: 14px;
       margin-left: 16px;
+    }
+    
+    .user-avatar:hover {
+      box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
     }
     
     /* Order info */
@@ -233,6 +268,7 @@
       border-bottom: none;
       margin-top: 16px;
       margin-bottom: 16px;
+      flex-wrap: wrap;
     }
     
     .tab {
@@ -243,6 +279,7 @@
       font-size: 14px;
       display: flex;
       align-items: center;
+      margin-bottom: 8px;
     }
     
     .tab.active {
@@ -253,6 +290,11 @@
     .tab:not(.active) {
       background-color: #f5f5f5;
       color: #666;
+    }
+    
+    .tab:not(.active):hover {
+      background-color: #e6f7ff;
+      color: #1890ff;
     }
     
     .tab-count {
@@ -271,11 +313,13 @@
       margin-bottom: 16px;
       align-items: center;
       flex-wrap: wrap;
+      gap: 8px;
     }
     
     .search-input {
       position: relative;
       width: 320px;
+      max-width: 100%;
     }
     
     .search-input input {
@@ -284,6 +328,13 @@
       border: 1px solid #ddd;
       border-radius: 2px;
       font-size: 14px;
+      transition: all 0.3s;
+    }
+    
+    .search-input input:focus {
+      border-color: #1890ff;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
     }
     
     .search-input i {
@@ -292,12 +343,14 @@
       top: 50%;
       transform: translateY(-50%);
       color: #bbb;
+      pointer-events: none;
     }
     
     .filter-actions {
       display: flex;
       align-items: center;
       gap: 8px;
+      flex-wrap: wrap;
     }
     
     .filter-button {
@@ -318,9 +371,9 @@
       border-color: #1890ff;
     }
     
-    .filter-button:not(.active) {
-      background-color: white;
-      color: #666;
+    .filter-button:not(.active):hover {
+      border-color: #1890ff;
+      color: #1890ff;
     }
     
     .filter-button .count {
@@ -343,11 +396,47 @@
       background: white;
       color: #666;
       min-width: 100px;
+      position: relative;
+    }
+    
+    .dropdown-button:hover {
+      border-color: #1890ff;
+      color: #1890ff;
     }
     
     .dropdown-button i {
       margin-left: 6px;
       font-size: 12px;
+    }
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: white;
+      min-width: 160px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      z-index: 10;
+      border-radius: 2px;
+      margin-top: 4px;
+    }
+    
+    .dropdown-button:focus .dropdown-content,
+    .dropdown-button:focus-within .dropdown-content,
+    .dropdown-content.show {
+      display: block;
+    }
+    
+    .dropdown-item {
+      padding: 8px 16px;
+      color: #666;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    
+    .dropdown-item:hover {
+      background-color: #f5f5f5;
     }
     
     /* Active filters */
@@ -373,11 +462,16 @@
       align-items: center;
       margin-right: 8px;
       border: 1px solid #91d5ff;
+      margin-bottom: 8px;
     }
     
     .filter-tag i {
       margin-left: 4px;
       cursor: pointer;
+    }
+    
+    .filter-tag i:hover {
+      color: #f5222d;
     }
     
     .filter-option {
@@ -388,6 +482,12 @@
       border-radius: 2px;
       margin-right: 8px;
       background-color: #f5f5f5;
+      margin-bottom: 8px;
+    }
+    
+    .filter-option:hover {
+      background-color: #e6f7ff;
+      color: #1890ff;
     }
     
     /* Table */
@@ -409,6 +509,9 @@
       padding: 12px 16px;
       text-align: left;
       border-bottom: 1px solid #f0f0f0;
+      position: sticky;
+      top: 0;
+      z-index: 1;
     }
     
     td {
@@ -417,17 +520,72 @@
       color: #666;
     }
     
+    tbody tr:hover {
+      background-color: #fafafa;
+    }
+    
     .warning-row {
       background-color: #fff1f0;
     }
     
+    .warning-row:hover {
+      background-color: #ffebe9;
+    }
+    
     /* Checkbox */
-    .checkbox {
+    .checkbox-wrapper {
+      position: relative;
       width: 16px;
       height: 16px;
-      border-radius: 2px;
-      border: 1px solid #ddd;
+      display: inline-block;
+    }
+    
+    .checkbox {
+      position: absolute;
+      opacity: 0;
       cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+    
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 16px;
+      width: 16px;
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 2px;
+    }
+    
+    .checkbox-wrapper:hover .checkmark {
+      border-color: #1890ff;
+    }
+    
+    .checkbox:checked ~ .checkmark {
+      background-color: #1890ff;
+      border-color: #1890ff;
+    }
+    
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+    
+    .checkbox:checked ~ .checkmark:after {
+      display: block;
+    }
+    
+    .checkbox-wrapper .checkmark:after {
+      left: 5px;
+      top: 2px;
+      width: 3px;
+      height: 7px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
     }
     
     /* Status tags */
@@ -490,63 +648,440 @@
       align-items: center;
       font-size: 13px;
       margin-left: 16px;
+      transition: background-color 0.2s;
+    }
+    
+    .create-button:hover {
+      background-color: #15803d;
+    }
+    
+    .create-button:active {
+      background-color: #166534;
     }
     
     .create-button i {
       margin-right: 4px;
+    }
+    
+    /* Action links */
+    a {
+      color: #1890ff;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    
+    a:hover {
+      color: #40a9ff;
+    }
+    
+    a:active {
+      color: #096dd9;
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 1200px) {
+      .filter-actions {
+        margin-top: 8px;
+      }
+    }
+    
+    @media (max-width: 992px) {
+      .search-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .search-input {
+        width: 100%;
+        max-width: none;
+        margin-bottom: 8px;
+      }
+      
+      .filter-actions {
+        width: 100%;
+        justify-content: flex-start;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: -180px;
+        height: 100%;
+        z-index: 1001;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.15);
+      }
+      
+      .sidebar.open {
+        transform: translateX(180px);
+      }
+      
+      .mobile-menu-toggle {
+        display: block;
+      }
+      
+      .header {
+        padding: 0 8px;
+      }
+      
+      .header-title {
+        font-size: 14px;
+      }
+      
+      .breadcrumb {
+        display: none;
+      }
+      
+      .tabs {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        margin-bottom: 8px;
+      }
+      
+      .tab {
+        flex-shrink: 0;
+      }
+      
+      .dropdown-button {
+        min-width: auto;
+      }
+      
+      .content {
+        padding-left: 0;
+      }
+      
+      .order-info {
+        padding: 8px;
+      }
+      
+      .order-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 0;
+        margin-top: 4px;
+      }
+      
+      .order-meta-item {
+        margin-bottom: 4px;
+      }
+      
+      th, td {
+        padding: 8px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .header-right {
+        display: none;
+      }
+      
+      .filter-actions {
+        justify-content: space-between;
+      }
+      
+      .filter-button, .dropdown-button {
+        padding: 6px 8px;
+        font-size: 12px;
+      }
+      
+      .filter-button .count, .tab-count {
+        padding: 0 4px;
+        font-size: 10px;
+      }
+      
+      .table-container {
+        margin: 0 -8px;
+      }
+    }
+    
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .modal.show {
+      display: flex;
+    }
+    
+    .modal-content {
+      background-color: white;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      padding: 24px;
+      width: 100%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    
+    .modal-title {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      color: #999;
+    }
+    
+    .modal-close:hover {
+      color: #666;
+    }
+    
+    .modal-body {
+      margin-bottom: 24px;
+    }
+    
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+    
+    .modal-btn {
+      padding: 6px 16px;
+      border-radius: 2px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    
+    .modal-btn-default {
+      background-color: white;
+      border: 1px solid #ddd;
+      color: #666;
+    }
+    
+    .modal-btn-default:hover {
+      border-color: #1890ff;
+      color: #1890ff;
+    }
+    
+    .modal-btn-primary {
+      background-color: #1890ff;
+      border: 1px solid #1890ff;
+      color: white;
+    }
+    
+    .modal-btn-primary:hover {
+      background-color: #40a9ff;
+      border-color: #40a9ff;
+    }
+    
+    /* Loading state */
+    .loading {
+      position: relative;
+      pointer-events: none;
+    }
+    
+    .loading::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.6);
+      z-index: 1000;
+    }
+    
+    .loading-spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1001;
+      width: 30px;
+      height: 30px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #1890ff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    
+    /* Toast notifications */
+    .toast-container {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 1010;
+    }
+    
+    .toast {
+      padding: 12px 16px;
+      border-radius: 4px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      max-width: 350px;
+      min-width: 250px;
+      animation: slide-in 0.3s ease-out;
+    }
+    
+    .toast-success {
+      background-color: #f6ffed;
+      border: 1px solid #b7eb8f;
+    }
+    
+    .toast-error {
+      background-color: #fff1f0;
+      border: 1px solid #ffa39e;
+    }
+    
+    .toast-warning {
+      background-color: #fffbe6;
+      border: 1px solid #ffe58f;
+    }
+    
+    .toast-info {
+      background-color: #e6f7ff;
+      border: 1px solid #91d5ff;
+    }
+    
+    .toast i {
+      margin-right: 8px;
+    }
+    
+    @keyframes slide-in {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    /* Tooltip */
+    [data-tooltip] {
+      position: relative;
+    }
+    
+    [data-tooltip]:hover::before {
+      content: attr(data-tooltip);
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0,0,0,0.75);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 2px;
+      font-size: 12px;
+      white-space: nowrap;
+      z-index: 1000;
+    }
+    
+    [data-tooltip]:hover::after {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 5px;
+      border-style: solid;
+      border-color: rgba(0,0,0,0.75) transparent transparent transparent;
+      z-index: 1000;
+    }
+    
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 999;
+      display: none;
+    }
+    
+    .overlay.show {
+      display: block;
     }
   </style>
 </head>
 <body>
   <div class="main-container">
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar" id="sidebar">
       <div class="logo-container">
         <div class="logo-text">COSMOS 智能未来</div>
         <div class="logo-subtitle">农业智能系统</div>
       </div>
-      <div class="menu-item">
+      <div class="menu-item" onclick="navigateTo('base-info')">
         <i class="fa-solid fa-building"></i> 基地信息
       </div>
-      <div class="menu-item">
+      <div class="menu-item" onclick="navigateTo('plant-mgmt')">
         <i class="fa-solid fa-seedling"></i> 种植管理
       </div>
-      <div class="menu-item">
+      <div class="menu-item" onclick="navigateTo('env-monitor')">
         <i class="fa-solid fa-temperature-half"></i> 环境监测
       </div>
-      <div class="menu-item">
+      <div class="menu-item" onclick="navigateTo('plant-protect')">
         <i class="fa-solid fa-shield"></i> 植保管理
       </div>
-      <div class="menu-item">
+      <div class="menu-item" onclick="navigateTo('task-mgmt')">
         <i class="fa-solid fa-clipboard-list"></i> 作业管理
       </div>
-      <div class="menu-item">
+      <div class="menu-item" onclick="navigateTo('salary-mgmt')">
         <i class="fa-solid fa-coins"></i> 薪酬管理
       </div>
-      <div class="menu-item">
+      <div class="menu-item" onclick="navigateTo('yield-predict')">
         <i class="fa-solid fa-chart-line"></i> 产量预测
       </div>
-      <div class="menu-item">
+      <div class="menu-item" onclick="navigateTo('real-time-data')">
         <i class="fa-solid fa-chart-column"></i> 实时数据大屏
       </div>
-      <div class="menu-item active">
+      <div class="menu-item active" onclick="toggleSubMenu()">
         <i class="fa-solid fa-warehouse"></i> 库存管理
       </div>
       <div class="sub-menu">
-        <div class="menu-item">库存信息</div>
-        <div class="menu-item">物料信息</div>
-        <div class="menu-item">仓库信息</div>
-        <div class="menu-item active">订单信息</div>
-        <div class="menu-item">库存报表</div>
-        <div class="menu-item">运营报表</div>
+        <div class="menu-item" onclick="navigateTo('inventory-info')">库存信息</div>
+        <div class="menu-item" onclick="navigateTo('material-info')">物料信息</div>
+        <div class="menu-item" onclick="navigateTo('warehouse-info')">仓库信息</div>
+        <div class="menu-item active" onclick="navigateTo('order-info')">订单信息</div>
+        <div class="menu-item" onclick="navigateTo('inventory-report')">库存报表</div>
+        <div class="menu-item" onclick="navigateTo('operation-report')">运营报表</div>
       </div>
-      <div class="menu-item package-management">
+      <div class="menu-item package-management" onclick="navigateTo('package-mgmt')">
         <i class="fa-solid fa-box"></i> 包装管理
       </div>
     </div>
 
     <!-- Content area -->
     <div class="content">
+      <!-- Mobile menu toggle -->
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
       <!-- Header -->
       <div class="header">
         <div class="header-left">
@@ -554,13 +1089,14 @@
           <div class="breadcrumb">库存管理 / 订单信息</div>
         </div>
         <div class="header-right">
-          <div class="location-info">
+          <div class="location-info" onclick="showLocationSelector()">
             <span class="dot">●</span> 拜耳康普基地
             <i class="fa-solid fa-chevron-down" style="margin-left: 4px; font-size: 10px;"></i>
           </div>
-          <div class="user-info" style="margin-left: 20px;">
+          <div class="user-info" onclick="showUserMenu()">
             <div class="user-avatar">BP</div>
             <span style="margin-left: 8px;">拜耳产品 (集团管理)</span>
+            <i class="fa-solid fa-chevron-down" style="margin-left: 4px; font-size: 10px;"></i>
           </div>
         </div>
       </div>
@@ -572,13 +1108,13 @@
           <div class="order-title">
             订单信息
             <div class="order-meta">
-              <div class="order-meta-item">
+              <div class="order-meta-item" data-tooltip="总订单数">
                 <i class="fa-regular fa-circle"></i> 共: 247条订单
               </div>
-              <div class="order-meta-item">
+              <div class="order-meta-item" data-tooltip="最后更新时间">
                 <i class="fa-regular fa-clock"></i> 更新时间: 分钟前
               </div>
-              <div class="order-meta-item urgent-order">
+              <div class="order-meta-item urgent-order" data-tooltip="紧急订单数">
                 <i class="fa-solid fa-triangle-exclamation"></i> 2条紧急订单
               </div>
             </div>
@@ -586,23 +1122,23 @@
 
           <!-- Tabs -->
           <div class="tabs">
-            <div class="tab active">
+            <div class="tab active" onclick="filterByTab('all')">
               全部
               <span class="tab-count">247</span>
             </div>
-            <div class="tab">
+            <div class="tab" onclick="filterByTab('pending')">
               代发货
               <span class="tab-count">0</span>
             </div>
-            <div class="tab">
+            <div class="tab" onclick="filterByTab('shipped')">
               已发货
               <span class="tab-count">0</span>
             </div>
-            <div class="tab">
+            <div class="tab" onclick="filterByTab('completed')">
               已完成
               <span class="tab-count">156</span>
             </div>
-            <div class="tab">
+            <div class="tab" onclick="filterByTab('cancelled')">
               已取消
               <span class="tab-count">12</span>
             </div>
@@ -612,29 +1148,51 @@
           <div class="search-bar">
             <div class="search-input">
               <i class="fa-solid fa-magnifying-glass"></i>
-              <input type="text" placeholder="搜索订单、客户、路线...">
+              <input type="text" placeholder="搜索订单、客户、路线..." id="search-input" onkeyup="searchTable()">
             </div>
             <div class="filter-actions">
-              <div class="filter-button">
+              <div class="filter-button" onclick="toggleFilter('return-status')">
                 退货状态
                 <span class="count">3</span>
               </div>
-              <div class="filter-button active">
+              <div class="filter-button active" onclick="toggleFilter('receive-status')">
                 收货状态
                 <span class="count">2</span>
               </div>
-              <div class="dropdown-button">
+              <div class="dropdown-button" onclick="toggleDropdown('customer-dropdown')" tabindex="0">
                 所有客户
                 <i class="fa-solid fa-chevron-down"></i>
+                <div class="dropdown-content" id="customer-dropdown">
+                  <div class="dropdown-item" onclick="selectCustomer('all')">所有客户</div>
+                  <div class="dropdown-item" onclick="selectCustomer('666-555')">666-555</div>
+                  <div class="dropdown-item" onclick="selectCustomer('test')">测试客户</div>
+                </div>
               </div>
-              <div class="dropdown-button">
+              <div class="dropdown-button" onclick="toggleDropdown('date-dropdown')" tabindex="0">
                 日期
                 <i class="fa-solid fa-calendar"></i>
+                <div class="dropdown-content" id="date-dropdown">
+                  <div class="dropdown-item" onclick="selectDateRange('all')">所有日期</div>
+                  <div class="dropdown-item" onclick="selectDateRange('today')">今天</div>
+                  <div class="dropdown-item" onclick="selectDateRange('week')">本周</div>
+                  <div class="dropdown-item" onclick="selectDateRange('month')">本月</div>
+                  <div class="dropdown-item" onclick="selectDateRange('custom')">自定义...</div>
+                </div>
               </div>
-              <div class="dropdown-button">
+              <div class="dropdown-button" onclick="toggleDropdown('route-dropdown')" tabindex="0">
                 发货用途
                 <i class="fa-solid fa-chevron-down"></i>
+                <div class="dropdown-content" id="route-dropdown">
+                  <div class="dropdown-item" onclick="selectRoute('all')">所有用途</div>
+                  <div class="dropdown-item" onclick="selectRoute('@111')">@111</div>
+                  <div class="dropdown-item" onclick="selectRoute('@222')">@222</div>
+                  <div class="dropdown-item" onclick="selectRoute('@555')">@555</div>
+                  <div class="dropdown-item" onclick="selectRoute('@销售')">@销售</div>
+                </div>
               </div>
+              <button class="create-button" onclick="showCreateOrderModal()">
+                <i class="fa-solid fa-plus"></i> 创建订单
+              </button>
             </div>
           </div>
 
@@ -643,20 +1201,23 @@
             <div class="active-filters-label">活动筛选条件:</div>
             <div class="filter-tag">
               已发货
-              <i class="fa-solid fa-xmark"></i>
+              <i class="fa-solid fa-xmark" onclick="removeFilter('shipped')"></i>
             </div>
-            <div class="filter-option">未发货</div>
-            <div class="filter-option">清除全部</div>
+            <div class="filter-option" onclick="addFilter('not-shipped')">未发货</div>
+            <div class="filter-option" onclick="clearAllFilters()">清除全部</div>
           </div>
         </div>
 
         <!-- Table -->
-        <div class="table-container">
+        <div class="table-container" id="table-container">
           <table>
             <thead>
               <tr>
                 <th style="width: 40px;">
-                  <input type="checkbox" class="checkbox">
+                  <label class="checkbox-wrapper" data-tooltip="全选">
+                    <input type="checkbox" class="checkbox" id="select-all" onchange="toggleSelectAll(this)">
+                    <span class="checkmark"></span>
+                  </label>
                 </th>
                 <th>订单编号</th>
                 <th>客户</th>
@@ -668,10 +1229,13 @@
                 <th>操作</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="orders-table">
               <tr>
                 <td>
-                  <input type="checkbox" class="checkbox">
+                  <label class="checkbox-wrapper">
+                    <input type="checkbox" class="checkbox order-checkbox">
+                    <span class="checkmark"></span>
+                  </label>
                 </td>
                 <td>SO2503170002</td>
                 <td>666-555</td>
@@ -680,11 +1244,14 @@
                 <td>63 kg</td>
                 <td><span class="priority-normal">正常</span></td>
                 <td><span class="status-pending">未发货</span></td>
-                <td><a href="#" style="color:#1890ff">详情...</a></td>
+                <td><a href="#" onclick="showOrderDetails('SO2503170002')">详情...</a></td>
               </tr>
               <tr class="warning-row">
                 <td>
-                  <input type="checkbox" class="checkbox">
+                  <label class="checkbox-wrapper">
+                    <input type="checkbox" class="checkbox order-checkbox">
+                    <span class="checkmark"></span>
+                  </label>
                 </td>
                 <td>
                   <i class="fa-solid fa-triangle-exclamation alert-icon"></i> SO2503170001
@@ -695,11 +1262,14 @@
                 <td>1 kg</td>
                 <td><span class="priority-high">高</span></td>
                 <td><span class="status-pending">未发货</span></td>
-                <td><a href="#" style="color:#1890ff">详情...</a></td>
+                <td><a href="#" onclick="showOrderDetails('SO2503170001')">详情...</a></td>
               </tr>
               <tr class="warning-row">
                 <td>
-                  <input type="checkbox" class="checkbox">
+                  <label class="checkbox-wrapper">
+                    <input type="checkbox" class="checkbox order-checkbox">
+                    <span class="checkmark"></span>
+                  </label>
                 </td>
                 <td>
                   <i class="fa-solid fa-triangle-exclamation alert-icon"></i> SO2503130001
@@ -710,11 +1280,14 @@
                 <td>355 kg</td>
                 <td><span class="priority-urgent">紧急</span></td>
                 <td><span class="status-pending">未发货</span></td>
-                <td><a href="#" style="color:#1890ff">详情...</a></td>
+                <td><a href="#" onclick="showOrderDetails('SO2503130001')">详情...</a></td>
               </tr>
               <tr>
                 <td>
-                  <input type="checkbox" class="checkbox">
+                  <label class="checkbox-wrapper">
+                    <input type="checkbox" class="checkbox order-checkbox">
+                    <span class="checkmark"></span>
+                  </label>
                 </td>
                 <td>SO2503120003</td>
                 <td>这是一个测试-去去味</td>
@@ -723,11 +1296,14 @@
                 <td>12 kg</td>
                 <td><span class="priority-normal">正常</span></td>
                 <td><span class="status-completed">已收货</span></td>
-                <td><a href="#" style="color:#1890ff">详情...</a></td>
+                <td><a href="#" onclick="showOrderDetails('SO2503120003')">详情...</a></td>
               </tr>
               <tr>
                 <td>
-                  <input type="checkbox" class="checkbox">
+                  <label class="checkbox-wrapper">
+                    <input type="checkbox" class="checkbox order-checkbox">
+                    <span class="checkmark"></span>
+                  </label>
                 </td>
                 <td>SO2503120002</td>
                 <td>test - C02</td>
@@ -736,11 +1312,14 @@
                 <td>-</td>
                 <td><span class="priority-normal">正常</span></td>
                 <td><span class="status-completed">已收货</span></td>
-                <td><a href="#" style="color:#1890ff">详情...</a></td>
+                <td><a href="#" onclick="showOrderDetails('SO2503120002')">详情...</a></td>
               </tr>
               <tr>
                 <td>
-                  <input type="checkbox" class="checkbox">
+                  <label class="checkbox-wrapper">
+                    <input type="checkbox" class="checkbox order-checkbox">
+                    <span class="checkmark"></span>
+                  </label>
                 </td>
                 <td>SO2503120001</td>
                 <td>这是一个测试-去去味</td>
@@ -749,11 +1328,14 @@
                 <td>122 kg</td>
                 <td><span class="priority-normal">正常</span></td>
                 <td><span class="status-completed">已收货</span></td>
-                <td><a href="#" style="color:#1890ff">详情...</a></td>
+                <td><a href="#" onclick="showOrderDetails('SO2503120001')">详情...</a></td>
               </tr>
               <tr>
                 <td>
-                  <input type="checkbox" class="checkbox">
+                  <label class="checkbox-wrapper">
+                    <input type="checkbox" class="checkbox order-checkbox">
+                    <span class="checkmark"></span>
+                  </label>
                 </td>
                 <td>SO2503050002</td>
                 <td>这是一个测试-去去味</td>
@@ -762,7 +1344,7 @@
                 <td>2 kg</td>
                 <td><span class="priority-low">低</span></td>
                 <td><span class="status-completed">已收货</span></td>
-                <td><a href="#" style="color:#1890ff">详情...</a></td>
+                <td><a href="#" onclick="showOrderDetails('SO2503050002')">详情...</a></td>
               </tr>
             </tbody>
           </table>
@@ -770,5 +1352,374 @@
       </div>
     </div>
   </div>
-</body>
-</html>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Order details modal -->
+  <div class="modal" id="order-details-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">订单详情</div>
+        <button class="modal-close" onclick="closeModal('order-details-modal')"><i class="fa-solid fa-times"></i></button>
+      </div>
+      <div class="modal-body" id="order-details-content">
+        <!-- Order details will be loaded here -->
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn modal-btn-default" onclick="closeModal('order-details-modal')">关闭</button>
+        <button class="modal-btn modal-btn-primary" onclick="editOrder(currentOrderId)">编辑</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create order modal -->
+  <div class="modal" id="create-order-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">创建订单</div>
+        <button class="modal-close" onclick="closeModal('create-order-modal')"><i class="fa-solid fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <!-- Create order form will be here -->
+        <form id="create-order-form">
+          <div style="margin-bottom: 16px;">
+            <label style="display: block; margin-bottom: 8px; color: #666;">客户</label>
+            <select style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 2px;">
+              <option value="">请选择客户</option>
+              <option value="666-555">666-555</option>
+              <option value="test">这是一个测试-去去味</option>
+            </select>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <label style="display: block; margin-bottom: 8px; color: #666;">计划交货日期</label>
+            <input type="date" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 2px;">
+          </div>
+          <div style="margin-bottom: 16px;">
+            <label style="display: block; margin-bottom: 8px; color: #666;">发货用途</label>
+            <select style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 2px;">
+              <option value="">请选择发货用途</option>
+              <option value="@111">@111</option>
+              <option value="@222">@222</option>
+              <option value="@555">@555</option>
+              <option value="@销售">@销售</option>
+            </select>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <label style="display: block; margin-bottom: 8px; color: #666;">重量 (kg)</label>
+            <input type="number" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 2px;">
+          </div>
+          <div style="margin-bottom: 16px;">
+            <label style="display: block; margin-bottom: 8px; color: #666;">优先级</label>
+            <select style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 2px;">
+              <option value="normal">正常</option>
+              <option value="high">高</option>
+              <option value="urgent">紧急</option>
+              <option value="low">低</option>
+            </select>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <label style="display: block; margin-bottom: 8px; color: #666;">备注</label>
+            <textarea style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 2px; height: 80px;"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn modal-btn-default" onclick="closeModal('create-order-modal')">取消</button>
+        <button class="modal-btn modal-btn-primary" onclick="submitCreateOrderForm()">创建</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- User menu modal -->
+  <div class="modal" id="user-menu-modal">
+    <div class="modal-content" style="max-width: 300px;">
+      <div class="modal-header">
+        <div class="modal-title">用户菜单</div>
+        <button class="modal-close" onclick="closeModal('user-menu-modal')"><i class="fa-solid fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div style="padding: 8px 0;">
+          <div style="display: flex; align-items: center; margin-bottom: 16px;">
+            <div style="width: 50px; height: 50px; border-radius: 50%; background-color: #666; color: white; display: flex; align-items: center; justify-content: center; font-size: 18px;">BP</div>
+            <div style="margin-left: 12px;">
+              <div style="font-weight: bold;">拜耳产品</div>
+              <div style="color: #999; font-size: 12px;">集团管理员</div>
+            </div>
+          </div>
+          <div style="border-top: 1px solid #eee; padding-top: 16px;">
+            <div style="padding: 8px 0; cursor: pointer;" onclick="navigateTo('profile')"><i class="fa-solid fa-user" style="width: 20px;"></i> 个人信息</div>
+            <div style="padding: 8px 0; cursor: pointer;" onclick="navigateTo('settings')"><i class="fa-solid fa-gear" style="width: 20px;"></i> 系统设置</div>
+            <div style="padding: 8px 0; cursor: pointer;" onclick="navigateTo('help')"><i class="fa-solid fa-circle-question" style="width: 20px;"></i> 帮助中心</div>
+            <div style="padding: 8px 0; cursor: pointer; color: #f5222d;" onclick="logout()"><i class="fa-solid fa-right-from-bracket" style="width: 20px;"></i> 退出登录</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Location selector modal -->
+  <div class="modal" id="location-selector-modal">
+    <div class="modal-content" style="max-width: 300px;">
+      <div class="modal-header">
+        <div class="modal-title">选择基地</div>
+        <button class="modal-close" onclick="closeModal('location-selector-modal')"><i class="fa-solid fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div style="padding: 8px 0;">
+          <div style="padding: 10px; cursor: pointer; display: flex; align-items: center;" onclick="selectLocation('拜耳康普基地')">
+            <div style="width: 12px; height: 12px; border-radius: 50%; background-color: #ff4d4f; margin-right: 8px;"></div>
+            <div>拜耳康普基地</div>
+          </div>
+          <div style="padding: 10px; cursor: pointer; display: flex; align-items: center;" onclick="selectLocation('康普拜耳基地')">
+            <div style="width: 12px; height: 12px; border-radius: 50%; background-color: #52c41a; margin-right: 8px;"></div>
+            <div>康普拜耳基地</div>
+          </div>
+          <div style="padding: 10px; cursor: pointer; display: flex; align-items: center;" onclick="selectLocation('科学基地')">
+            <div style="width: 12px; height: 12px; border-radius: 50%; background-color: #1890ff; margin-right: 8px;"></div>
+            <div>科学基地</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast notifications container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script>
+    // Global variables
+    let currentOrderId = null;
+    
+    // Function to toggle sidebar on mobile
+    document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+      document.getElementById('sidebar').classList.toggle('open');
+      document.getElementById('overlay').classList.toggle('show');
+    });
+    
+    document.getElementById('overlay').addEventListener('click', function() {
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('overlay').classList.remove('show');
+    });
+    
+    // Function to navigate to a page
+    function navigateTo(page) {
+      // In a real app, this would navigate to a new page
+      // For demo, we'll just show a toast notification
+      showToast(`导航到: ${page}`, 'info');
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('overlay').classList.remove('show');
+    }
+    
+    // Function to toggle submenu
+    function toggleSubMenu() {
+      // In a real app, this would toggle the submenu visibility
+      showToast('切换子菜单', 'info');
+    }
+    
+    // Function to filter by tab
+    function filterByTab(tabType) {
+      // In a real app, this would filter the table data
+      // For demo, we'll update the active tab and show a toast
+      const tabs = document.querySelectorAll('.tab');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      
+      // Find the tab that was clicked and make it active
+      const clickedTab = event.currentTarget;
+      clickedTab.classList.add('active');
+      
+      showToast(`筛选: ${tabType}`, 'info');
+    }
+    
+    // Function to toggle filter
+    function toggleFilter(filterType) {
+      // In a real app, this would toggle the filter
+      // For demo, we'll toggle the active class and show a toast
+      const filterButton = event.currentTarget;
+      filterButton.classList.toggle('active');
+      
+      showToast(`切换筛选: ${filterType}`, 'info');
+    }
+    
+    // Function to toggle dropdown
+    function toggleDropdown(dropdownId) {
+      // Close all other dropdowns first
+      const allDropdowns = document.querySelectorAll('.dropdown-content');
+      allDropdowns.forEach(dropdown => {
+        if (dropdown.id !== dropdownId) {
+          dropdown.classList.remove('show');
+        }
+      });
+      
+      // Toggle the clicked dropdown
+      document.getElementById(dropdownId).classList.toggle('show');
+      
+      // Prevent the click from propagating
+      event.stopPropagation();
+    }
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(event) {
+      if (!event.target.matches('.dropdown-button') && !event.target.closest('.dropdown-content')) {
+        const dropdowns = document.querySelectorAll('.dropdown-content');
+        dropdowns.forEach(dropdown => dropdown.classList.remove('show'));
+      }
+    });
+    
+    // Function to select customer
+    function selectCustomer(customer) {
+      // In a real app, this would filter by customer
+      // For demo, we'll show a toast notification
+      showToast(`选择客户: ${customer}`, 'info');
+      
+      // Close the dropdown
+      document.getElementById('customer-dropdown').classList.remove('show');
+    }
+    
+    // Function to select date range
+    function selectDateRange(range) {
+      // In a real app, this would filter by date range
+      // For demo, we'll show a toast notification
+      showToast(`选择日期范围: ${range}`, 'info');
+      
+      // If custom date range, show a date picker modal
+      if (range === 'custom') {
+        showToast('显示日期选择器...', 'info');
+      }
+      
+      // Close the dropdown
+      document.getElementById('date-dropdown').classList.remove('show');
+    }
+    
+    // Function to select route
+    function selectRoute(route) {
+      // In a real app, this would filter by route
+      // For demo, we'll show a toast notification
+      showToast(`选择发货用途: ${route}`, 'info');
+      
+      // Close the dropdown
+      document.getElementById('route-dropdown').classList.remove('show');
+    }
+    
+    // Function to add filter
+    function addFilter(filter) {
+      // In a real app, this would add a filter
+      // For demo, we'll show a toast notification
+      showToast(`添加筛选: ${filter}`, 'info');
+      
+      // Add the filter tag
+      const activeFilters = document.querySelector('.active-filters');
+      const filterTag = document.createElement('div');
+      filterTag.className = 'filter-tag';
+      filterTag.innerHTML = `${filter} <i class="fa-solid fa-xmark" onclick="removeFilter('${filter}')"></i>`;
+      activeFilters.insertBefore(filterTag, document.querySelector('.filter-option'));
+    }
+    
+    // Function to remove filter
+    function removeFilter(filter) {
+      // In a real app, this would remove the filter
+      // For demo, we'll remove the filter tag and show a toast
+      event.currentTarget.parentNode.remove();
+      showToast(`移除筛选: ${filter}`, 'success');
+    }
+    
+    // Function to clear all filters
+    function clearAllFilters() {
+      // In a real app, this would clear all filters
+      // For demo, we'll remove all filter tags and show a toast
+      const filterTags = document.querySelectorAll('.filter-tag');
+      filterTags.forEach(tag => tag.remove());
+      showToast('清除全部筛选', 'success');
+    }
+    
+    // Function to search the table
+    function searchTable() {
+      const searchInput = document.getElementById('search-input').value.toLowerCase();
+      const rows = document.querySelectorAll('#orders-table tr');
+      
+      rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        if (text.includes(searchInput)) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+    
+    // Function to toggle select all
+    function toggleSelectAll(checkbox) {
+      const orderCheckboxes = document.querySelectorAll('.order-checkbox');
+      orderCheckboxes.forEach(cb => {
+        cb.checked = checkbox.checked;
+      });
+    }
+    
+    // Function to show order details
+    function showOrderDetails(orderId) {
+      // Prevent default anchor action
+      event.preventDefault();
+      
+      // In a real app, this would fetch order details from the server
+      // For demo, we'll simulate a loading state and then show a modal
+      currentOrderId = orderId;
+      
+      // Add loading state
+      document.getElementById('order-details-content').innerHTML = '<div class="loading-spinner"></div>';
+      document.getElementById('order-details-modal').classList.add('show');
+      
+      // Simulate API call delay
+      setTimeout(() => {
+        // Show order details in the modal
+        document.getElementById('order-details-content').innerHTML = `
+          <div style="margin-bottom: 16px;">
+            <div style="margin-bottom: 8px; font-weight: bold;">订单编号</div>
+            <div>${orderId}</div>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <div style="margin-bottom: 8px; font-weight: bold;">客户</div>
+            <div>${orderId === 'SO2503170002' ? '666-555' : '这是一个测试-去去味'}</div>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <div style="margin-bottom: 8px; font-weight: bold;">计划交货日期</div>
+            <div>2025-03-04</div>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <div style="margin-bottom: 8px; font-weight: bold;">发货用途</div>
+            <div>${orderId === 'SO2503170001' ? '-' : '<span class="route-tag">@111</span>'}</div>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <div style="margin-bottom: 8px; font-weight: bold;">重量</div>
+            <div>${orderId === 'SO2503170002' ? '63 kg' : orderId === 'SO2503170001' ? '1 kg' : '355 kg'}</div>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <div style="margin-bottom: 8px; font-weight: bold;">优先级</div>
+            <div>${orderId === 'SO2503170002' ? '<span class="priority-normal">正常</span>' : 
+                  orderId === 'SO2503170001' ? '<span class="priority-high">高</span>' : 
+                  '<span class="priority-urgent">紧急</span>'}</div>
+          </div>
+          <div style="margin-bottom: 16px;">
+            <div style="margin-bottom: 8px; font-weight: bold;">状态</div>
+            <div><span class="status-pending">未发货</span></div>
+          </div>
+          <div>
+            <div style="margin-bottom: 8px; font-weight: bold;">备注</div>
+            <div>这是订单的备注信息。</div>
+          </div>
+        `;
+      }, 1000);
+    }
+    
+    // Function to close modal
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.remove('show');
+    }
+    
+    // Function to edit order
+    function editOrder(orderId) {
+      // In a real app, this would navigate to the edit order page
+      // For demo, we'll just show a toast notification
+      showToast(`编辑订单: ${orderId}`, 'info');
+      closeModal('order-details-modal');
+    }
+    
