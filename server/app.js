@@ -149,8 +149,14 @@ app.get('/docs/:page?', async (req, res) => {
   }
 });
 
+// DEMO
+// Inventory
 app.get('/demos/inventory', (req, res) => {
   res.render('demos/inventory');
+});
+// Form
+app.get('/demos/form', (req, res) => {
+  res.render('demos/form');
 });
 
 // Admin routes

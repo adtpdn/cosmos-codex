@@ -51,11 +51,12 @@
     }
     
     .logo-container {
-      padding: 16px 10px;
+      padding: 16px;
       display: flex;
       flex-direction: column;
       color: white;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      background-color: #16A34A;
     }
     
     .logo-text {
@@ -100,20 +101,16 @@
     
     .sub-menu .menu-item.active {
       background-color: #14532D; /* Updated to exact color from image */
-    }
-    
-    .menu-item.active.selected {
       position: relative;
     }
     
-    .menu-item.active.selected::before {
+    .sub-menu .menu-item.active::before {
       content: '';
       position: absolute;
       left: 0;
       top: 8px;
       bottom: 8px;
       width: 3px;
-      border-radius: 0 2px 2px 0;
       background-color: white;
     }
     
@@ -127,7 +124,7 @@
       display: flex;
       flex-direction: column;
       overflow-x: hidden;
-      background-color: #f5f5f5;
+      background-color: #fff;
     }
     
     /* Header */
@@ -138,7 +135,7 @@
       padding: 0 16px;
       background: white;
       height: 48px;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #f0f0f0;
     }
     
     .header-left {
@@ -150,13 +147,13 @@
       font-size: 16px;
       font-weight: bold;
       margin: 0;
-      color: #000;
+      color: #333;
     }
     
     .breadcrumb {
       font-size: 12px;
       color: #999;
-      margin-left: 12px;
+      margin-left: 5px;
     }
     
     .header-right {
@@ -199,33 +196,26 @@
       padding: 16px 16px 0 16px;
     }
     
-    .order-info-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-    
     .order-title {
       font-size: 16px;
-      font-weight: bold;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      color: #333;
     }
     
     .order-meta {
       display: flex;
       align-items: center;
-      margin-top: 8px;
+      color: #999;
+      font-size: 12px;
+      margin-left: 16px;
     }
     
     .order-meta-item {
-      color: #999;
-      font-size: 12px;
       display: flex;
       align-items: center;
-    }
-    
-    .order-meta-item:not(:first-child) {
-      margin-left: 16px;
+      margin-right: 16px;
     }
     
     .order-meta-item i {
@@ -237,79 +227,63 @@
       color: #ff4d4f;
     }
     
-    .order-actions {
+    /* Tabs */
+    .tabs {
       display: flex;
-      align-items: center;
-    }
-    
-    .order-actions a {
-      color: #1890ff;
-      margin-right: 16px;
-      text-decoration: none;
-    }
-    
-    /* Filter tabs */
-    .filter-tabs {
-      display: flex;
-      margin-bottom: 16px;
       border-bottom: none;
+      margin-top: 16px;
+      margin-bottom: 16px;
     }
     
-    .filter-tab {
+    .tab {
       padding: 8px 16px;
       cursor: pointer;
-      font-size: 14px;
       border-radius: 2px;
+      margin-right: 8px;
+      font-size: 14px;
       display: flex;
       align-items: center;
-      margin-right: 8px;
-      background-color: white;
-      border: 1px solid #eee;
+    }
+    
+    .tab.active {
+      background-color: #1890ff;
+      color: white;
+    }
+    
+    .tab:not(.active) {
+      background-color: #f5f5f5;
       color: #666;
     }
     
-    .filter-tab.active {
-      background-color: #1890ff;
-      color: white;
-      border-color: #1890ff;
-    }
-    
-    .filter-tab-count {
-      background-color: rgba(0, 0, 0, 0.15);
+    .tab-count {
+      display: inline-block;
+      margin-left: 4px;
+      background: rgba(0,0,0,0.1);
       padding: 0 6px;
       border-radius: 10px;
       font-size: 12px;
-      margin-left: 6px;
-      color: inherit;
     }
     
-    /* Search and filter bar */
-    .search-filter-bar {
+    /* Search and filter */
+    .search-bar {
       display: flex;
       justify-content: space-between;
       margin-bottom: 16px;
+      align-items: center;
       flex-wrap: wrap;
-      gap: 8px;
     }
     
     .search-input {
-      width: 320px;
       position: relative;
+      width: 320px;
     }
     
     .search-input input {
       width: 100%;
-      padding: 8px 12px;
-      padding-left: 32px;
+      padding: 8px 12px 8px 32px;
       border: 1px solid #ddd;
       border-radius: 2px;
       font-size: 14px;
-      background-color: white;
-      color: #666;
-    }
-    
-    .search-input input::placeholder {
-      color: #999;
     }
     
     .search-input i {
@@ -320,21 +294,22 @@
       color: #bbb;
     }
     
-    .filter-buttons {
+    .filter-actions {
       display: flex;
+      align-items: center;
       gap: 8px;
     }
     
     .filter-button {
-      padding: 7px 16px;
+      padding: 6px 16px;
+      border: 1px solid #ddd;
       border-radius: 2px;
-      font-size: 13px;
-      cursor: pointer;
       display: flex;
       align-items: center;
-      background-color: white;
-      border: 1px solid #ddd;
-      color: #666;
+      cursor: pointer;
+      font-size: 13px;
+      white-space: nowrap;
+      background: white;
     }
     
     .filter-button.active {
@@ -343,32 +318,35 @@
       border-color: #1890ff;
     }
     
-    .filter-button i {
-      margin-right: 6px;
+    .filter-button:not(.active) {
+      background-color: white;
+      color: #666;
     }
     
-    .filter-button .counter {
-      background-color: rgba(0, 0, 0, 0.15);
-      padding: 0 5px;
+    .filter-button .count {
+      margin-left: 4px;
+      background: rgba(0,0,0,0.1);
+      padding: 0 6px;
       border-radius: 10px;
       font-size: 12px;
-      margin-left: 6px;
     }
     
-    .action-button {
-      padding: 7px 16px;
-      border-radius: 2px;
-      font-size: 13px;
-      cursor: pointer;
-      background-color: white;
+    .dropdown-button {
+      padding: 6px 16px;
       border: 1px solid #ddd;
-      color: #666;
+      border-radius: 2px;
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      font-size: 13px;
+      background: white;
+      color: #666;
+      min-width: 100px;
     }
     
-    .action-button i {
-      margin-left: 4px;
+    .dropdown-button i {
+      margin-left: 6px;
       font-size: 12px;
     }
     
@@ -377,43 +355,46 @@
       display: flex;
       align-items: center;
       margin-bottom: 16px;
-      color: #666;
+      flex-wrap: wrap;
     }
     
     .active-filters-label {
+      color: #666;
       margin-right: 8px;
     }
     
     .filter-tag {
-      padding: 4px 8px;
-      background: white;
-      border: 1px solid #ddd;
+      background-color: #e6f7ff;
+      color: #1890ff;
+      padding: 2px 8px;
       border-radius: 2px;
       font-size: 12px;
       display: flex;
       align-items: center;
       margin-right: 8px;
-      color: #666;
+      border: 1px solid #91d5ff;
     }
     
-    .filter-tag-close {
+    .filter-tag i {
       margin-left: 4px;
-      color: #999;
       cursor: pointer;
     }
     
-    .clear-filters {
-      color: #1890ff;
+    .filter-option {
+      padding: 2px 8px;
       font-size: 12px;
+      color: #666;
       cursor: pointer;
+      border-radius: 2px;
+      margin-right: 8px;
+      background-color: #f5f5f5;
     }
     
     /* Table */
     .table-container {
-      margin: 0 16px;
+      flex: 1;
+      overflow-x: auto;
       background-color: white;
-      border-radius: 2px;
-      overflow: hidden;
     }
     
     table {
@@ -421,66 +402,65 @@
       border-collapse: collapse;
     }
     
-    thead tr {
+    th {
       background-color: #fafafa;
-      height: 48px;
-    }
-    
-    th, td {
-      padding: 8px 16px;
+      font-weight: normal;
+      color: #666;
+      padding: 12px 16px;
       text-align: left;
       border-bottom: 1px solid #f0f0f0;
     }
     
-    th {
-      color: #666;
-      font-weight: normal;
-    }
-    
     td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #f0f0f0;
       color: #666;
-      height: 48px;
-    }
-    
-    tr:hover td {
-      background-color: #fafafa;
     }
     
     .warning-row {
-      background-color: #fffbe6;
+      background-color: #fff1f0;
     }
     
-    /* Tags */
-    .tag {
+    /* Checkbox */
+    .checkbox {
+      width: 16px;
+      height: 16px;
+      border-radius: 2px;
+      border: 1px solid #ddd;
+      cursor: pointer;
+    }
+    
+    /* Status tags */
+    .status-tag {
       display: inline-block;
       padding: 2px 8px;
       border-radius: 2px;
       font-size: 12px;
     }
     
-    .tag-normal {
-      color: #666;
-    }
-    
-    .tag-high {
-      color: #fa8c16;
-    }
-    
-    .tag-urgent {
-      color: #f5222d;
-    }
-    
-    .tag-low {
-      color: #1890ff;
-    }
-    
-    /* Status tags */
     .status-pending {
       color: #fa8c16;
     }
     
-    .status-received {
+    .status-completed {
       color: #52c41a;
+    }
+    
+    /* Priority tags */
+    .priority-normal {
+      color: #666;
+    }
+    
+    .priority-high {
+      color: #fa8c16;
+    }
+    
+    .priority-urgent {
+      color: #f5222d;
+    }
+    
+    .priority-low {
+      color: #1890ff;
     }
     
     /* Route tags */
@@ -492,71 +472,28 @@
       color: #666;
     }
     
-    /* Action links */
-    .action-link {
-      color: #1890ff;
-      cursor: pointer;
-    }
-    
-    /* Create order button */
-    .create-button {
-      padding: 8px 12px;
-      background-color: #16A34A;
-      color: white;
-      border: none;
-      border-radius: 2px;
-      font-size: 13px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      margin-left: 8px;
-    }
-    
-    .create-button i {
-      margin-right: 4px;
-    }
-    
     /* Alert icon */
     .alert-icon {
       color: #f5222d;
       margin-right: 4px;
     }
     
-    /* Checkbox styling */
-    .checkbox {
-      width: 16px;
-      height: 16px;
+    /* Create button */
+    .create-button {
+      padding: 6px 16px;
+      background-color: #16A34A;
+      color: white;
+      border: none;
+      border-radius: 2px;
       cursor: pointer;
-    }
-    
-    /* Status colors */
-    .status-not-shipped {
-      color: #fa8c16;
-    }
-    
-    .status-shipped {
-      color: #52c41a;
-    }
-    
-    /* Selected item highlight */
-    .highlight-selected {
-      background-color: #14532D; /* Darkest green */
-      border-radius: 4px;
-      padding: 8px;
-      margin-left: 8px;
-      margin-right: 8px;
       display: flex;
       align-items: center;
+      font-size: 13px;
+      margin-left: 16px;
     }
     
-    .highlight-selected::before {
-      content: '';
-      width: 3px;
-      height: 18px;
-      background-color: white;
-      border-radius: 0 2px 2px 0;
-      position: absolute;
-      left: 0;
+    .create-button i {
+      margin-right: 4px;
     }
   </style>
 </head>
@@ -564,6 +501,10 @@
   <div class="main-container">
     <!-- Sidebar -->
     <div class="sidebar">
+      <div class="logo-container">
+        <div class="logo-text">COSMOS 智能未来</div>
+        <div class="logo-subtitle">农业智能系统</div>
+      </div>
       <div class="menu-item">
         <i class="fa-solid fa-building"></i> 基地信息
       </div>
@@ -624,257 +565,208 @@
         </div>
       </div>
 
-      <!-- Order info section -->
-      <div class="order-info">
-        <div class="order-info-header">
-          <div>
-            <div class="order-title">订单信息</div>
+      <!-- Main content -->
+      <div>
+        <!-- Order info header -->
+        <div class="order-info">
+          <div class="order-title">
+            订单信息
             <div class="order-meta">
               <div class="order-meta-item">
-                <i class="fa-solid fa-circle-info"></i> 共: 247条订单
+                <i class="fa-regular fa-circle"></i> 共: 247条订单
               </div>
               <div class="order-meta-item">
-                <i class="fa-solid fa-clock"></i> 更新时间: 分钟前
+                <i class="fa-regular fa-clock"></i> 更新时间: 分钟前
               </div>
               <div class="order-meta-item urgent-order">
                 <i class="fa-solid fa-triangle-exclamation"></i> 2条紧急订单
               </div>
             </div>
           </div>
-          <div class="order-actions">
-            <a href="#">订单排程报告</a>
-            <a href="#">客户信息</a>
-            <button class="create-button">
-              <i class="fa-solid fa-plus"></i> 创建订单
-            </button>
+
+          <!-- Tabs -->
+          <div class="tabs">
+            <div class="tab active">
+              全部
+              <span class="tab-count">247</span>
+            </div>
+            <div class="tab">
+              代发货
+              <span class="tab-count">0</span>
+            </div>
+            <div class="tab">
+              已发货
+              <span class="tab-count">0</span>
+            </div>
+            <div class="tab">
+              已完成
+              <span class="tab-count">156</span>
+            </div>
+            <div class="tab">
+              已取消
+              <span class="tab-count">12</span>
+            </div>
+          </div>
+
+          <!-- Search and filter bar -->
+          <div class="search-bar">
+            <div class="search-input">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" placeholder="搜索订单、客户、路线...">
+            </div>
+            <div class="filter-actions">
+              <div class="filter-button">
+                退货状态
+                <span class="count">3</span>
+              </div>
+              <div class="filter-button active">
+                收货状态
+                <span class="count">2</span>
+              </div>
+              <div class="dropdown-button">
+                所有客户
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div class="dropdown-button">
+                日期
+                <i class="fa-solid fa-calendar"></i>
+              </div>
+              <div class="dropdown-button">
+                发货用途
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Active filters -->
+          <div class="active-filters">
+            <div class="active-filters-label">活动筛选条件:</div>
+            <div class="filter-tag">
+              已发货
+              <i class="fa-solid fa-xmark"></i>
+            </div>
+            <div class="filter-option">未发货</div>
+            <div class="filter-option">清除全部</div>
           </div>
         </div>
 
-        <!-- Filter tabs -->
-        <div class="filter-tabs">
-          <div class="filter-tab active">
-            全部
-            <span class="filter-tab-count">247</span>
-          </div>
-          <div class="filter-tab">
-            待处理
-            <span class="filter-tab-count">0</span>
-          </div>
-          <div class="filter-tab">
-            已发货
-            <span class="filter-tab-count">0</span>
-          </div>
-          <div class="filter-tab">
-            已完成
-            <span class="filter-tab-count">156</span>
-          </div>
-          <div class="filter-tab">
-            已取消
-            <span class="filter-tab-count">12</span>
-          </div>
+        <!-- Table -->
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 40px;">
+                  <input type="checkbox" class="checkbox">
+                </th>
+                <th>订单编号</th>
+                <th>客户</th>
+                <th>计划交货日期</th>
+                <th>发货用途</th>
+                <th>重量</th>
+                <th>优先级</th>
+                <th>状态</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input type="checkbox" class="checkbox">
+                </td>
+                <td>SO2503170002</td>
+                <td>666-555</td>
+                <td>2025-03-04</td>
+                <td><span class="route-tag">@111</span></td>
+                <td>63 kg</td>
+                <td><span class="priority-normal">正常</span></td>
+                <td><span class="status-pending">未发货</span></td>
+                <td><a href="#" style="color:#1890ff">详情...</a></td>
+              </tr>
+              <tr class="warning-row">
+                <td>
+                  <input type="checkbox" class="checkbox">
+                </td>
+                <td>
+                  <i class="fa-solid fa-triangle-exclamation alert-icon"></i> SO2503170001
+                </td>
+                <td>这是一个测试-去去味</td>
+                <td>2025-03-04</td>
+                <td>-</td>
+                <td>1 kg</td>
+                <td><span class="priority-high">高</span></td>
+                <td><span class="status-pending">未发货</span></td>
+                <td><a href="#" style="color:#1890ff">详情...</a></td>
+              </tr>
+              <tr class="warning-row">
+                <td>
+                  <input type="checkbox" class="checkbox">
+                </td>
+                <td>
+                  <i class="fa-solid fa-triangle-exclamation alert-icon"></i> SO2503130001
+                </td>
+                <td>这是一个测试-去去味</td>
+                <td>2025-03-13</td>
+                <td><span class="route-tag">@111</span></td>
+                <td>355 kg</td>
+                <td><span class="priority-urgent">紧急</span></td>
+                <td><span class="status-pending">未发货</span></td>
+                <td><a href="#" style="color:#1890ff">详情...</a></td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="checkbox" class="checkbox">
+                </td>
+                <td>SO2503120003</td>
+                <td>这是一个测试-去去味</td>
+                <td>2025-03-04</td>
+                <td><span class="route-tag">@111</span></td>
+                <td>12 kg</td>
+                <td><span class="priority-normal">正常</span></td>
+                <td><span class="status-completed">已收货</span></td>
+                <td><a href="#" style="color:#1890ff">详情...</a></td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="checkbox" class="checkbox">
+                </td>
+                <td>SO2503120002</td>
+                <td>test - C02</td>
+                <td>2025-03-19</td>
+                <td><span class="route-tag">@销售</span></td>
+                <td>-</td>
+                <td><span class="priority-normal">正常</span></td>
+                <td><span class="status-completed">已收货</span></td>
+                <td><a href="#" style="color:#1890ff">详情...</a></td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="checkbox" class="checkbox">
+                </td>
+                <td>SO2503120001</td>
+                <td>这是一个测试-去去味</td>
+                <td>2025-03-12</td>
+                <td><span class="route-tag">@222</span></td>
+                <td>122 kg</td>
+                <td><span class="priority-normal">正常</span></td>
+                <td><span class="status-completed">已收货</span></td>
+                <td><a href="#" style="color:#1890ff">详情...</a></td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="checkbox" class="checkbox">
+                </td>
+                <td>SO2503050002</td>
+                <td>这是一个测试-去去味</td>
+                <td>2025-03-05</td>
+                <td><span class="route-tag">@222</span></td>
+                <td>2 kg</td>
+                <td><span class="priority-low">低</span></td>
+                <td><span class="status-completed">已收货</span></td>
+                <td><a href="#" style="color:#1890ff">详情...</a></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-
-        <!-- Search and filter bar -->
-        <div class="search-filter-bar">
-          <div class="search-input">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" placeholder="搜索订单、客户、路线...">
-          </div>
-          <div class="filter-buttons">
-            <div class="filter-button active">
-              收货状态
-              <span class="counter">2</span>
-            </div>
-            <div class="filter-button">
-              退货状态
-              <span class="counter">3</span>
-            </div>
-            <div class="action-button">
-              所有客户
-              <i class="fa-solid fa-chevron-down"></i>
-            </div>
-            <div class="action-button">
-              所有路线
-              <i class="fa-solid fa-chevron-down"></i>
-            </div>
-            <div class="action-button">
-              <i class="fa-regular fa-calendar"></i>
-              日期
-            </div>
-          </div>
-        </div>
-
-        <!-- Active filters -->
-        <div class="active-filters">
-          <div class="active-filters-label">活动筛选条件:</div>
-          <div class="filter-tag">
-            已发货
-            <i class="fa-solid fa-xmark filter-tag-close"></i>
-          </div>
-          <div class="filter-tag">
-            未发货
-            <i class="fa-solid fa-xmark filter-tag-close"></i>
-          </div>
-          <div class="clear-filters">清除全部</div>
-        </div>
-
-      </div>
-
-      <!-- Table -->
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th style="width: 40px;">
-                <input type="checkbox" class="checkbox">
-              </th>
-              <th>订单编号</th>
-              <th>客户</th>
-              <th>计划交货日期</th>
-              <th>发货用途</th>
-              <th>重量</th>
-              <th>优先级</th>
-              <th>状态</th>
-              <th>操作</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <input type="checkbox" class="checkbox">
-              </td>
-              <td>SO2503170002</td>
-              <td>666-555</td>
-              <td>2025-03-04</td>
-              <td><span class="route-tag">@111</span></td>
-              <td>63 kg</td>
-              <td><span class="tag tag-normal">正常</span></td>
-              <td><span class="status-pending">未发货</span></td>
-              <td><a href="#" class="action-link">详情...</a></td>
-            </tr>
-            <tr class="warning-row">
-              <td>
-                <input type="checkbox" class="checkbox">
-              </td>
-              <td>
-                <i class="fa-solid fa-triangle-exclamation alert-icon"></i> SO2503170001
-              </td>
-              <td>这是一个测试-去去味</td>
-              <td>2025-03-04</td>
-              <td>-</td>
-              <td>1 kg</td>
-              <td><span class="tag tag-high">高</span></td>
-              <td><span class="status-pending">未发货</span></td>
-              <td><a href="#" class="action-link">详情...</a></td>
-            </tr>
-            <tr class="warning-row">
-              <td>
-                <input type="checkbox" class="checkbox">
-              </td>
-              <td>
-                <i class="fa-solid fa-triangle-exclamation alert-icon"></i> SO2503130001
-              </td>
-              <td>这是一个测试-去去味</td>
-              <td>2025-03-13</td>
-              <td><span class="route-tag">@111</span></td>
-              <td>355 kg</td>
-              <td><span class="tag tag-urgent">紧急</span></td>
-              <td><span class="status-pending">未发货</span></td>
-              <td><a href="#" class="action-link">详情...</a></td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" class="checkbox">
-              </td>
-              <td>SO2503120003</td>
-              <td>这是一个测试-去去味</td>
-              <td>2025-03-04</td>
-              <td><span class="route-tag">@111</span></td>
-              <td>12 kg</td>
-              <td><span class="tag tag-normal">正常</span></td>
-              <td><span class="status-shipped">已收货</span></td>
-              <td><a href="#" class="action-link">详情...</a></td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" class="checkbox">
-              </td>
-              <td>SO2503120002</td>
-              <td>test - C02</td>
-              <td>2025-03-19</td>
-              <td><span class="route-tag">@销售</span></td>
-              <td>-</td>
-              <td><span class="tag tag-normal">正常</span></td>
-              <td><span class="status-shipped">已收货</span></td>
-              <td><a href="#" class="action-link">详情...</a></td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" class="checkbox">
-              </td>
-              <td>SO2503120001</td>
-              <td>这是一个测试-去去味</td>
-              <td>2025-03-12</td>
-              <td><span class="route-tag">@222</span></td>
-              <td>122 kg</td>
-              <td><span class="tag tag-normal">正常</span></td>
-              <td><span class="status-shipped">已收货</span></td>
-              <td><a href="#" class="action-link">详情...</a></td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" class="checkbox">
-              </td>
-              <td>SO2503050002</td>
-              <td>这是一个测试-去去味</td>
-              <td>2025-03-05</td>
-              <td><span class="route-tag">@222</span></td>
-              <td>2 kg</td>
-              <td><span class="tag tag-low">低</span></td>
-              <td><span class="status-shipped">已收货</span></td>
-              <td><a href="#" class="action-link">详情...</a></td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" class="checkbox">
-              </td>
-              <td>SO2503050001</td>
-              <td>这是一个测试-去去味</td>
-              <td>2025-03-05</td>
-              <td><span class="route-tag">@555</span></td>
-              <td>2 kg</td>
-              <td><span class="tag tag-normal">正常</span></td>
-              <td><span class="status-shipped">已收货</span></td>
-              <td><a href="#" class="action-link">详情...</a></td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" class="checkbox">
-              </td>
-              <td>SO2502280002</td>
-              <td>666-555</td>
-              <td>2025-02-01</td>
-              <td><span class="route-tag">@555</span></td>
-              <td>-</td>
-              <td><span class="tag tag-normal">正常</span></td>
-              <td><span class="status-shipped">已收货</span></td>
-              <td><a href="#" class="action-link">详情...</a></td>
-            </tr>
-            <tr>
-              <td>
-                <input type="checkbox" class="checkbox">
-              </td>
-              <td>SO2502280001</td>
-              <td>666-555</td>
-              <td>2025-02-24</td>
-              <td>-</td>
-              <td>12 kg</td>
-              <td><span class="tag tag-normal">正常</span></td>
-              <td><span class="status-shipped">已收货</span></td>
-              <td><a href="#" class="action-link">详情...</a></td>
-            </tr>
-          </tbody>
-        </table>
       </div>
     </div>
   </div>

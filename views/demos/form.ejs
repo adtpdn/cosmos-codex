@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>创建新订单</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/antd@5.17.4/dist/reset.css" rel="stylesheet">
+  <style>
+    /* Font face for Source Han Sans CN (Noto Sans SC is the web equivalent) */
+    @font-face {
+      font-family: 'Source Han Sans CN';
+      src: local('Source Han Sans CN'), local('Noto Sans SC');
+      font-weight: normal;
+    }
+    
+    @font-face {
+      font-family: 'Source Han Sans CN';
+      src: local('Source Han Sans CN Bold'), local('Noto Sans SC Bold');
+      font-weight: bold;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Source Han Sans CN', 'Noto Sans SC', sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      font-size: 14px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      background-color: white;
+      border-radius: 4px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .header-icon {
+      width: 40px;
+      height: 40px;
+      background-color: #16A34A;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+      margin-right: 12px;
+    }
+
+    .header-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin: 0;
+      color: #000;
+    }
+
+    .header-subtitle {
+      font-size: 12px;
+      color: #666;
+      margin: 0;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .language-selector {
+      display: flex;
+      align-items: center;
+      margin-right: 16px;
+    }
+
+    .language-icon {
+      color: #666;
+      margin-right: 4px;
+      font-size: 16px;
+    }
+
+    .close-button {
+      color: #666;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .form-container {
+      padding: 20px 24px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      gap: 16px;
+    }
+
+    .form-group {
+      flex: 1;
+      min-width: 260px;
+      position: relative;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .form-required {
+      color: #ff4d4f;
+      margin-right: 4px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #d9d9d9;
+      border-radius: 2px;
+      color: #333;
+      font-size: 14px;
+      background-color: white;
+    }
+
+    .form-control:disabled {
+      background-color: #f5f5f5;
+      color: #666;
+    }
+
+    .form-control-suffix {
+      position: absolute;
+      right: 12px;
+      top: 40px;
+      color: #bbb;
+      pointer-events: none;
+    }
+
+    .form-select {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #d9d9d9;
+      border-radius: 2px;
+      color: #333;
+      font-size: 14px;
+      background-color: white;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8.825L1.175 4 2.05 3.125 6 7.075 9.95 3.125 10.825 4z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+    }
+
+    .form-hint {
+      margin-top: 16px;
+      padding: 12px 16px;
+      background-color: #f0f9ff;
+      border-radius: 2px;
+      font-size: 13px;
+      color: #666;
+    }
+
+    .form-hint-text {
+      cursor: pointer;
+      color: #1890ff;
+    }
+
+    .expand-button {
+      width: 100%;
+      padding: 8px;
+      text-align: center;
+      background-color: #fafafa;
+      border-radius: 2px;
+      cursor: pointer;
+      color: #666;
+      margin: 16px 0;
+    }
+
+    .expanded-section {
+      margin-top: 16px;
+    }
+
+    .item-count {
+      position: absolute;
+      left: -24px;
+      top: 35px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: #e6f7ff;
+      color: #16A34A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .product-row {
+      position: relative;
+      padding: 16px;
+      border: 1px solid #f0f0f0;
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+
+    .product-tag {
+      display: inline-block;
+      padding: 4px 8px;
+      background-color: #f0f0f0;
+      border-radius: 2px;
+      margin-right: 8px;
+    }
+
+    .delete-button {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      color: #999;
+      cursor: pointer;
+    }
+
+    .product-actions {
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .product-total {
+      display: flex;
+      align-items: center;
+    }
+
+    .total-price {
+      font-weight: bold;
+      margin-right: 8px;
+      font-size: 16px;
+    }
+
+    .price-dropdown {
+      padding: 4px 8px;
+      border: 1px solid #d9d9d9;
+      border-radius: 2px;
+      background-color: white;
+      cursor: pointer;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      font-size: 14px;
+    }
+
+    .summary-label {
+      color: #666;
+    }
+
+    .summary-value {
+      font-weight: bold;
+    }
+
+    .footer {
+      padding: 16px 24px;
+      background-color: #fafafa;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #f0f0f0;
+      border-radius: 0 0 4px 4px;
+    }
+
+    .cancel-button {
+      padding: 8px 16px;
+      background-color: white;
+      border: 1px solid #d9d9d9;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    .submit-button {
+      padding: 8px 16px;
+      background-color: #16A34A;
+      color: white;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-left">
+        <div class="header-icon">
+          <i class="fa-solid fa-box"></i>
+        </div>
+        <div class="header-text">
+          <h1 class="header-title">创建新订单</h1>
+          <p class="header-subtitle">农作物供应，设备与物流管理</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="language-selector">
+          <i class="fa-solid fa-language language-icon"></i>
+          <select class="form-select" style="width: 120px;">
+            <option value="zh">Chinese</option>
+            <option value="en">English</option>
+          </select>
+        </div>
+        <div class="close-button">
+          <i class="fa-solid fa-xmark"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-container">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">订单编号</label>
+          <input type="text" class="form-control" value="保存时自动生成" disabled>
+        </div>
+        <div class="form-group">
+          <label class="form-label"><span class="form-required">*</span>客户</label>
+          <select class="form-select">
+            <option value="">请选择</option>
+            <option value="customer1">这是一个测试-去去味</option>
+            <option value="customer2">666-555</option>
+            <option value="customer3">test - C02</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label"><span class="form-required">*</span>计划交货日期</label>
+          <input type="date" class="form-control" placeholder="mm/dd/yy">
+          <div class="form-control-suffix">
+            <i class="fa-regular fa-calendar"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label"><span class="form-required">*</span>发货用途</label>
+          <select class="form-select">
+            <option value="">请选择发货用途</option>
+            <option value="usage1">@111</option>
+            <option value="usage2">@222</option>
+            <option value="usage3">@555</option>
+            <option value="usage4">@销售</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">订单备注</label>
+          <select class="form-select">
+            <option value="">请选择</option>
+            <option value="note1">普通备注</option>
+            <option value="note2">紧急备注</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">优先级</label>
+          <select class="form-select">
+            <option value="normal">普通优先级</option>
+            <option value="high">高</option>
+            <option value="urgent">紧急</option>
+            <option value="low">低</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label"><span class="form-required">*</span>农场位置</label>
+          <select class="form-select">
+            <option value="">选择农场位置...</option>
+            <option value="farm1">拜耳康普基地</option>
+            <option value="farm2">北京农场基地</option>
+            <option value="farm3">西部生态农场</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-hint">
+        点击每个项目的展开按钮以查看价格和备注
+      </div>
+
+      <div class="expanded-section">
+        <!-- Product Item 1 -->
+        <div class="product-row">
+          <div class="item-count">2</div>
+          <div class="delete-button">
+            <i class="fa-regular fa-trash-can"></i>
+          </div>
+          
+          <div class="product-tag">已完成</div>
+          <div class="product-tag">白季特性</div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label"><span class="form-required">*</span>农产品</label>
+              <select class="form-select">
+                <option value="product1">大豆: 优质等级</option>
+                <option value="product2">小麦: 标准等级</option>
+                <option value="product3">玉米: 特级</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label"><span class="form-required">*</span>计划数量</label>
+              <input type="text" class="form-control" value="1000">
+            </div>
+            <div class="form-group">
+              <label class="form-label">&nbsp;</label>
+              <select class="form-select">
+                <option value="kg">kg</option>
+                <option value="ton">吨</option>
+                <option value="pack">包</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="product-actions">
+            <div></div>
+            <div class="product-total">
+              <span class="total-price">$2500</span>
+              <div class="price-dropdown">
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary section -->
+      <div style="margin-bottom: 16px;">
+        <div class="summary-row">
+          <div class="summary-label">项目总数: 3</div>
+          <div class="summary-label">已完成: 3</div>
+          <div class="summary-label">优先级: 普通</div>
+          <div class="summary-label">总计: $25000.00</div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 8px;">
+        <button class="cancel-button">取消</button>
+        <button class="submit-button" id="createOrderBtn">
+          <i class="fa-solid fa-check"></i> 创建订单
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Make the form interactive
+    document.addEventListener('DOMContentLoaded', function() {
+      // Create order button click handler
+      const createOrderBtn = document.getElementById('createOrderBtn');
+      if (createOrderBtn) {
+        createOrderBtn.addEventListener('click', function() {
+          alert('订单已创建成功！');
+        });
+      }
+
+      // Add event listeners to all dropdowns and inputs for demo purposes
+      const formControls = document.querySelectorAll('.form-control, .form-select');
+      formControls.forEach(control => {
+        control.addEventListener('change', function() {
+          console.log(`Changed value: ${this.value}`);
+        });
+      });
+
+      // Delete button functionality
+      const deleteButtons = document.querySelectorAll('.delete-button');
+      deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const productRow = this.closest('.product-row');
+          if (confirm('确定要删除这个项目吗？')) {
+            productRow.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
