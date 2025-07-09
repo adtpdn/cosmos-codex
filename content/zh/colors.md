@@ -1,43 +1,217 @@
 ---
-title: 颜色
+title: 色彩
 category: general
 order: 2
 ---
 
-# 颜色
+<style>
+  /* 色彩面板样式 */
+  .color-section {
+    margin-bottom: 40px;
+  }
+  
+  .color-palette {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+  
+  .color-box {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    color: white;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .color-box.light-text {
+    color: #333;
+  }
+  
+  .color-code {
+    font-family: monospace;
+    font-size: 12px;
+    position: absolute;
+    bottom: 8px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .interaction-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+  }
+  
+  .interaction-table td {
+    border: 1px solid #e0e0e0;
+    padding: 12px;
+    text-align: center;
+    font-size: 12px;
+  }
+  
+  .palette-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  
+  .palette-column {
+    flex: 1;
+    min-width: 250px;
+  }
+  
+  .palette-title {
+    font-size: 16px;
+    margin-bottom: 15px;
+    font-weight: bold; /* 改为粗体 */
+  }
+  
+  .palette-title-en {
+    display: block;
+    color: #666;
+    font-size: 14px;
+    font-weight: bold; /* 为英文标题添加粗体 */
+  }
+  
+  .description {
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+  
+  /* 使主标题粗体 */
+  .main-title {
+    font-weight: bold;
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+</style>
 
-此页面展示了整个应用程序中使用的调色板。
+<h1 class="main-title">色彩配色</h1>
 
-## 主要颜色
+<div class="interaction-table-container">
+  <table class="interaction-table">
+    <tr>
+      <td style="background-color: #ffffff; color: #111111;">abc</td>
+      <td style="background-color: #ffffff; color: #898B8C;">abc</td>
+      <td style="background-color: #ffffff; color: #333;"></td>
+      <td style="background-color: #ffffff; color: #333;"></td>
+      <td style="background-color: #ffffff; color: #1890ff;">abc</td>
+      <td style="background-color: #ffffff; color: #004098;">abc</td>
+      <td style="background-color: #ffffff; color: #4FA147;">abc</td>
+    </tr>
+    <tr>
+      <td style="background-color: #A3CEF1; color: white;">abc</td>
+      <td style="background-color: #A3CEF1; color: #333;"></td>
+      <td style="background-color: #A3CEF1; color: #333;"></td>
+      <td style="background-color: #A3CEF1; color: #333;"></td>
+      <td style="background-color: #A3CEF1; color: #1890ff;">abc</td>
+      <td style="background-color: #A3CEF1; color: #004098;">abc</td>
+      <td style="background-color: #A3CEF1; color: #333;"></td>
+    </tr>
+    <tr>
+      <td style="background-color: #3071B9; color: white;">abc</td>
+      <td style="background-color: #3071B9; color: white;"></td>
+      <td style="background-color: #3071B9; color: #FFFFFF;">abc</td>
+      <td style="background-color: #3071B9; color: white;"></td>
+      <td style="background-color: #3071B9; color: white;"></td>
+      <td style="background-color: #3071B9; color: white;"></td>
+      <td style="background-color: #3071B9; color: white;"></td>
+    </tr>
+    <tr>
+      <td style="background-color: #004098; color: white;">abc</td>
+      <td style="background-color: #004098; color: white;"></td>
+      <td style="background-color: #004098; color: #FFFFFF;">abc</td>
+      <td style="background-color: #004098; color: #3071B9;">abc</td>
+      <td style="background-color: #004098; color: white;"></td>
+      <td style="background-color: #004098; color: white;"></td>
+      <td style="background-color: #004098; color: white;"></td>
+    </tr>
+    <tr>
+      <td style="background-color: #E7ECEF; color: #111111;">abc</td>
+      <td style="background-color: #E7ECEF; color: #898B8C;">abc</td>
+      <td style="background-color: #E7ECEF; color: #333;"></td>
+      <td style="background-color: #E7ECEF; color: #333;"></td>
+      <td style="background-color: #E7ECEF; color: #333;"></td>
+      <td style="background-color: #E7ECEF; color: #004098;">abc</td>
+      <td style="background-color: #E7ECEF; color: #4FA147;">abc</td>
+    </tr>
+    <tr>
+      <td style="background-color: #898B8C; color: white;">abc</td>
+      <td style="background-color: #898B8C; color: white;"></td>
+      <td style="background-color: #898B8C; color: #FFFFFF;">abc</td>
+      <td style="background-color: #898B8C; color: white;"></td>
+      <td style="background-color: #898B8C; color: white;"></td>
+      <td style="background-color: #898B8C; color: white;"></td>
+      <td style="background-color: #898B8C; color: white;"></td>
+    </tr>
+    <tr>
+      <td style="background-color: #111111; color: white;">abc</td>
+      <td style="background-color: #111111; color: #898B8C;">abc</td>
+      <td style="background-color: #111111; color: white;">abc</td>
+      <td style="background-color: #111111; color: #3071B9;">abc</td>
+      <td style="background-color: #111111; color: white;"></td>
+      <td style="background-color: #111111; color: white;"></td>
+      <td style="background-color: #111111; color: #4FA147;">abc</td>
+    </tr>
+  </table>
+</div>
 
-### 主蓝色
-- **#1890ff** - 主要品牌颜色，用于按钮、链接和重点
-- 用途：主要操作、活跃状态、品牌元素
+<div class="description">
+  <p>上图展示了我们的色彩以及它们之间的相互作用。<br>
+  在组合色彩时，请以此作为起点。</p>
+</div>
 
-### 成功绿
-- **#52c41a** - 成功状态和正面反馈
-- 用途：成功消息、完成状态、正面指示器
-
-### 警告橙
-- **#fa8c16** - 警告状态和需要注意
-- 用途：警告消息、等待状态、谨慎指示器
-
-### 错误红
-- **#ff4d4f** - 错误状态和关键警报
-- 用途：错误消息、紧急状态、危险操作
-
-## 中性颜色
-
-### 文本颜色
-- **#000000** - 主要文本
-- **#666666** - 次要文本
-- **#999999** - 禁用文本
-
-### 背景颜色
-- **#ffffff** - 主要背景
-- **#f0f2f5** - 次要背景
-- **#fafafa** - 第三背景
-
-## 使用指南
-
-颜色应在整个界面中保持一致使用，以创建一个连贯的视觉语言。每种颜色都有特定的含义，应适当应用以保持用户理解和可访问性。
+<div class="palette-section">
+  <div class="palette-column">
+    <h3 class="palette-title">基础色彩</h3>
+    <div class="color-palette">
+      <div class="color-box light-text" style="background-color: #ffffff;">
+        <span class="color-code">#ffffff</span>
+      </div>
+      <div class="color-box light-text" style="background-color: #E7ECEF;">
+        <span class="color-code">#E7ECEF</span>
+      </div>
+      <div class="color-box light-text" style="background-color: #898B8C;">
+        <span class="color-code">#898B8C</span>
+      </div>
+      <div class="color-box" style="background-color: #111111;">
+        <span class="color-code">#111111</span>
+      </div>
+      <div class="color-box" style="background-color: #A3CEF1;">
+        <span class="color-code">#A3CEF1</span>
+      </div>
+      <div class="color-box" style="background-color: #3071B9;">
+        <span class="color-code">#3071B9</span>
+      </div>
+      <div class="color-box" style="background-color: #004098;">
+        <span class="color-code">#004098</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="palette-column">
+    <h3 class="palette-title">辅助色彩</h3>
+    <div class="color-palette">
+      <div class="color-box" style="background-color: #4FA147;">
+        <span class="color-code">#4FA147</span>
+      </div>
+    </div>
+    <h3 class="palette-title">组件提示色彩</h3>
+    <div class="color-palette">
+      <div class="color-box" style="background-color: #B44432;">
+        <span class="color-code">#B44432</span>
+      </div>
+      <div class="color-box" style="background-color: #C26831;">
+        <span class="color-code">#C26831</span>
+      </div>
+    </div>
+  </div>
+</div>
