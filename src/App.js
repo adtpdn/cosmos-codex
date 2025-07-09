@@ -15,6 +15,7 @@ import {
 } from '@ant-design/icons';
 import enUS from 'antd/locale/en_US';
 import zhCN from 'antd/locale/zh_CN';
+import jaJP from 'antd/locale/ja_JP';
 import { initialContent, componentData } from './content';
 import DocPage from './components/DocPage';
 
@@ -100,7 +101,9 @@ const App = () => {
   };
 
   const getFontFamily = () => {
-      return content.currentLang === 'zh' ? "'Source Han Sans CN', sans-serif" : "'Quicksand', sans-serif";
+      if (content.currentLang === 'zh') return "'Source Han Sans CN', sans-serif";
+      if (content.currentLang === 'ja') return "'Source Han Sans CN', sans-serif";
+      return "'Quicksand', sans-serif";
   };
 
   const pageContent = {
@@ -108,7 +111,12 @@ const App = () => {
       code: componentData[selectedKey]?.code,
   };
 
-  const antdLocale = content.currentLang === 'zh' ? zhCN : enUS;
+  const getAntdLocale = () => {
+      if (content.currentLang === 'zh') return zhCN;
+      if (content.currentLang === 'ja') return jaJP;
+      return enUS;
+  };
+  const antdLocale = getAntdLocale();
   const siderWidth = isTablet ? 150 : 200;
 
   const SiderMenu = (
@@ -223,6 +231,7 @@ const App = () => {
               <Select value={content.currentLang} onChange={(lang) => setContent({ ...content, currentLang: lang })}>
                   <Option value="en">English</Option>
                   <Option value="zh">中文</Option>
+                  <Option value="ja">日本語</Option>
               </Select>
           </Header>
           <Layout>
