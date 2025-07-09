@@ -1,14 +1,14 @@
 import {
-  Typography,
-  Space,
-  Input,
-  Button,
-  Divider,
+    Typography,
+    Space,
+    Input,
+    Button,
+    Divider,
 } from 'antd';
 import {
-  EditOutlined,
-  SaveOutlined,
-  CloseOutlined,
+    EditOutlined,
+    SaveOutlined,
+    CloseOutlined,
 } from '@ant-design/icons';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
@@ -34,17 +34,17 @@ const DocPage = ({
 
     // Guard against tempContent being null on initial render
     if (isEditing && !tempContent) {
-        return null; 
+        return null;
     }
 
     return (
         <>
             <Space style={{ marginBottom: 16 }}>
                 {isEditing ? (
-                    <Input 
-                        value={tempContent[currentLang][pageKey]} 
-                        onChange={(e) => handleContentChange(pageKey, e.target.value)} 
-                        style={{ width: 300 }} 
+                    <Input
+                        value={tempContent[currentLang][pageKey]}
+                        onChange={(e) => handleContentChange(pageKey, e.target.value)}
+                        style={{ width: 300 }}
                     />
                 ) : (
                     <Title id="overview" style={{ margin: 0 }}>{t[pageKey]}</Title>
@@ -61,16 +61,16 @@ const DocPage = ({
 
             {isEditing ? (
                 <>
-                    <TextArea 
-                        rows={15} 
-                        value={tempContent[currentLang][`${pageKey}Description`]} 
-                        onChange={(e) => handleContentChange(`${pageKey}Description`, e.target.value)} 
+                    <TextArea
+                        rows={15}
+                        value={tempContent[currentLang][`${pageKey}Description`]}
+                        onChange={(e) => handleContentChange(`${pageKey}Description`, e.target.value)}
                     />
                     <Text type="secondary">{t.editHint}</Text>
                     <Divider />
                     <Title level={4}>Edit Code Snippet</Title>
-                    <TextArea 
-                        rows={10} 
+                    <TextArea
+                        rows={10}
                         value={tempContent.code}
                         onChange={(e) => handleContentChange('code', e.target.value)}
                     />
@@ -86,10 +86,10 @@ const DocPage = ({
                     <Title level={2} id="demo" style={{ marginTop: 24 }}>{t.liveDemo}</Title>
                     {/* Simplified the props passed to the demo component */}
                     {typeof DemoComponent === 'function' ? <DemoComponent t={t} /> : DemoComponent}
-                    <Text type="secondary" style={{display: 'block', marginTop: '1rem'}}>Note: The live demo does not update in real-time from the editor. This requires a local development environment.</Text>
+                    <Text type="secondary" style={{ display: 'block', marginTop: '1rem' }}>Note: The live demo does not update in real-time from the editor. This requires a local development environment.</Text>
                 </>
             )}
-            
+
             {content.code && <CodeBlock>{content.code}</CodeBlock>}
         </>
     );
