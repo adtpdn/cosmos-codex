@@ -1,4 +1,3 @@
-import React from 'react';
 import { List, Card, Typography } from 'antd';
 
 const data = [

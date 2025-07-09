@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button, Card, Space, Divider, Radio } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 

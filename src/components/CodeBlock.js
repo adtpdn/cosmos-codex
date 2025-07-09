@@ -1,4 +1,3 @@
-import React from 'react';
 import { Collapse, Typography } from 'antd';
 import { CodeOutlined } from '@ant-design/icons';
 

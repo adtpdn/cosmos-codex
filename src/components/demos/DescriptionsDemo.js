@@ -1,4 +1,3 @@
-import React from 'react';
 import { Descriptions, Card, Badge } from 'antd';
 
 const DescriptionsDemo = () => (

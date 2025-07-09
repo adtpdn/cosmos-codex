@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, Row, Col, Divider } from 'antd';
 
 const style = { background: '#27ae6033', padding: '8px 0', textAlign: 'center', borderRadius: 4 };

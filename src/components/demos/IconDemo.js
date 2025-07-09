@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, Space, Divider, Typography } from 'antd';
 import {
   HomeOutlined,

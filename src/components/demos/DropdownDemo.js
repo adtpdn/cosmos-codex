@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button, Card, Dropdown, Menu } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 

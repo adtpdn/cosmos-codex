@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import { Card, Space, Typography, Slider, Switch } from 'antd';
+import { Card, Space, Typography } from 'antd';
 
 const { Title, Paragraph, Text, Link } = Typography;
 
 const TypographyDemo = () => {
-    const [ellipsis, setEllipsis] = useState(true);
+    // const [ellipsis, setEllipsis] = useState(true);
 
     return (
         <Card>

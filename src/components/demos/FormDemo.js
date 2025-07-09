@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Button,
   Typography,
@@ -19,7 +19,6 @@ import {
 } from 'antd';
 import {
   ContainerOutlined,
-  PlusOutlined,
   CopyOutlined,
   ImportOutlined,
   DeleteOutlined,

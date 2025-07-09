@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, Col, Row, Avatar } from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 
@@ -33,12 +32,12 @@ const CardDemo = () => (
         />
       </Card>
     </Col>
-     <Col span={8}>
-        <Card title="Inner Card">
-            <Card type="inner" title="Inner Card title" extra={<a href="#">More</a>}>
-                Inner Card content
-            </Card>
+    <Col span={8}>
+      <Card title="Inner Card">
+        <Card type="inner" title="Inner Card title" extra={<a href="https://example.com">More</a>}>
+          Inner Card content
         </Card>
+      </Card>
     </Col>
   </Row>
 );

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Collapse, Card, Space } from 'antd';
 
 const { Panel } = Collapse;

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, Space, Tag } from 'antd';
 
 const PriorityTag = ({ priority }) => {

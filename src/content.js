@@ -1,6 +1,3 @@
-import React from 'react';
-
-// Import all demo components
 import AvatarDemo from './components/demos/AvatarDemo';
 import BadgeDemo from './components/demos/BadgeDemo';
 import ButtonDemo from './components/demos/ButtonDemo';
@@ -29,7 +26,7 @@ import TimelineDemo from './components/demos/TimelineDemo';
 import TooltipDemo from './components/demos/TooltipDemo';
 import TreeDemo from './components/demos/TreeDemo';
 import TypographyDemo from './components/demos/TypographyDemo';
-import InventoryDemo from './components/demos/InventoryDemo'; // <-- Import the new demo
+import InventoryDemo from './components/demos/InventoryDemo'; 
 
 // This object holds the JSX for live demos and the corresponding code strings.
 export const componentData = {
@@ -80,7 +77,7 @@ export const initialContent = {
         dataEntry: 'Data Entry',
         // Components
         inventory: 'Inventory',
-        avatar: 'Avatar', badge: 'Badge', button: 'Button', calendar: 'Calendar', card: 'Card', carousel: 'Carousel', checkbox: 'Checkbox', collapse: 'Collapse', descriptions: 'Descriptions', divider: 'Divider', dropdown: 'Dropdown', empty: 'Empty', form: 'Form', grid: 'Grid', icon: 'Icon', image: 'Image', layout: 'Layout', list: 'List', popover: 'Popover', segmented: 'Segmented', space: 'Space', statistic: 'Statistic', table: 'Table', tag: 'Tag', timeline: 'Timeline', tooltip: 'Tooltip', tree: 'Tree', typography: 'Typography',
+        avatar: 'Avatar', badge: 'Badge', button: 'Button', calendar: 'Calendar', card: 'Card', carousel: 'Carousel', checkbox: 'Checkbox', collapse: 'Collapse', descriptions: 'Descriptions', divider: 'Divider', dropdown: 'Dropdown', empty: 'Empty', form: 'Form', grid: 'Grid', icon: 'Icon', image: 'Image', list: 'List', popover: 'Popover', segmented: 'Segmented', space: 'Space', statistic: 'Statistic', table: 'Table', tag: 'Tag', timeline: 'Timeline', tooltip: 'Tooltip', tree: 'Tree', typography: 'Typography',
         // Descriptions
         overviewDescription: `
 # COSMOS Agricultural Design System
@@ -238,7 +235,7 @@ This roadmap starts with understanding what we're really working with, then buil
         dataEntry: '数据录入',
         // Components
         inventory: '库存',
-        avatar: '头像', badge: '徽标数', button: '按钮', calendar: '日历', card: '卡片', carousel: '走马灯', checkbox: '复选框', collapse: '折叠面板', descriptions: '描述列表', divider: '分割线', dropdown: '下拉菜单', empty: '空状态', form: '表单', grid: '栅格', icon: '图标', image: '图片', layout: '布局', list: '列表', popover: '气泡卡片', segmented: '分段控制器', space: '间距', statistic: '统计数值', table: '表格', tag: '标签', timeline: '时间轴', tooltip: '文字提示', tree: '树形控件', typography: '排版',
+        avatar: '头像', badge: '徽标数', button: '按钮', calendar: '日历', card: '卡片', carousel: '走马灯', checkbox: '复选框', collapse: '折叠面板', descriptions: '描述列表', divider: '分割线', dropdown: '下拉菜单', empty: '空状态', form: '表单', grid: '栅格', icon: '图标', image: '图片', list: '列表', popover: '气泡卡片', segmented: '分段控制器', space: '间距', statistic: '统计数值', table: '表格', tag: '标签', timeline: '时间轴', tooltip: '文字提示', tree: '树形控件', typography: '排版',
         // Descriptions
         inventoryDescription: '一个在宽模态框中启动的完整库存管理界面演示。',
         overviewDescription: `

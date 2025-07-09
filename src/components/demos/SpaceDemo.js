@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button, Card, Space, Divider } from 'antd';
 
 const SpaceDemo = () => (

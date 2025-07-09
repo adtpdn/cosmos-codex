@@ -1,6 +1,5 @@
-import React from 'react';
-import { Badge, Card, Space, Avatar, Button } from 'antd';
-import { ClockCircleOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
+import { Badge, Card, Space, Avatar} from 'antd';
+import { ClockCircleOutlined } from '@ant-design/icons';
 
 const BadgeDemo = () => (
     <Card>

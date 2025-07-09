@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
     Layout,
     Menu,
@@ -26,7 +26,6 @@ import {
     CalendarOutlined,
     MoreOutlined,
     WarningFilled,
-    LeftOutlined,
     FundProjectionScreenOutlined,
     InteractionOutlined,
     DatabaseOutlined,

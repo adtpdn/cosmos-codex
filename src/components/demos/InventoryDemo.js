@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button, Modal, Card } from 'antd';
 import { SendOutlined } from '@ant-design/icons';
 import InventoryStandalone from './InventoryStandalone';

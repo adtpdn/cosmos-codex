@@ -1,4 +1,3 @@
-import React from 'react';
 import { Popover, Button, Card, Space } from 'antd';
 
 const content = (

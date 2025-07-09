@@ -1,4 +1,3 @@
-import React from 'react';
 import { Carousel, Card } from 'antd';
 
 const contentStyle = {

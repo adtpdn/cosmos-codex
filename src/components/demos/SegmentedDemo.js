@@ -1,4 +1,3 @@
-import React from 'react';
 import { Segmented, Card, Space } from 'antd';
 import { AppstoreOutlined, BarsOutlined } from '@ant-design/icons';
 

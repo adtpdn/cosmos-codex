@@ -8,7 +8,6 @@ import {
   Anchor,
   Drawer,
   Button,
-  Image,
 } from 'antd';
 import {
   AppstoreOutlined,
