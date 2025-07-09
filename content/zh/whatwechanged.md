@@ -5,6 +5,115 @@ order: 2
 demo: false
 ---
 
+<!-- Centered 16:9 Aspect Ratio Before/After Image Comparison Slider for Markdown, with Green Drag and Hover Color -->
+
+<style>
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 2em 0;
+}
+.comparison-slider-wrapper {
+  position: relative;
+  width: 640px;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+}
+.comparison-slider {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px #0002;
+  user-select: none;
+  background: #eee;
+  display: block;
+}
+.comparison-slider img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  top: 0; left: 0;
+}
+.comparison-slider .after-image {
+  clip-path: inset(0 0 0 50%);
+  transition: clip-path 0.1s;
+}
+.comparison-slider .slider-handle {
+  position: absolute;
+  top: 0; left: 50%;
+  width: 8px; height: 100%;
+  background: #fff;
+  cursor: ew-resize;
+  box-shadow: 0 0 4px #0005;
+  border-radius: 2px;
+  transition: background 0.2s;
+  z-index: 2;
+}
+.comparison-slider .slider-handle:hover,
+.comparison-slider .slider-handle.dragging {
+  background: #4FA147;
+}
+</style>
+
+<div class="center-container">
+  <div class="comparison-slider-wrapper">
+    <div class="comparison-slider" id="mySlider">
+      <img src="../../public/assets/before.png" alt="Before">
+      <img src="../../public/assets/after.png" class="after-image" alt="After">
+      <div class="slider-handle"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const slider = document.getElementById('mySlider');
+  const after = slider.querySelector('.after-image');
+  const handle = slider.querySelector('.slider-handle');
+  let dragging = false;
+
+  function setSlider(x) {
+    const rect = slider.getBoundingClientRect();
+    let pct = Math.max(0, Math.min(1, (x - rect.left) / rect.width));
+    handle.style.left = (pct * 100) + '%';
+    after.style.clipPath = `inset(0 0 0 ${pct * 100}%)`;
+  }
+
+  function onDown(e) {
+    dragging = true;
+    document.body.style.userSelect = 'none';
+    handle.classList.add('dragging');
+  }
+  function onUp(e) {
+    dragging = false;
+    document.body.style.userSelect = '';
+    handle.classList.remove('dragging');
+  }
+  function onMove(e) {
+    if (!dragging) return;
+    let x = e.touches ? e.touches[0].clientX : e.clientX;
+    setSlider(x);
+  }
+
+  handle.addEventListener('mousedown', onDown);
+  window.addEventListener('mouseup', onUp);
+  window.addEventListener('mousemove', onMove);
+
+  handle.addEventListener('touchstart', onDown);
+  window.addEventListener('touchend', onUp);
+  window.addEventListener('touchmove', onMove);
+
+  // Set initial position
+  setSlider(slider.getBoundingClientRect().left + slider.offsetWidth / 2);
+})();
+</script>
+
 **文字优化** 
 
 - 统一字体规范，提升多语言适配性 
