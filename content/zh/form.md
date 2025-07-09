@@ -1,15 +1,17 @@
 ---
-title: 表单
+title: 表单系统
 category: 演示展示
 order: 4
 demo: false
 ---
 
-表单在模态窗口中提供数据收集功能。
+表单组件以模态框形式提供数据采集功能。 
 
-## 概述
+## 系统概述
 
-表单组件展示了农业订单创建界面，具有智能验证、实时反馈和移动优化的输入字段。
+该表单组件展示了农业订单创建界面，具备智能验证、实时反馈和移动端优化的输入体验。
+
+[完整演示版本](https://codex.mornoir.com/demos/form)
 
 <!-- Simple Centered Image Popup Viewer with Mobile Zoom Support, 16:9 Aspect Ratio -->
 

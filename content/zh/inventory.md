@@ -1,15 +1,17 @@
 ---
-title: 库存
+title: 库存管理系统
 category: 演示展示
 order: 3
 demo: false
 ---
 
-一个全页库存管理界面，以宽模态窗口启动。
+这是一个全屏的库存管理界面，以横屏模态框形式呈现。
 
-## 概述
+## 系统概述 
 
-库存管理系统为管理农业订单、产品和物流提供了一个全面的界面。此组件展示了基于卡片的布局方法，取代了传统的表格布局，以获得更好的移动响应性和用户体验。
+这套库存管理系统提供了全方位的农业订单、产品及物流管理功能。系统采用卡片式布局取代传统表格设计，提升了移动端适配性和用户体验。
+
+[完整演示版本](https://codex.mornoir.com/demos/inventory)
 
 <!-- Simple Centered Image Popup Viewer with Mobile Zoom Support, 16:9 Aspect Ratio -->
 

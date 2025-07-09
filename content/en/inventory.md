@@ -11,6 +11,8 @@ A full-page inventory management interface, launched in a wide modal.
 
 The inventory management system provides a comprehensive interface for managing agricultural orders, products, and logistics. This component demonstrates the card-based approach that replaced traditional table layouts for better mobile responsiveness and user experience.
 
+[Full Live Demo](https://codex.mornoir.com/demos/inventory)
+
 <!-- Simple Centered Image Popup Viewer with Mobile Zoom Support, 16:9 Aspect Ratio -->
 
 <style>
