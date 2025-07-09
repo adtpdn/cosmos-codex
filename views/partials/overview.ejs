@@ -1,0 +1,25 @@
+<div class="markdown-body" id="overviewContent">
+    <%- parsedContent %>
+</div>
+
+<h2 id="demo"><%= t.liveDemo %></h2>
+<div class="demo-section">
+    <!-- Image Slider Demo Placeholder -->
+    <div class="image-slider-demo">
+        <div class="slider-container">
+            <div class="slider-item active">
+                <img src="https://via.placeholder.com/800x400/f0f0f0/666?text=Before" alt="Before" />
+                <div class="slider-label">Before</div>
+            </div>
+            <div class="slider-item">
+                <img src="https://via.placeholder.com/800x400/e6f7ff/666?text=After" alt="After" />
+                <div class="slider-label">After</div>
+            </div>
+            <div class="slider-control">
+                <input type="range" min="0" max="100" value="50" class="slider-range" id="imageSlider" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<p class="demo-note"><%= t.note %></p>

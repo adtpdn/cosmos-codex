@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="<%= lang %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= t.appTitle %></title>
+    
+    <!-- Ant Design CSS -->
+    <link rel="stylesheet" href="/antd/antd.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Source+Han+Sans+CN:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+    
+    <!-- Ant Design Icons -->
+    <script src="https://unpkg.com/@ant-design/icons@latest/dist/antd-icon.min.js"></script>
+</head>
+<body class="<%= lang === 'zh' ? 'font-chinese' : 'font-english' %>">
+    <div id="app">
+        <!-- Header -->
+        <div class="ant-layout-header header">
+            <div class="header-content">
+                <div class="header-left">
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" style="display: none;">
+                        <svg class="anticon" viewBox="64 64 896 896" width="1em" height="1em">
+                            <path d="M904 160H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0 256H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8zm0 256H120c-4.4 0-8 3.6-8 8v64c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-64c0-4.4-3.6-8-8-8z"></path>
+                        </svg>
+                    </button>
+                    <h3 class="header-title">
+                        <svg class="anticon header-icon" viewBox="64 64 896 896" width="1em" height="1em">
+                            <path d="M464 144H160c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V160c0-8.8-7.2-16-16-16zm-52 268H212V196h200v216zM464 544H160c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V560c0-8.8-7.2-16-16-16zm-52 268H212V596h200v216zM864 144H560c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V160c0-8.8-7.2-16-16-16zm-52 268H612V196h200v216zM864 544H560c-8.8 0-16 7.2-16 16v304c0 8.8 7.2 16 16 16h304c8.8 0 16-7.2 16-16V560c0-8.8-7.2-16-16-16zm-52 268H612V596h200v216z"></path>
+                        </svg>
+                        <%= t.appTitle %>
+                    </h3>
+                </div>
+                <div class="language-selector">
+                    <select class="ant-select-selector" id="languageSelect">
+                        <option value="en" <%= lang === 'en' ? 'selected' : '' %>>English</option>
+                        <option value="zh" <%= lang === 'zh' ? 'selected' : '' %>>中文</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="ant-layout">
+            <!-- Desktop Sidebar -->
+            <div class="ant-layout-sider desktop-sider" id="desktopSider">
+                <div class="sidebar-menu">
+                    <div class="ant-menu ant-menu-inline">
+                        <li class="ant-menu-item <%= page === 'overview' ? 'ant-menu-item-selected' : '' %>" data-page="overview">
+                            <span class="ant-menu-title-content"><%= t.overview %></span>
+                        </li>
+                        <li class="ant-menu-item <%= page === 'inventory' ? 'ant-menu-item-selected' : '' %>" data-page="inventory">
+                            <span class="ant-menu-title-content"><%= t.inventory %></span>
+                        </li>
+                        <li class="ant-menu-item <%= page === 'form' ? 'ant-menu-item-selected' : '' %>" data-page="form">
+                            <span class="ant-menu-title-content"><%= t.form %></span>
+                        </li>
+                        <li class="ant-menu-item-group">
+                            <div class="ant-menu-item-group-title"><%= t.general %></div>
+                            <ul class="ant-menu-item-group-list">
+                                <li class="ant-menu-item <%= page === 'colors' ? 'ant-menu-item-selected' : '' %>" data-page="colors">
+                                    <span class="ant-menu-title-content"><%= t.colors %></span>
+                                </li>
+                                <li class="ant-menu-item <%= page === 'button' ? 'ant-menu-item-selected' : '' %>" data-page="button">
+                                    <span class="ant-menu-title-content"><%= t.button %></span>
+                                </li>
+                                <li class="ant-menu-item <%= page === 'icon' ? 'ant-menu-item-selected' : '' %>" data-page="icon">
+                                    <span class="ant-menu-title-content"><%= t.icon %></span>
+                                </li>
+                                <li class="ant-menu-item <%= page === 'typography' ? 'ant-menu-item-selected' : '' %>" data-page="typography">
+                                    <span class="ant-menu-title-content"><%= t.typography %></span>
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Drawer -->
+            <div class="mobile-drawer" id="mobileDrawer" style="display: none;">
+                <div class="drawer-content">
+                    <div class="sidebar-menu">
+                        <div class="ant-menu ant-menu-inline">
+                            <li class="ant-menu-item <%= page === 'overview' ? 'ant-menu-item-selected' : '' %>" data-page="overview">
+                                <span class="ant-menu-title-content"><%= t.overview %></span>
+                            </li>
+                            <li class="ant-menu-item <%= page === 'inventory' ? 'ant-menu-item-selected' : '' %>" data-page="inventory">
+                                <span class="ant-menu-title-content"><%= t.inventory %></span>
+                            </li>
+                            <li class="ant-menu-item <%= page === 'form' ? 'ant-menu-item-selected' : '' %>" data-page="form">
+                                <span class="ant-menu-title-content"><%= t.form %></span>
+                            </li>
+                            <li class="ant-menu-item-group">
+                                <div class="ant-menu-item-group-title"><%= t.general %></div>
+                                <ul class="ant-menu-item-group-list">
+                                    <li class="ant-menu-item <%= page === 'colors' ? 'ant-menu-item-selected' : '' %>" data-page="colors">
+                                        <span class="ant-menu-title-content"><%= t.colors %></span>
+                                    </li>
+                                    <li class="ant-menu-item <%= page === 'button' ? 'ant-menu-item-selected' : '' %>" data-page="button">
+                                        <span class="ant-menu-title-content"><%= t.button %></span>
+                                    </li>
+                                    <li class="ant-menu-item <%= page === 'icon' ? 'ant-menu-item-selected' : '' %>" data-page="icon">
+                                        <span class="ant-menu-title-content"><%= t.icon %></span>
+                                    </li>
+                                    <li class="ant-menu-item <%= page === 'typography' ? 'ant-menu-item-selected' : '' %>" data-page="typography">
+                                        <span class="ant-menu-title-content"><%= t.typography %></span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-layout">
+                <!-- Main Content -->
+                <div class="ant-layout-content main-content">
+                    <div class="content-wrapper">
+                        <!-- Page Header -->
+                        <div class="page-header">
+                            <h1 id="overview"><%= t[page] %></h1>
+                            <button class="ant-btn ant-btn-text edit-btn" id="editBtn">
+                                <svg class="anticon" viewBox="64 64 896 896" width="1em" height="1em">
+                                    <path d="M257.7 752c2 0 4-.2 6-.5L431.9 722c2-.4 3.9-1.3 5.3-2.8l423.9-423.9a9.96 9.96 0 000-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2a33.5 33.5 0 009.4 29.8c6.6 6.4 15.1 9.9 24.3 9.9zm67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <!-- Page Content -->
+                        <div class="page-content" id="pageContent">
+                            <%- include('partials/' + page, { t: t, lang: lang }) %>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Sidebar (Table of Contents) -->
+                <div class="right-sidebar desktop-only" id="rightSidebar">
+                    <div class="toc-wrapper">
+                        <div class="ant-anchor">
+                            <div class="ant-anchor-link">
+                                <a href="#overview" class="ant-anchor-link-title"><%= t[page] %></a>
+                            </div>
+                            <div id="tocContent">
+                                <!-- TOC will be dynamically generated -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Container -->
+    <div id="modalContainer"></div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/antd@5.17.4/dist/antd.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/demos.js"></script>
+</body>
+</html>
