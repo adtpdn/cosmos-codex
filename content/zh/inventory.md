@@ -11,6 +11,15 @@ demo: false
 
 这套库存管理系统提供了全方位的农业订单、产品及物流管理功能。系统采用卡片式布局取代传统表格设计，提升了移动端适配性和用户体验。
 
+<!-- Ant Design style single Info Alert, icon and text same size, centered, font-family follows <p> element -->
+<div style="min-width: 280px; border-radius: 4px; border: 1px solid #bae7ff; background: #e6f7ff; display: flex; align-items: center; gap: 8px; padding: 12px 16px; justify-content: center; font-family: inherit;">
+  <span style="color: #1890ff; font-size: 24px; display: flex; align-items: center;">&#8505;</span>
+  <span style="color: #10239e; display: flex; align-items: center;">
+    明天周四更新英文版 
+  </span>
+</div>
+<br>
+
 [完整演示版本](https://codex.mornoir.com/demos/inventory)
 
 <!-- Simple Centered Image Popup Viewer with Mobile Zoom Support, 16:9 Aspect Ratio -->
