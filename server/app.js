@@ -149,6 +149,10 @@ app.get('/docs/:page?', async (req, res) => {
   }
 });
 
+app.get('/demos/inventory', (req, res) => {
+  res.render('demos/inventory');
+});
+
 // Admin routes
 app.get('/admin/login', (req, res) => {
   res.render('admin/login', { error: null });
