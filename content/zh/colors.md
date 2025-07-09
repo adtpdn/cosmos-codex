@@ -204,7 +204,7 @@ order: 5
         <span class="color-code">#4FA147</span>
       </div>
     </div>
-    <h3 class="palette-title">组件提示色彩</h3>
+    <h3 class="palette-title">提示色系</h3>
     <div class="color-palette">
       <div class="color-box" style="background-color: #B44432;">
         <span class="color-code">#B44432</span>

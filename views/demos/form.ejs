@@ -5,51 +5,106 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>创建新订单</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-  <link href="https://unpkg.com/antd@5.17.4/dist/reset.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
   <style>
-    /* Font face for Source Han Sans CN (Noto Sans SC is the web equivalent) */
+    /* Font definitions */
     @font-face {
       font-family: 'Source Han Sans CN';
-      src: local('Source Han Sans CN'), local('Noto Sans SC');
+      src: local('Source Han Sans CN'), local('Noto Sans SC'), local('PingFang SC'), local('Microsoft YaHei');
       font-weight: normal;
+      font-display: swap;
     }
-    
+
     @font-face {
       font-family: 'Source Han Sans CN';
-      src: local('Source Han Sans CN Bold'), local('Noto Sans SC Bold');
-      font-weight: bold;
+      src: local('Source Han Sans CN Medium'), local('Noto Sans SC Medium'), local('PingFang SC Medium');
+      font-weight: 500;
+      font-display: swap;
     }
-    
+
+    @font-face {
+      font-family: 'Source Han Sans CN';
+      src: local('Source Han Sans CN Bold'), local('Noto Sans SC Bold'), local('PingFang SC Semibold');
+      font-weight: 600;
+      font-display: swap;
+    }
+
+    /* Base styles - Ant Design inspired */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    
+
+    :root {
+      /* Ant Design color palette */
+      --ant-primary-color: #1890ff;
+      --ant-primary-color-hover: #40a9ff;
+      --ant-primary-color-active: #096dd9;
+      --ant-success-color: #52c41a;
+      --ant-success-color-hover: #73d13d;
+      --ant-warning-color: #faad14;
+      --ant-error-color: #ff4d4f;
+      --ant-error-color-hover: #ff7875;
+      
+      /* Text colors */
+      --ant-text-color: rgba(0, 0, 0, 0.85);
+      --ant-text-color-secondary: rgba(0, 0, 0, 0.65);
+      --ant-text-color-disabled: rgba(0, 0, 0, 0.25);
+      
+      /* Background colors */
+      --ant-background-color-base: #f5f5f5;
+      --ant-background-color-light: #fafafa;
+      --ant-component-background: #ffffff;
+      
+      /* Border colors */
+      --ant-border-color-base: #d9d9d9;
+      --ant-border-color-split: #f0f0f0;
+      
+      /* Shadows */
+      --ant-shadow-1-up: 0 -6px 16px -8px rgba(0, 0, 0, 0.08), 0 -9px 28px 0 rgba(0, 0, 0, 0.05), 0 -12px 48px 16px rgba(0, 0, 0, 0.03);
+      --ant-shadow-1-down: 0 6px 16px -8px rgba(0, 0, 0, 0.08), 0 9px 28px 0 rgba(0, 0, 0, 0.05), 0 12px 48px 16px rgba(0, 0, 0, 0.03);
+      --ant-shadow-2: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
+      
+      /* Border radius */
+      --ant-border-radius-base: 6px;
+      --ant-border-radius-sm: 4px;
+      --ant-border-radius-lg: 8px;
+    }
+
+    /* Language-specific fonts */
     body {
-      font-family: 'Source Han Sans CN', 'Noto Sans SC', sans-serif;
-      background-color: #f5f5f5;
-      color: #333;
-      margin: 0;
-      padding: 0;
+      font-family: 'Source Han Sans CN', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background-color: var(--ant-background-color-base);
+      color: var(--ant-text-color);
       font-size: 14px;
+      line-height: 1.5715;
+      transition: font-family 0.3s ease;
+    }
+
+    body.lang-en {
+      font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
 
     .container {
       max-width: 900px;
       margin: 20px auto;
-      background-color: white;
-      border-radius: 4px;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      background-color: var(--ant-component-background);
+      border-radius: var(--ant-border-radius-base);
+      box-shadow: var(--ant-shadow-1-down);
+      overflow: hidden;
     }
 
+    /* Header styles */
     .header {
       padding: 16px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #f0f0f0;
+      border-bottom: 1px solid var(--ant-border-color-split);
+      background-color: var(--ant-component-background);
     }
 
     .header-left {
@@ -60,14 +115,15 @@
     .header-icon {
       width: 40px;
       height: 40px;
-      background-color: #16A34A;
-      border-radius: 4px;
+      background-color: var(--ant-success-color);
+      border-radius: var(--ant-border-radius-base);
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 20px;
+      font-size: 18px;
       margin-right: 12px;
+      box-shadow: 0 2px 4px rgba(82, 196, 26, 0.2);
     }
 
     .header-text {
@@ -77,296 +133,757 @@
 
     .header-title {
       font-size: 16px;
-      font-weight: bold;
+      font-weight: 600;
       margin: 0;
-      color: #000;
+      color: var(--ant-text-color);
+      letter-spacing: -0.01em;
     }
 
     .header-subtitle {
       font-size: 12px;
-      color: #666;
-      margin: 0;
+      color: var(--ant-text-color-secondary);
+      margin: 2px 0 0 0;
+      font-weight: 400;
     }
 
     .header-right {
       display: flex;
       align-items: center;
+      gap: 16px;
     }
 
     .language-selector {
       display: flex;
       align-items: center;
-      margin-right: 16px;
+      gap: 6px;
     }
 
     .language-icon {
-      color: #666;
-      margin-right: 4px;
-      font-size: 16px;
+      color: var(--ant-text-color-secondary);
+      font-size: 14px;
+    }
+
+    .language-select {
+      padding: 4px 8px;
+      border: 1px solid var(--ant-border-color-base);
+      border-radius: var(--ant-border-radius-sm);
+      font-size: 12px;
+      background-color: var(--ant-component-background);
+      color: var(--ant-text-color);
+      cursor: pointer;
+      min-width: 80px;
+      transition: all 0.3s;
+    }
+
+    .language-select:hover {
+      border-color: var(--ant-primary-color-hover);
+    }
+
+    .language-select:focus {
+      border-color: var(--ant-primary-color);
+      box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+      outline: none;
     }
 
     .close-button {
-      color: #666;
+      color: var(--ant-text-color-secondary);
       font-size: 16px;
       cursor: pointer;
+      padding: 4px;
+      border-radius: var(--ant-border-radius-sm);
+      transition: all 0.3s;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
+    .close-button:hover {
+      color: var(--ant-text-color);
+      background-color: var(--ant-background-color-light);
+    }
+
+    /* Form container */
     .form-container {
-      padding: 20px 24px;
+      padding: 24px;
     }
 
     .form-row {
-      display: flex;
-      flex-wrap: wrap;
-      margin-bottom: 16px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 16px;
+      margin-bottom: 16px;
     }
 
     .form-group {
-      flex: 1;
-      min-width: 260px;
       position: relative;
     }
 
     .form-label {
       display: block;
       margin-bottom: 8px;
-      color: #333;
+      color: var(--ant-text-color);
       font-size: 14px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
     }
 
     .form-required {
-      color: #ff4d4f;
+      color: var(--ant-error-color);
       margin-right: 4px;
+      font-weight: 400;
     }
 
     .form-control {
       width: 100%;
-      padding: 8px 12px;
-      border: 1px solid #d9d9d9;
-      border-radius: 2px;
-      color: #333;
+      padding: 4px 11px;
+      border: 1px solid var(--ant-border-color-base);
+      border-radius: var(--ant-border-radius-base);
+      color: var(--ant-text-color);
       font-size: 14px;
-      background-color: white;
+      background-color: var(--ant-component-background);
+      transition: all 0.3s;
+      font-family: inherit;
+      height: 32px;
+      line-height: 1.5715;
+    }
+
+    .form-control:hover {
+      border-color: var(--ant-primary-color-hover);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--ant-primary-color);
+      box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
     }
 
     .form-control:disabled {
-      background-color: #f5f5f5;
-      color: #666;
+      background-color: var(--ant-background-color-light);
+      color: var(--ant-text-color-disabled);
+      cursor: not-allowed;
+      border-color: var(--ant-border-color-base);
     }
 
-    .form-control-suffix {
-      position: absolute;
-      right: 12px;
-      top: 40px;
-      color: #bbb;
-      pointer-events: none;
+    .form-control::placeholder {
+      color: var(--ant-text-color-disabled);
     }
 
     .form-select {
       width: 100%;
-      padding: 8px 12px;
-      border: 1px solid #d9d9d9;
-      border-radius: 2px;
-      color: #333;
+      padding: 4px 11px;
+      border: 1px solid var(--ant-border-color-base);
+      border-radius: var(--ant-border-radius-base);
+      color: var(--ant-text-color);
       font-size: 14px;
-      background-color: white;
+      background-color: var(--ant-component-background);
       appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8.825L1.175 4 2.05 3.125 6 7.075 9.95 3.125 10.825 4z'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
-      background-position: right 12px center;
-    }
-
-    .form-hint {
-      margin-top: 16px;
-      padding: 12px 16px;
-      background-color: #f0f9ff;
-      border-radius: 2px;
-      font-size: 13px;
-      color: #666;
-    }
-
-    .form-hint-text {
+      background-position: right 8px center;
       cursor: pointer;
-      color: #1890ff;
+      transition: all 0.3s;
+      font-family: inherit;
+      height: 32px;
+      line-height: 1.5715;
+      padding-right: 24px;
     }
 
-    .expand-button {
-      width: 100%;
-      padding: 8px;
-      text-align: center;
-      background-color: #fafafa;
-      border-radius: 2px;
-      cursor: pointer;
-      color: #666;
-      margin: 16px 0;
+    .form-select:hover {
+      border-color: var(--ant-primary-color-hover);
     }
 
-    .expanded-section {
-      margin-top: 16px;
+    .form-select:focus {
+      outline: none;
+      border-color: var(--ant-primary-color);
+      box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
     }
 
-    .item-count {
+    .form-control-suffix {
       position: absolute;
-      left: -24px;
-      top: 35px;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--ant-text-color-disabled);
+      pointer-events: none;
+      font-size: 14px;
+      margin-top: 14px;
+    }
+
+    .select-with-icon {
+      position: relative;
+    }
+
+    .select-icon {
+      position: absolute;
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--ant-text-color-disabled);
+      font-size: 14px;
+      z-index: 1;
+      
+    }
+
+    .with-icon {
+      padding-left: 28px;
+    }
+
+    /* Hint section */
+    .form-hint {
+      background-color: #e6f7ff;
+      padding: 12px 16px;
+      border-radius: var(--ant-border-radius-base);
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #91d5ff;
+    }
+
+    .hint-text {
+      color: var(--ant-primary-color);
+      font-size: 13px;
+      font-weight: 400;
+    }
+
+    .hint-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hint-link {
+      color: var(--ant-primary-color);
+      font-size: 13px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 400;
+      transition: color 0.3s;
+      padding: 2px 4px;
+      border-radius: var(--ant-border-radius-sm);
+    }
+
+    .hint-link:hover {
+      color: var(--ant-primary-color-hover);
+      background-color: rgba(24, 144, 255, 0.1);
+    }
+
+    .hint-separator {
+      color: var(--ant-primary-color);
+      font-size: 13px;
+      opacity: 0.6;
+    }
+
+    /* Product item - Fixed layout */
+    .product-item {
+      position: relative;
+      border: 1px solid var(--ant-border-color-split);
+      border-radius: var(--ant-border-radius-base);
+      padding: 16px 16px 16px 40px; /* Added left padding for item number */
+      margin-bottom: 16px;
+      background-color: var(--ant-background-color-light);
+      transition: all 0.3s;
+    }
+
+    .product-item:hover {
+      border-color: var(--ant-border-color-base);
+      box-shadow: var(--ant-shadow-2);
+    }
+
+    /* Fixed item number positioning */
+    .item-number {
+      position: absolute;
+      left: 8px;
+      top: 16px;
       width: 24px;
       height: 24px;
       border-radius: 50%;
       background-color: #e6f7ff;
-      color: #16A34A;
+      color: var(--ant-success-color);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: bold;
+      font-weight: 600;
+      font-size: 12px;
+      border: 2px solid var(--ant-component-background);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      z-index: 2;
     }
 
-    .product-row {
-      position: relative;
-      padding: 16px;
-      border: 1px solid #f0f0f0;
-      border-radius: 4px;
+    /* Fixed delete button positioning */
+    .delete-button {
+      position: absolute;
+      top: 15px;
+      right: 12px;
+      color: var(--ant-text-color-disabled);
+      cursor: pointer;
+      padding: 4px;
+      border-radius: var(--ant-border-radius-sm);
+      transition: all 0.3s;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    .delete-button:hover {
+      color: var(--ant-error-color);
+      background-color: rgba(255, 77, 79, 0.1);
+    }
+
+    /* Fixed product tags layout */
+    .product-tags {
+      display: flex;
+      align-items: center;
       margin-bottom: 16px;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding-right: 40px; /* Space for delete button */
     }
 
     .product-tag {
       display: inline-block;
-      padding: 4px 8px;
-      background-color: #f0f0f0;
-      border-radius: 2px;
-      margin-right: 8px;
+      padding: 2px 8px;
+      border-radius: var(--ant-border-radius-sm);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      border: 1px solid transparent;
     }
 
-    .delete-button {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      color: #999;
-      cursor: pointer;
+    .product-tag.completed {
+      background-color: #f6ffed;
+      color: var(--ant-success-color);
+      border-color: #b7eb8f;
     }
 
-    .product-actions {
-      margin-top: 12px;
-      display: flex;
-      justify-content: space-between;
+    .product-tag.seasonal {
+      background-color: #e6f7ff;
+      color: var(--ant-primary-color);
+      border-color: #91d5ff;
     }
 
-    .product-total {
+    /* Fixed price display */
+    .product-price {
+      margin-left: auto;
       display: flex;
       align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
     }
 
-    .total-price {
-      font-weight: bold;
-      margin-right: 8px;
+    .price-amount {
       font-size: 16px;
+      font-weight: 600;
+      color: var(--ant-text-color);
+      letter-spacing: -0.02em;
     }
 
     .price-dropdown {
-      padding: 4px 8px;
-      border: 1px solid #d9d9d9;
-      border-radius: 2px;
-      background-color: white;
+      color: var(--ant-text-color-secondary);
       cursor: pointer;
+      padding: 2px;
+      border-radius: var(--ant-border-radius-sm);
+      transition: all 0.3s;
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .summary-row {
+    .price-dropdown:hover {
+      color: var(--ant-text-color);
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .product-form {
+      background-color: var(--ant-component-background);
+      padding: 16px;
+      border-radius: var(--ant-border-radius-base);
+      border: 1px solid var(--ant-border-color-split);
+    }
+
+    /* Summary section */
+    .summary-section {
       display: flex;
       justify-content: space-between;
-      padding: 8px 0;
+      align-items: center;
+      margin-bottom: 16px;
+      padding: 12px 0;
+      border-top: 1px solid var(--ant-border-color-split);
+      border-bottom: 1px solid var(--ant-border-color-split);
+    }
+
+    .summary-left {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .summary-item {
       font-size: 14px;
+      color: var(--ant-text-color-secondary);
+      white-space: nowrap;
     }
 
-    .summary-label {
-      color: #666;
+    .summary-item strong {
+      color: var(--ant-text-color);
+      font-weight: 500;
     }
 
-    .summary-value {
-      font-weight: bold;
+    .summary-total {
+      font-size: 16px;
+      color: var(--ant-text-color);
     }
 
-    .footer {
-      padding: 16px 24px;
-      background-color: #fafafa;
+    .summary-total strong {
+      font-weight: 600;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+
+    /* Additional actions */
+    .additional-actions {
       display: flex;
-      justify-content: space-between;
-      border-top: 1px solid #f0f0f0;
-      border-radius: 0 0 4px 4px;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .action-button {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 15px;
+      background-color: var(--ant-component-background);
+      border: 1px solid var(--ant-border-color-base);
+      border-radius: var(--ant-border-radius-base);
+      color: var(--ant-text-color-secondary);
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: inherit;
+      text-decoration: none;
+      height: 32px;
+      line-height: 1.5715;
+    }
+
+    .action-button:hover {
+      border-color: var(--ant-primary-color);
+      color: var(--ant-primary-color);
+    }
+
+    /* Footer buttons */
+    .footer-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     .cancel-button {
-      padding: 8px 16px;
-      background-color: white;
-      border: 1px solid #d9d9d9;
-      border-radius: 2px;
+      padding: 4px 15px;
+      background-color: var(--ant-component-background);
+      border: 1px solid var(--ant-border-color-base);
+      border-radius: var(--ant-border-radius-base);
+      color: var(--ant-text-color-secondary);
       cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s;
+      font-family: inherit;
+      height: 32px;
+      line-height: 1.5715;
+    }
+
+    .cancel-button:hover {
+      border-color: var(--ant-primary-color);
+      color: var(--ant-primary-color);
     }
 
     .submit-button {
-      padding: 8px 16px;
-      background-color: #16A34A;
-      color: white;
-      border: none;
-      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 15px;
+      background-color: var(--ant-primary-color);
+      color: var(--ant-component-background);
+      border: 1px solid var(--ant-primary-color);
+      border-radius: var(--ant-border-radius-base);
       cursor: pointer;
+      font-size: 14px;
+      font-weight: 400;
+      transition: all 0.3s;
+      font-family: inherit;
+      height: 32px;
+      line-height: 1.5715;
+    }
+
+    .submit-button:hover {
+      background-color: var(--ant-primary-color-hover);
+      border-color: var(--ant-primary-color-hover);
+    }
+
+    .submit-button:active {
+      background-color: var(--ant-primary-color-active);
+      border-color: var(--ant-primary-color-active);
+    }
+
+    /* Success modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+
+    .modal-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .success-modal {
+      background: var(--ant-component-background);
+      padding: 32px 24px;
+      border-radius: var(--ant-border-radius-lg);
+      text-align: center;
+      box-shadow: var(--ant-shadow-1-up);
+      max-width: 400px;
+      width: 90%;
+      transform: scale(0.9);
+      transition: transform 0.3s;
+    }
+
+    .modal-overlay.show .success-modal {
+      transform: scale(1);
+    }
+
+    .success-icon {
+      color: var(--ant-success-color);
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .success-title {
+      color: var(--ant-text-color);
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .success-message {
+      color: var(--ant-text-color-secondary);
+      font-size: 14px;
+      margin-bottom: 24px;
+      line-height: 1.5715;
+    }
+
+    .success-button {
+      background-color: var(--ant-primary-color);
+      color: var(--ant-component-background);
+      border: 1px solid var(--ant-primary-color);
+      padding: 4px 15px;
+      border-radius: var(--ant-border-radius-base);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 400;
+      transition: all 0.3s;
+      font-family: inherit;
+      height: 32px;
+      line-height: 1.5715;
+    }
+
+    .success-button:hover {
+      background-color: var(--ant-primary-color-hover);
+      border-color: var(--ant-primary-color-hover);
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .container {
+        margin: 10px;
+        border-radius: var(--ant-border-radius-sm);
+      }
+
+      .header {
+        padding: 12px 16px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .header-right {
+        gap: 12px;
+      }
+
+      .form-container {
+        padding: 16px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .summary-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .summary-left {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .additional-actions {
+        flex-direction: column;
+      }
+
+      .footer-buttons {
+        flex-direction: column-reverse;
+      }
+
+      .cancel-button,
+      .submit-button {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .product-item {
+        padding: 12px 12px 12px 36px;
+      }
+
+      .item-number {
+        position:absolute;
+        top: 15px;
+        left: 8px;
+        width: 20px;
+        height: 20px;
+        font-size: 11px;
+      }
+
+      .product-tags {
+        padding-right: 32px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-title {
+        font-size: 14px;
+      }
+
+      .header-subtitle {
+        font-size: 11px;
+      }
+
+      .form-hint {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .hint-actions {
+        align-self: flex-end;
+      }
+    }
+
+    /* Print styles */
+    @media print {
+      body {
+        background-color: white;
+      }
+
+      .container {
+        box-shadow: none;
+        margin: 0;
+      }
+
+      .close-button,
+      .footer-buttons,
+      .additional-actions {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <!-- Header -->
     <div class="header">
       <div class="header-left">
         <div class="header-icon">
           <i class="fa-solid fa-box"></i>
         </div>
         <div class="header-text">
-          <h1 class="header-title">创建新订单</h1>
-          <p class="header-subtitle">农作物供应，设备与物流管理</p>
+          <h1 class="header-title" data-zh="创建新订单" data-en="Create New Order">创建新订单</h1>
+          <p class="header-subtitle" data-zh="农作物供应、设备与物流管理" data-en="Agricultural Supply, Equipment & Logistics Management">农作物供应、设备与物流管理</p>
         </div>
       </div>
       <div class="header-right">
         <div class="language-selector">
-          <i class="fa-solid fa-language language-icon"></i>
-          <select class="form-select" style="width: 120px;">
+          <i class="fa-solid fa-globe language-icon"></i>
+          <select class="language-select" id="languageSelect">
             <option value="zh">Chinese</option>
             <option value="en">English</option>
           </select>
         </div>
-        <div class="close-button">
+        <div class="close-button" onclick="closeForm()">
           <i class="fa-solid fa-xmark"></i>
         </div>
       </div>
     </div>
 
+    <!-- Form Content -->
     <div class="form-container">
+      <!-- First Row -->
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label">订单编号</label>
-          <input type="text" class="form-control" value="保存时自动生成" disabled>
+          <label class="form-label" data-zh="订单编号" data-en="Order Number">订单编号</label>
+          <input type="text" class="form-control" data-zh="保存时自动生成" data-en="Auto-generated when saved" value="保存时自动生成" disabled>
         </div>
         <div class="form-group">
-          <label class="form-label"><span class="form-required">*</span>客户</label>
-          <select class="form-select">
-            <option value="">请选择</option>
+          <label class="form-label">
+            <span class="form-required">*</span>
+            <span data-zh="客户" data-en="Customer">客户</span>
+          </label>
+          <select class="form-select" required>
+            <option value="" data-zh="请选择" data-en="Please select">请选择</option>
             <option value="customer1">这是一个测试-去去味</option>
             <option value="customer2">666-555</option>
             <option value="customer3">test - C02</option>
           </select>
         </div>
         <div class="form-group">
-          <label class="form-label"><span class="form-required">*</span>计划交货日期</label>
-          <input type="date" class="form-control" placeholder="mm/dd/yy">
-          <div class="form-control-suffix">
-            <i class="fa-regular fa-calendar"></i>
-          </div>
+          <label class="form-label">
+            <span class="form-required">*</span>
+            <span data-zh="计划交货日期" data-en="Planned Delivery Date">计划交货日期</span>
+          </label>
+          <input type="date" class="form-control" placeholder="mm/dd/yy" required>
         </div>
       </div>
 
+      <!-- Second Row -->
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label"><span class="form-required">*</span>发货用途</label>
-          <select class="form-select">
-            <option value="">请选择发货用途</option>
+          <label class="form-label">
+            <span class="form-required">*</span>
+            <span data-zh="发货用途" data-en="Shipping Purpose">发货用途</span>
+          </label>
+          <select class="form-select" required>
+            <option value="" data-zh="请选择发货用途" data-en="Select shipping purpose">请选择发货用途</option>
             <option value="usage1">@111</option>
             <option value="usage2">@222</option>
             <option value="usage3">@555</option>
@@ -374,136 +891,487 @@
           </select>
         </div>
         <div class="form-group">
-          <label class="form-label">订单备注</label>
-          <select class="form-select">
-            <option value="">请选择</option>
-            <option value="note1">普通备注</option>
-            <option value="note2">紧急备注</option>
-          </select>
+          <label class="form-label" data-zh="订单备注" data-en="Order Notes">订单备注</label>
+          <div class="select-with-icon">
+            <i class="fa-solid fa-edit select-icon"></i>
+            <select class="form-select with-icon">
+              <option value="" data-zh="请选择" data-en="Please select">请选择</option>
+              <option value="note1" data-zh="普通备注" data-en="Regular notes">普通备注</option>
+              <option value="note2" data-zh="紧急备注" data-en="Urgent notes">紧急备注</option>
+            </select>
+          </div>
         </div>
         <div class="form-group">
-          <label class="form-label">优先级</label>
+          <label class="form-label" data-zh="优先级" data-en="Priority">优先级</label>
           <select class="form-select">
-            <option value="normal">普通优先级</option>
-            <option value="high">高</option>
-            <option value="urgent">紧急</option>
-            <option value="low">低</option>
+            <option value="normal" selected data-zh="普通优先级" data-en="Normal Priority">普通优先级</option>
+            <option value="high" data-zh="高" data-en="High">高</option>
+            <option value="urgent" data-zh="紧急" data-en="Urgent">紧急</option>
+            <option value="low" data-zh="低" data-en="Low">低</option>
           </select>
         </div>
       </div>
 
+      <!-- Third Row -->
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label"><span class="form-required">*</span>农场位置</label>
-          <select class="form-select">
-            <option value="">选择农场位置...</option>
-            <option value="farm1">拜耳康普基地</option>
-            <option value="farm2">北京农场基地</option>
-            <option value="farm3">西部生态农场</option>
-          </select>
+          <label class="form-label">
+            <span class="form-required">*</span>
+            <span data-zh="农场位置" data-en="Farm Location">农场位置</span>
+          </label>
+          <div class="select-with-icon">
+            <i class="fa-solid fa-map-marker-alt select-icon"></i>
+            <select class="form-select with-icon" required>
+              <option value="" data-zh="选择农场位置..." data-en="Select farm location...">选择农场位置...</option>
+              <option value="farm1" data-zh="拜耳康普基地" data-en="Bayer Comp Base">拜耳康普基地</option>
+              <option value="farm2" data-zh="北京农场基地" data-en="Beijing Farm Base">北京农场基地</option>
+              <option value="farm3" data-zh="西部生态农场" data-en="Western Eco Farm">西部生态农场</option>
+            </select>
+          </div>
         </div>
       </div>
 
+      <!-- Hint Section -->
       <div class="form-hint">
-        点击每个项目的展开按钮以查看价格和备注
+        <span class="hint-text" data-zh="点击每个项目的展开按钮以查看价格和备注" data-en="Click expand button for each item to view prices and notes">点击每个项目的展开按钮以查看价格和备注</span>
+        <div class="hint-actions">
+          <span class="hint-link" onclick="expandAll()" data-zh="全部展开" data-en="Expand All">全部展开</span>
+          <span class="hint-separator">|</span>
+          <span class="hint-link" onclick="collapseAll()" data-zh="全部收起" data-en="Collapse All">全部收起</span>
+        </div>
       </div>
 
-      <div class="expanded-section">
-        <!-- Product Item 1 -->
-        <div class="product-row">
-          <div class="item-count">2</div>
-          <div class="delete-button">
-            <i class="fa-regular fa-trash-can"></i>
+      <!-- Product Item -->
+      <div class="product-item" id="productItem1">
+        <div class="item-number">2</div>
+        <div class="delete-button" onclick="deleteItem(this)">
+          <i class="fa-regular fa-trash-can"></i>
+        </div>
+        
+        <div class="product-tags">
+          <span class="product-tag completed" data-zh="已完成" data-en="Completed">已完成</span>
+          <span class="product-tag seasonal" data-zh="白季特性" data-en="White Season">白季特性</span>
+          <div class="product-price">
+            <span class="price-amount">$2500</span>
+            <i class="fa-solid fa-chevron-down price-dropdown" onclick="togglePriceDetails(this)"></i>
           </div>
-          
-          <div class="product-tag">已完成</div>
-          <div class="product-tag">白季特性</div>
-          
+        </div>
+
+        <div class="product-form">
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label"><span class="form-required">*</span>农产品</label>
-              <select class="form-select">
-                <option value="product1">大豆: 优质等级</option>
-                <option value="product2">小麦: 标准等级</option>
-                <option value="product3">玉米: 特级</option>
+              <label class="form-label">
+                <span class="form-required">*</span>
+                <span data-zh="农产品" data-en="Agricultural Product">农产品</span>
+              </label>
+              <select class="form-select" required>
+                <option value="soybean" selected data-zh="大豆：优质等级" data-en="Soybeans: Premium Grade">大豆：优质等级</option>
+                <option value="wheat" data-zh="小麦：标准等级" data-en="Wheat: Standard Grade">小麦：标准等级</option>
+                <option value="corn" data-zh="玉米：特级" data-en="Corn: Premium">玉米：特级</option>
               </select>
             </div>
           </div>
           
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label"><span class="form-required">*</span>计划数量</label>
-              <input type="text" class="form-control" value="1000">
+              <label class="form-label">
+                <span class="form-required">*</span>
+                <span data-zh="计划数量" data-en="Planned Quantity">计划数量</span>
+              </label>
+              <input type="number" class="form-control" value="1000" required min="1">
             </div>
             <div class="form-group">
               <label class="form-label">&nbsp;</label>
               <select class="form-select">
-                <option value="kg">kg</option>
-                <option value="ton">吨</option>
-                <option value="pack">包</option>
+                <option value="kg" selected>Kg</option>
+                <option value="ton" data-zh="吨" data-en="Ton">吨</option>
+                <option value="pack" data-zh="包" data-en="Pack">包</option>
               </select>
             </div>
           </div>
-          
-          <div class="product-actions">
-            <div></div>
-            <div class="product-total">
-              <span class="total-price">$2500</span>
-              <div class="price-dropdown">
-                <i class="fa-solid fa-chevron-down"></i>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 
-      <!-- Summary section -->
-      <div style="margin-bottom: 16px;">
-        <div class="summary-row">
-          <div class="summary-label">项目总数: 3</div>
-          <div class="summary-label">已完成: 3</div>
-          <div class="summary-label">优先级: 普通</div>
-          <div class="summary-label">总计: $25000.00</div>
+      <!-- Summary Section -->
+      <div class="summary-section">
+        <div class="summary-left">
+          <span class="summary-item">
+            <span data-zh="项目总数:" data-en="Total Items:">项目总数:</span> <strong id="totalItems">3</strong>
+          </span>
+          <span class="summary-item">
+            <span data-zh="已完成:" data-en="Completed:">已完成:</span> <strong id="completedItems">3</strong>
+          </span>
+          <span class="summary-item">
+            <span data-zh="优先级:" data-en="Priority:">优先级:</span> <strong data-zh="普通" data-en="Normal">普通</strong>
+          </span>
+        </div>
+        <div class="summary-right">
+          <span class="summary-total">
+            <span data-zh="总计:" data-en="Total:">总计:</span> <strong id="grandTotal">$25000.00</strong>
+          </span>
         </div>
       </div>
 
-      <div style="display: flex; gap: 8px;">
-        <button class="cancel-button">取消</button>
-        <button class="submit-button" id="createOrderBtn">
-          <i class="fa-solid fa-check"></i> 创建订单
+      <!-- Additional Actions -->
+      <div class="additional-actions">
+        <button class="action-button" onclick="copyTemplate()">
+          <i class="fa-regular fa-copy"></i>
+          <span data-zh="复制模板" data-en="Copy Template">复制模板</span>
+        </button>
+        <button class="action-button" onclick="importCSV()">
+          <i class="fa-solid fa-download"></i>
+          <span data-zh="导入CSV" data-en="Import CSV">导入CSV</span>
+        </button>
+      </div>
+
+      <!-- Footer Buttons -->
+      <div class="footer-buttons">
+        <button class="cancel-button" onclick="cancelOrder()">
+          <span data-zh="取消" data-en="Cancel">取消</span>
+        </button>
+        <button class="submit-button" onclick="createOrder()">
+          <i class="fa-solid fa-check"></i>
+          <span data-zh="创建订单" data-en="Create Order">创建订单</span>
         </button>
       </div>
     </div>
   </div>
 
+  <!-- Success Modal -->
+  <div class="modal-overlay" id="successModal">
+    <div class="success-modal">
+      <div class="success-icon">
+        <i class="fa-solid fa-check-circle"></i>
+      </div>
+      <h3 class="success-title" data-zh="订单创建成功！" data-en="Order Created Successfully!">订单创建成功！</h3>
+      <p class="success-message" data-zh="您的订单已成功提交，订单编号将自动生成。" data-en="Your order has been successfully submitted. Order number will be auto-generated.">您的订单已成功提交，订单编号将自动生成。</p>
+      <button class="success-button" onclick="closeSuccessModal()">
+        <span data-zh="确定" data-en="OK">确定</span>
+      </button>
+    </div>
+  </div>
+
   <script>
-    // Make the form interactive
-    document.addEventListener('DOMContentLoaded', function() {
-      // Create order button click handler
-      const createOrderBtn = document.getElementById('createOrderBtn');
-      if (createOrderBtn) {
-        createOrderBtn.addEventListener('click', function() {
-          alert('订单已创建成功！');
-        });
+    // Language switching functionality
+    let currentLanguage = 'zh';
+
+    function switchLanguage(lang) {
+      currentLanguage = lang;
+      document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+      
+      // Switch font
+      if (lang === 'en') {
+        document.body.classList.add('lang-en');
+      } else {
+        document.body.classList.remove('lang-en');
       }
 
-      // Add event listeners to all dropdowns and inputs for demo purposes
+      // Update all translatable elements
+      const elements = document.querySelectorAll('[data-zh][data-en]');
+      elements.forEach(element => {
+        const text = element.getAttribute(`data-${lang}`);
+        if (text) {
+          if (element.tagName === 'INPUT' && element.type !== 'button') {
+            element.placeholder = text;
+            if (element.disabled) {
+              element.value = text;
+            }
+          } else if (element.tagName === 'OPTION') {
+            element.textContent = text;
+          } else {
+            element.textContent = text;
+          }
+        }
+      });
+
+      console.log(`Language switched to: ${lang}`);
+    }
+
+    // Initialize form functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeForm();
+      
+      // Language selector
+      const languageSelect = document.getElementById('languageSelect');
+      languageSelect.addEventListener('change', function() {
+        switchLanguage(this.value);
+      });
+    });
+
+    function initializeForm() {
+      // Add event listeners to form controls
       const formControls = document.querySelectorAll('.form-control, .form-select');
       formControls.forEach(control => {
         control.addEventListener('change', function() {
-          console.log(`Changed value: ${this.value}`);
+          console.log(`Field changed: ${this.name || this.className} = ${this.value}`);
+          validateForm();
+          updateSummary();
+        });
+
+        control.addEventListener('focus', function() {
+          this.parentElement.classList.add('focused');
+        });
+
+        control.addEventListener('blur', function() {
+          this.parentElement.classList.remove('focused');
         });
       });
+    }
 
-      // Delete button functionality
-      const deleteButtons = document.querySelectorAll('.delete-button');
-      deleteButtons.forEach(button => {
-        button.addEventListener('click', function() {
-          const productRow = this.closest('.product-row');
-          if (confirm('确定要删除这个项目吗？')) {
-            productRow.style.display = 'none';
-          }
-        });
+    // Expand/Collapse functionality
+    function expandAll() {
+      const productItems = document.querySelectorAll('.product-item');
+      productItems.forEach(item => {
+        item.classList.add('expanded');
+      });
+      console.log('All items expanded');
+    }
+
+    function collapseAll() {
+      const productItems = document.querySelectorAll('.product-item');
+      productItems.forEach(item => {
+        item.classList.remove('expanded');
+      });
+      console.log('All items collapsed');
+    }
+
+    // Delete item functionality
+    function deleteItem(button) {
+      const productItem = button.closest('.product-item');
+      const confirmText = currentLanguage === 'zh' ? '确定要删除这个项目吗？' : 'Are you sure you want to delete this item?';
+      
+      if (confirm(confirmText)) {
+        productItem.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        productItem.style.opacity = '0';
+        productItem.style.transform = 'translateX(-20px)';
+        
+        setTimeout(() => {
+          productItem.remove();
+          updateSummary();
+        }, 300);
+      }
+    }
+
+    // Toggle price details
+    function togglePriceDetails(button) {
+      console.log('Price details toggled');
+      // Here you could show/hide price breakdown
+    }
+
+    // Additional actions
+    function copyTemplate() {
+      const alertText = currentLanguage === 'zh' ? '复制模板功能已触发' : 'Copy template function triggered';
+      alert(alertText);
+      console.log('Copy template clicked');
+    }
+
+    function importCSV() {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.csv';
+      input.onchange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          console.log('CSV file selected:', file.name);
+          const alertText = currentLanguage === 'zh' ? 
+            `已选择文件: ${file.name}` : 
+            `File selected: ${file.name}`;
+          alert(alertText);
+        }
+      };
+      input.click();
+    }
+
+    // Form submission
+    function createOrder() {
+      if (validateForm()) {
+        const formData = collectFormData();
+        console.log('Order data:', formData);
+        showSuccessMessage();
+      } else {
+        const alertText = currentLanguage === 'zh' ? 
+          '请填写所有必填字段' : 
+          'Please fill in all required fields';
+        alert(alertText);
+      }
+    }
+
+    function cancelOrder() {
+      const confirmText = currentLanguage === 'zh' ? 
+        '确定要取消创建订单吗？未保存的数据将丢失。' : 
+        'Are you sure you want to cancel? Unsaved data will be lost.';
+        
+      if (confirm(confirmText)) {
+        resetForm();
+      }
+    }
+
+    function closeForm() {
+      const confirmText = currentLanguage === 'zh' ? 
+        '确定要关闭吗？未保存的数据将丢失。' : 
+        'Are you sure you want to close? Unsaved data will be lost.';
+        
+      if (confirm(confirmText)) {
+        window.close();
+      }
+    }
+
+    // Form validation
+    function validateForm() {
+      const requiredSelects = document.querySelectorAll('select[required]');
+      const requiredInputs = document.querySelectorAll('input[required]');
+      let isValid = true;
+
+      [...requiredSelects, ...requiredInputs].forEach(field => {
+        if (!field.value.trim()) {
+          isValid = false;
+          field.style.borderColor = '#ff4d4f';
+          field.style.boxShadow = '0 0 0 2px rgba(255, 77, 79, 0.2)';
+        } else {
+          field.style.borderColor = '#d9d9d9';
+          field.style.boxShadow = 'none';
+        }
+      });
+
+      return isValid;
+    }
+
+    // Collect form data
+    function collectFormData() {
+      const formData = {};
+
+      // Basic form fields
+      const inputs = document.querySelectorAll('.form-control, .form-select');
+      inputs.forEach(input => {
+        if (input.name || input.id) {
+          formData[input.name || input.id] = input.value;
+        }
+      });
+
+      // Product items
+      const productItems = document.querySelectorAll('.product-item');
+      formData.products = Array.from(productItems).map(item => {
+        const selects = item.querySelectorAll('.form-select');
+        const inputs = item.querySelectorAll('.form-control');
+        const priceElement = item.querySelector('.price-amount');
+
+        return {
+          product: selects[0]?.value || '',
+          quantity: inputs[0]?.value || '',
+          unit: selects[1]?.value || '',
+          price: priceElement?.textContent || ''
+        };
+      });
+
+      return formData;
+    }
+
+    // Reset form
+    function resetForm() {
+      const inputs = document.querySelectorAll('.form-control:not([disabled]), .form-select');
+      inputs.forEach(input => {
+        if (input.tagName === 'SELECT') {
+          input.selectedIndex = 0;
+        } else {
+          input.value = '';
+        }
+        input.style.borderColor = '#d9d9d9';
+        input.style.boxShadow = 'none';
+      });
+      
+      updateSummary();
+      console.log('Form reset');
+    }
+
+    // Show success message
+    function showSuccessMessage() {
+      const modal = document.getElementById('successModal');
+      modal.classList.add('show');
+    }
+
+    // Close success modal
+    function closeSuccessModal() {
+      const modal = document.getElementById('successModal');
+      modal.classList.remove('show');
+    }
+
+    // Update summary when items change
+    function updateSummary() {
+      const productItems = document.querySelectorAll('.product-item');
+      const totalItems = productItems.length;
+      const completedItems = document.querySelectorAll('.product-tag.completed').length;
+
+      // Update summary display
+      document.getElementById('totalItems').textContent = totalItems;
+      document.getElementById('completedItems').textContent = completedItems;
+
+      // Calculate total price
+      let totalPrice = 0;
+      document.querySelectorAll('.price-amount').forEach(priceEl => {
+        const price = parseFloat(priceEl.textContent.replace('$', '').replace(',', ''));
+        if (!isNaN(price)) {
+          totalPrice += price;
+        }
+      });
+
+      document.getElementById('grandTotal').textContent = `$${totalPrice.toLocaleString()}.00`;
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('successModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeSuccessModal();
+      }
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+      // Ctrl/Cmd + Enter to submit
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault();
+        createOrder();
+      }
+      
+      // Escape to close modal
+      if (e.key === 'Escape') {
+        closeSuccessModal();
+      }
+    });
+
+    // Auto-save functionality (optional)
+    let autoSaveTimer;
+    function autoSave() {
+      clearTimeout(autoSaveTimer);
+      autoSaveTimer = setTimeout(() => {
+        const formData = collectFormData();
+        localStorage.setItem('orderFormData', JSON.stringify(formData));
+        console.log('Form auto-saved');
+      }, 2000);
+    }
+
+    // Load saved data on page load
+    function loadSavedData() {
+      const savedData = localStorage.getItem('orderFormData');
+      if (savedData) {
+        try {
+          const data = JSON.parse(savedData);
+          console.log('Loaded saved data:', data);
+          // Here you could populate the form with saved data
+        } catch (e) {
+          console.error('Error loading saved data:', e);
+        }
+      }
+    }
+
+    // Initialize auto-save
+    document.addEventListener('DOMContentLoaded', function() {
+      loadSavedData();
+      
+      // Add auto-save listeners
+      const formElements = document.querySelectorAll('.form-control, .form-select');
+      formElements.forEach(element => {
+        element.addEventListener('input', autoSave);
+        element.addEventListener('change', autoSave);
       });
     });
   </script>
