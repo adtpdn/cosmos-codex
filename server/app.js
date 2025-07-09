@@ -9,7 +9,7 @@ const { marked } = require('marked');
 const matter = require('gray-matter');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 7015;
 
 // Configure marked for markdown processing
 marked.setOptions({
