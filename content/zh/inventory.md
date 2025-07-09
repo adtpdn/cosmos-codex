@@ -88,7 +88,7 @@ demo: false
 </style>
 
 <!-- Replace the src below with your image, and use class="image-popup-trigger" on any image you want to pop up -->
-<img src="https://raw.githubusercontent.com/adtpdn/cosmos-codex/refs/heads/express/public/assets/inv-zh.png" alt="Click to view"
+<img src="https://adt.wtf/img/inv-zh.png" alt="Click to view"
      class="image-popup-trigger"
      style="max-width:400px; width:100%; border-radius:6px; border:1px solid #ddd; margin:1em auto; display:block; aspect-ratio: 16 / 9; object-fit: cover;">
 
