@@ -1,7 +1,7 @@
 ---
 title: 色彩
-category: general
-order: 2
+category: 标准化
+order: 5
 ---
 
 <style>

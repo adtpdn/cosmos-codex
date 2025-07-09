@@ -1,11 +1,9 @@
 ---
 title: Inventory
-category: data-display
-order: 10
+category: demo-showcase
+order: 3
 demo: false
 ---
-
-# Inventory
 
 A full-page inventory management interface, launched in a wide modal.
 
@@ -50,7 +48,3 @@ The inventory system is designed for agricultural operations where users need to
 - Track compliance requirements
 - Handle weather-dependent logistics
 - Coordinate between multiple farms and suppliers
-
-## Technical Implementation
-
-This component uses Ant Design's Grid system and Card components to create a flexible, responsive layout that maintains functionality across all screen sizes while providing rich interaction capabilities.

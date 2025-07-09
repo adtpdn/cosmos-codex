@@ -1,11 +1,9 @@
 ---
 title: Form
-category: data-entry
-order: 20
+category: demo-showcase
+order: 4
 demo: false
 ---
-
-# Form
 
 Form provides data collection functionality in a modal.
 
@@ -60,7 +58,3 @@ The form design addresses common agricultural industry pain points:
 - Field operation constraints
 - Weather-dependent logistics
 - Compliance documentation needs
-
-## Implementation Notes
-
-The form uses Ant Design's Form component with custom validation rules optimized for agricultural data patterns and requirements.

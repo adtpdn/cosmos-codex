@@ -1,7 +1,7 @@
 ---
 title: Colour
-category: general
-order: 2
+category: standardization
+order: 5
 ---
 
 <style>

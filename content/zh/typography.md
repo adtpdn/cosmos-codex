@@ -1,7 +1,7 @@
 ---
 title: 排版
-category: general
-order: 3
+category: 标准化
+order: 6
 demo: false
 ---
 

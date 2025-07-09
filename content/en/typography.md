@@ -1,7 +1,7 @@
 ---
 title: Typography
-category: general
-order: 3
+category: standardization
+order: 6
 demo: false
 ---
 
