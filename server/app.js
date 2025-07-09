@@ -29,7 +29,7 @@ db.serialize(() => {
     password TEXT,
     role TEXT DEFAULT 'admin'
   )`);
-  
+
   db.run(`CREATE TABLE IF NOT EXISTS content_meta (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     page_key TEXT,
@@ -101,13 +101,13 @@ const saveContent = async (pageKey, language, content, frontMatter = {}, author 
     const contentPath = path.join(__dirname, `../content/${language}/${pageKey}.md`);
     const matterString = matter.stringify(content, frontMatter);
     await fs.writeFile(contentPath, matterString, 'utf8');
-    
+
     // Update metadata in database
     db.run(
       'INSERT OR REPLACE INTO content_meta (page_key, language, last_modified, author) VALUES (?, ?, datetime("now"), ?)',
       [pageKey, language, author]
     );
-    
+
     return true;
   } catch (error) {
     console.error(`Error saving content for ${pageKey} (${language}):`, error);
@@ -125,16 +125,16 @@ app.get('/', (req, res) => {
 app.get('/docs/:page?', async (req, res) => {
   const pageKey = req.params.page || 'overview';
   const language = req.query.lang || 'en';
-  
+
   console.log(`Requested page: ${pageKey}, language: ${language}`);
-  
+
   try {
     const contentData = await loadContent(pageKey, language);
     const menuItems = await getMenuItems(language);
-    
+
     console.log(`Content loaded:`, !!contentData);
     console.log(`Menu items:`, menuItems.length);
-    
+
     res.render('layout', {
       pageKey,
       language,
@@ -166,17 +166,17 @@ app.get('/admin/login', (req, res) => {
 
 app.post('/admin/login', async (req, res) => {
   const { username, password } = req.body;
-  
+
   db.get('SELECT * FROM users WHERE username = ?', [username], async (err, user) => {
     if (err || !user) {
       return res.render('admin/login', { error: 'Invalid credentials' });
     }
-    
+
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
       return res.render('admin/login', { error: 'Invalid credentials' });
     }
-    
+
     req.session.user = { id: user.id, username: user.username, role: user.role };
     res.redirect('/admin');
   });
@@ -189,16 +189,16 @@ app.get('/admin/logout', (req, res) => {
 
 app.get('/admin', requireAuth, async (req, res) => {
   const menuItems = await getMenuItems('en');
-  res.render('admin/dashboard', { 
+  res.render('admin/dashboard', {
     user: req.session.user,
-    menuItems 
+    menuItems
   });
 });
 
 app.get('/admin/edit/:page', requireAuth, async (req, res) => {
   const pageKey = req.params.page;
   const language = req.query.lang || 'en';
-  
+
   const contentData = await loadContent(pageKey, language);
   res.render('admin/edit', {
     pageKey,
@@ -212,7 +212,7 @@ app.get('/admin/edit/:page', requireAuth, async (req, res) => {
 app.get('/api/content/:page', async (req, res) => {
   const pageKey = req.params.page;
   const language = req.query.lang || 'en';
-  
+
   const contentData = await loadContent(pageKey, language);
   if (contentData) {
     res.json(contentData);
@@ -225,7 +225,7 @@ app.post('/api/content/:page', requireAuth, async (req, res) => {
   const pageKey = req.params.page;
   const language = req.body.language || 'en';
   const { content, frontMatter } = req.body;
-  
+
   const success = await saveContent(pageKey, language, content, frontMatter, req.session.user.username);
   if (success) {
     res.json({ success: true });
@@ -238,7 +238,7 @@ app.post('/api/upload', requireAuth, upload.single('file'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: 'No file uploaded' });
   }
-  
+
   res.json({
     success: true,
     filename: req.file.filename,
@@ -252,7 +252,7 @@ const getMenuItems = async (language = 'en') => {
     const contentDir = path.join(__dirname, `../content/${language}`);
     const files = await fs.readdir(contentDir);
     const menuItems = [];
-    
+
     for (const file of files) {
       if (file.endsWith('.md')) {
         const pageKey = file.replace('.md', '');
@@ -267,7 +267,7 @@ const getMenuItems = async (language = 'en') => {
         }
       }
     }
-    
+
     return menuItems.sort((a, b) => a.order - b.order);
   } catch (error) {
     console.error('Error loading menu items:', error);
