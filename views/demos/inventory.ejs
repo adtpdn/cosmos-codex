@@ -1,774 +1,810 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>生产管理系统 - 订单信息</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-  <style>
-    /* Font face for Source Han Sans CN (Noto Sans SC is the web equivalent) */
-    @font-face {
-      font-family: 'Source Han Sans CN';
-      src: local('Source Han Sans CN'), local('Noto Sans SC');
-      font-weight: normal;
-    }
-    
-    @font-face {
-      font-family: 'Source Han Sans CN';
-      src: local('Source Han Sans CN Bold'), local('Noto Sans SC Bold');
-      font-weight: bold;
-    }
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Source Han Sans CN', 'Noto Sans SC', sans-serif;
-      background-color: #f5f5f5;
-      color: #333;
-      margin: 0;
-      padding: 0;
-      font-size: 14px;
-    }
-    
-    /* Layout */
-    .main-container {
-      display: flex;
-      height: 100vh;
-    }
-    
-    /* Sidebar */
-    .sidebar {
-      width: 180px;
-      background: #16A34A; /* Updated to exact color from image */
-      height: 100vh;
-      overflow-y: auto;
-      min-width: 180px;
-    }
-    
-    .logo-container {
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      color: white;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      background-color: #16A34A;
-    }
-    
-    .logo-text {
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      margin-bottom: 2px;
-    }
-    
-    .logo-subtitle {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 10px;
-    }
-    
-    .menu-item {
-      color: white;
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      font-size: 14px;
-    }
-    
-    .menu-item i {
-      margin-right: 12px;
-      width: 16px;
-      text-align: center;
-      font-size: 16px;
-    }
-    
-    .menu-item.active {
-      background-color: #166534; /* Updated to exact color from image */
-    }
-    
-    .sub-menu {
-      background-color: #166534; /* Parent selected item color */
-    }
-    
-    .sub-menu .menu-item {
-      padding-left: 48px;
-    }
-    
-    .sub-menu .menu-item.active {
-      background-color: #14532D; /* Updated to exact color from image */
-      position: relative;
-    }
-    
-    .sub-menu .menu-item.active::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 8px;
-      bottom: 8px;
-      width: 3px;
-      background-color: white;
-    }
-    
-    .package-management {
-      background-color: #16A34A; /* Match main background */
-    }
-    
-    /* Content area */
-    .content {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      overflow-x: hidden;
-      background-color: #fff;
-    }
-    
-    /* Header */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 16px;
-      background: white;
-      height: 48px;
-      border-bottom: 1px solid #f0f0f0;
-    }
-    
-    .header-left {
-      display: flex;
-      align-items: center;
-    }
-    
-    .header-title {
-      font-size: 16px;
-      font-weight: bold;
-      margin: 0;
-      color: #333;
-    }
-    
-    .breadcrumb {
-      font-size: 12px;
-      color: #999;
-      margin-left: 5px;
-    }
-    
-    .header-right {
-      display: flex;
-      align-items: center;
-    }
-    
-    .user-info {
-      display: flex;
-      align-items: center;
-    }
-    
-    .location-info {
-      display: flex;
-      align-items: center;
-      font-size: 12px;
-      color: #666;
-    }
-    
-    .location-info .dot {
-      color: #ff4d4f;
-      margin-right: 4px;
-    }
-    
-    .user-avatar {
-      width: 28px;
-      height: 28px;
-      background-color: #666;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 14px;
-      margin-left: 16px;
-    }
-    
-    /* Order info */
-    .order-info {
-      padding: 16px 16px 0 16px;
-    }
-    
-    .order-title {
-      font-size: 16px;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      color: #333;
-    }
-    
-    .order-meta {
-      display: flex;
-      align-items: center;
-      color: #999;
-      font-size: 12px;
-      margin-left: 16px;
-    }
-    
-    .order-meta-item {
-      display: flex;
-      align-items: center;
-      margin-right: 16px;
-    }
-    
-    .order-meta-item i {
-      margin-right: 4px;
-      font-size: 12px;
-    }
-    
-    .urgent-order {
-      color: #ff4d4f;
-    }
-    
-    /* Tabs */
-    .tabs {
-      display: flex;
-      border-bottom: none;
-      margin-top: 16px;
-      margin-bottom: 16px;
-    }
-    
-    .tab {
-      padding: 8px 16px;
-      cursor: pointer;
-      border-radius: 2px;
-      margin-right: 8px;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-    }
-    
-    .tab.active {
-      background-color: #1890ff;
-      color: white;
-    }
-    
-    .tab:not(.active) {
-      background-color: #f5f5f5;
-      color: #666;
-    }
-    
-    .tab-count {
-      display: inline-block;
-      margin-left: 4px;
-      background: rgba(0,0,0,0.1);
-      padding: 0 6px;
-      border-radius: 10px;
-      font-size: 12px;
-    }
-    
-    /* Search and filter */
-    .search-bar {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 16px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    
-    .search-input {
-      position: relative;
-      width: 320px;
-    }
-    
-    .search-input input {
-      width: 100%;
-      padding: 8px 12px 8px 32px;
-      border: 1px solid #ddd;
-      border-radius: 2px;
-      font-size: 14px;
-    }
-    
-    .search-input i {
-      position: absolute;
-      left: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #bbb;
-    }
-    
-    .filter-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .filter-button {
-      padding: 6px 16px;
-      border: 1px solid #ddd;
-      border-radius: 2px;
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      font-size: 13px;
-      white-space: nowrap;
-      background: white;
-    }
-    
-    .filter-button.active {
-      background-color: #1890ff;
-      color: white;
-      border-color: #1890ff;
-    }
-    
-    .filter-button:not(.active) {
-      background-color: white;
-      color: #666;
-    }
-    
-    .filter-button .count {
-      margin-left: 4px;
-      background: rgba(0,0,0,0.1);
-      padding: 0 6px;
-      border-radius: 10px;
-      font-size: 12px;
-    }
-    
-    .dropdown-button {
-      padding: 6px 16px;
-      border: 1px solid #ddd;
-      border-radius: 2px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      font-size: 13px;
-      background: white;
-      color: #666;
-      min-width: 100px;
-    }
-    
-    .dropdown-button i {
-      margin-left: 6px;
-      font-size: 12px;
-    }
-    
-    /* Active filters */
-    .active-filters {
-      display: flex;
-      align-items: center;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
-    
-    .active-filters-label {
-      color: #666;
-      margin-right: 8px;
-    }
-    
-    .filter-tag {
-      background-color: #e6f7ff;
-      color: #1890ff;
-      padding: 2px 8px;
-      border-radius: 2px;
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      margin-right: 8px;
-      border: 1px solid #91d5ff;
-    }
-    
-    .filter-tag i {
-      margin-left: 4px;
-      cursor: pointer;
-    }
-    
-    .filter-option {
-      padding: 2px 8px;
-      font-size: 12px;
-      color: #666;
-      cursor: pointer;
-      border-radius: 2px;
-      margin-right: 8px;
-      background-color: #f5f5f5;
-    }
-    
-    /* Table */
-    .table-container {
-      flex: 1;
-      overflow-x: auto;
-      background-color: white;
-    }
-    
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    
-    th {
-      background-color: #fafafa;
-      font-weight: normal;
-      color: #666;
-      padding: 12px 16px;
-      text-align: left;
-      border-bottom: 1px solid #f0f0f0;
-    }
-    
-    td {
-      padding: 12px 16px;
-      border-bottom: 1px solid #f0f0f0;
-      color: #666;
-    }
-    
-    .warning-row {
-      background-color: #fff1f0;
-    }
-    
-    /* Checkbox */
-    .checkbox {
-      width: 16px;
-      height: 16px;
-      border-radius: 2px;
-      border: 1px solid #ddd;
-      cursor: pointer;
-    }
-    
-    /* Status tags */
-    .status-tag {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 2px;
-      font-size: 12px;
-    }
-    
-    .status-pending {
-      color: #fa8c16;
-    }
-    
-    .status-completed {
-      color: #52c41a;
-    }
-    
-    /* Priority tags */
-    .priority-normal {
-      color: #666;
-    }
-    
-    .priority-high {
-      color: #fa8c16;
-    }
-    
-    .priority-urgent {
-      color: #f5222d;
-    }
-    
-    .priority-low {
-      color: #1890ff;
-    }
-    
-    /* Route tags */
-    .route-tag {
-      background-color: #f5f5f5;
-      border-radius: 12px;
-      padding: 2px 8px;
-      font-size: 12px;
-      color: #666;
-    }
-    
-    /* Alert icon */
-    .alert-icon {
-      color: #f5222d;
-      margin-right: 4px;
-    }
-    
-    /* Create button */
-    .create-button {
-      padding: 6px 16px;
-      background-color: #16A34A;
-      color: white;
-      border: none;
-      border-radius: 2px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      font-size: 13px;
-      margin-left: 16px;
-    }
-    
-    .create-button i {
-      margin-right: 4px;
-    }
-  </style>
-</head>
-<body>
-  <div class="main-container">
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <div class="logo-container">
-        <div class="logo-text">COSMOS 智能未来</div>
-        <div class="logo-subtitle">农业智能系统</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>生产管理系统 - 订单信息</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Font face for Source Han Sans CN (Noto Sans SC is the web equivalent) */
+      @font-face {
+        font-family: "Source Han Sans CN";
+        src: local("Source Han Sans CN"), local("Noto Sans SC");
+        font-weight: normal;
+      }
+
+      @font-face {
+        font-family: "Source Han Sans CN";
+        src: local("Source Han Sans CN Bold"), local("Noto Sans SC Bold");
+        font-weight: bold;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Source Han Sans CN", "Noto Sans SC", sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        font-size: 14px;
+      }
+
+      /* Layout */
+      .main-container {
+        display: flex;
+        height: 100vh;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        width: 180px;
+        background: #16a34a;
+        /* Updated to exact color from image */
+        height: 100vh;
+        overflow-y: auto;
+        min-width: 180px;
+      }
+
+      .logo-container {
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        color: white;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        background-color: #16a34a;
+      }
+
+      .logo-text {
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 2px;
+      }
+
+      .logo-subtitle {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 10px;
+      }
+
+      .menu-item {
+        color: white;
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      .menu-item i {
+        margin-right: 12px;
+        width: 16px;
+        text-align: center;
+        font-size: 16px;
+      }
+
+      .menu-item.active {
+        background-color: #166534;
+        width: 100%;
+      }
+
+      .sub-menu {
+        background-color: #166534;
+      }
+
+      .sub-menu .menu-item {
+        text-align: center;
+      }
+
+      .sub-menu .menu-item.active {
+        background-color: #14532d;
+        position: relative;
+        width: 80%;
+        margin: 0 auto;
+        border-radius: 8px;
+        transition: background-color 0.3s ease, color 0.3s ease,
+        transform 0.3s ease;
+      }
+
+      .sub-menu .menu-item.active::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 8px;
+        bottom: 8px;
+        width: 3px;
+        background-color: #16a34a;
+        border-radius: 2px;
+      }
+
+      .package-management {
+        background-color: #16a34a;
+        /* Match main background */
+      }
+
+      /* Content area */
+      .content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+        background-color: #fff;
+      }
+
+      /* Header */
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 16px;
+        background: white;
+        height: 48px;
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+      }
+
+      .header-title {
+        font-size: 16px;
+        font-weight: bold;
+        margin: 0;
+        color: #333;
+      }
+
+      .breadcrumb {
+        font-size: 12px;
+        color: #999;
+        margin-left: 5px;
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+      }
+
+      .user-info {
+        display: flex;
+        align-items: center;
+      }
+
+      .location-info {
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+        color: #666;
+      }
+
+      .location-info .dot {
+        color: #ff4d4f;
+        margin-right: 4px;
+      }
+
+      .user-avatar {
+        width: 28px;
+        height: 28px;
+        background-color: #666;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 14px;
+        margin-left: 16px;
+      }
+
+      /* Order info */
+      .order-info {
+        padding: 16px 16px 0 16px;
+      }
+
+      .order-title {
+        font-size: 16px;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        color: #333;
+      }
+
+      .order-meta {
+        display: flex;
+        align-items: center;
+        color: #999;
+        font-size: 12px;
+        margin-left: 16px;
+      }
+
+      .order-meta-item {
+        display: flex;
+        align-items: center;
+        margin-right: 16px;
+      }
+
+      .order-meta-item i {
+        margin-right: 4px;
+        font-size: 12px;
+      }
+
+      .urgent-order {
+        color: #ff4d4f;
+      }
+
+      /* Tabs */
+      .tabs {
+        display: flex;
+        border-bottom: none;
+        margin-top: 16px;
+        margin-bottom: 16px;
+      }
+
+      .tab {
+        padding: 8px 16px;
+        cursor: pointer;
+        border-radius: 2px;
+        margin-right: 8px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+      }
+
+      .tab.active {
+        background-color: #1890ff;
+        color: white;
+      }
+
+      .tab:not(.active) {
+        background-color: #f5f5f5;
+        color: #666;
+      }
+
+      .tab-count {
+        display: inline-block;
+        margin-left: 4px;
+        background: rgba(0, 0, 0, 0.1);
+        padding: 0 6px;
+        border-radius: 10px;
+        font-size: 12px;
+      }
+
+      /* Search and filter */
+      .search-bar {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 16px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .search-input {
+        position: relative;
+        width: 320px;
+      }
+
+      .search-input input {
+        width: 100%;
+        padding: 8px 12px 8px 32px;
+        border: 1px solid #ddd;
+        border-radius: 2px;
+        font-size: 14px;
+      }
+
+      .search-input i {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #bbb;
+      }
+
+      .filter-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .filter-button {
+        padding: 6px 16px;
+        border: 1px solid #ddd;
+        border-radius: 2px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        font-size: 13px;
+        white-space: nowrap;
+        background: white;
+      }
+
+      .filter-button.active {
+        background-color: #1890ff;
+        color: white;
+        border-color: #1890ff;
+      }
+
+      .filter-button:not(.active) {
+        background-color: white;
+        color: #666;
+      }
+
+      .filter-button .count {
+        margin-left: 4px;
+        background: rgba(0, 0, 0, 0.1);
+        padding: 0 6px;
+        border-radius: 10px;
+        font-size: 12px;
+      }
+
+      .dropdown-button {
+        padding: 6px 16px;
+        border: 1px solid #ddd;
+        border-radius: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        font-size: 13px;
+        background: white;
+        color: #666;
+        min-width: 100px;
+      }
+
+      .dropdown-button i {
+        margin-left: 6px;
+        font-size: 12px;
+      }
+
+      /* Active filters */
+      .active-filters {
+        display: flex;
+        align-items: center;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+      }
+
+      .active-filters-label {
+        color: #666;
+        margin-right: 8px;
+      }
+
+      .filter-tag {
+        background-color: #e6f7ff;
+        color: #1890ff;
+        padding: 2px 8px;
+        border-radius: 2px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        margin-right: 8px;
+        border: 1px solid #91d5ff;
+      }
+
+      .filter-tag i {
+        margin-left: 4px;
+        cursor: pointer;
+      }
+
+      .filter-option {
+        padding: 2px 8px;
+        font-size: 12px;
+        color: #666;
+        cursor: pointer;
+        border-radius: 2px;
+        margin-right: 8px;
+        background-color: #f5f5f5;
+      }
+
+      /* Table */
+      .table-container {
+        flex: 1;
+        overflow-x: auto;
+        background-color: white;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th {
+        background-color: #fafafa;
+        font-weight: normal;
+        color: #666;
+        padding: 12px 16px;
+        text-align: left;
+        border-bottom: 1px solid #f0f0f0;
+      }
+
+      td {
+        padding: 12px 16px;
+        border-bottom: 1px solid #f0f0f0;
+        color: #666;
+      }
+
+      .warning-row {
+        background-color: #fff1f0;
+      }
+
+      /* Checkbox */
+      .checkbox {
+        width: 16px;
+        height: 16px;
+        border-radius: 2px;
+        border: 1px solid #ddd;
+        cursor: pointer;
+      }
+
+      /* Status tags */
+      .status-tag {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 2px;
+        font-size: 12px;
+      }
+
+      .status-pending {
+        color: #fa8c16;
+      }
+
+      .status-completed {
+        color: #52c41a;
+      }
+
+      /* Priority tags */
+      .priority-normal {
+        color: #666;
+      }
+
+      .priority-high {
+        color: #fa8c16;
+      }
+
+      .priority-urgent {
+        color: #f5222d;
+      }
+
+      .priority-low {
+        color: #1890ff;
+      }
+
+      /* Route tags */
+      .route-tag {
+        background-color: #f5f5f5;
+        border-radius: 12px;
+        padding: 2px 8px;
+        font-size: 12px;
+        color: #666;
+      }
+
+      /* Alert icon */
+      .alert-icon {
+        color: #f5222d;
+        margin-right: 4px;
+      }
+
+      /* Create button */
+      .create-button {
+        padding: 6px 16px;
+        background-color: #16a34a;
+        color: white;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        font-size: 13px;
+        margin-left: 16px;
+      }
+
+      .create-button i {
+        margin-right: 4px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="main-container">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="logo-container">
+          <div class="logo-text">COSMOS 智能未来</div>
+          <div class="logo-subtitle">农业智能系统</div>
+        </div>
+        <div class="menu-item">
+          <i class="fa-solid fa-building"></i> 基地信息
+        </div>
+        <div class="menu-item">
+          <i class="fa-solid fa-seedling"></i> 种植管理
+        </div>
+        <div class="menu-item">
+          <i class="fa-solid fa-temperature-half"></i> 环境监测
+        </div>
+        <div class="menu-item"><i class="fa-solid fa-shield"></i> 植保管理</div>
+        <div class="menu-item">
+          <i class="fa-solid fa-clipboard-list"></i> 作业管理
+        </div>
+        <div class="menu-item"><i class="fa-solid fa-coins"></i> 薪酬管理</div>
+        <div class="menu-item">
+          <i class="fa-solid fa-chart-line"></i> 产量预测
+        </div>
+        <div class="menu-item">
+          <i class="fa-solid fa-chart-column"></i> 实时数据大屏
+        </div>
+        <div class="menu-item active">
+          <i class="fa-solid fa-warehouse"></i> 库存管理
+        </div>
+        <div class="sub-menu">
+          <div class="menu-item" data-menu="inventory">库存信息</div>
+          <div class="menu-item" data-menu="material">物料信息</div>
+          <div class="menu-item" data-menu="warehouse">仓库信息</div>
+          <div class="menu-item" data-menu="order">订单信息</div>
+          <div class="menu-item" data-menu="inventory-report">库存报表</div>
+          <div class="menu-item" data-menu="operation-report">运营报表</div>
+        </div>
+        <div class="menu-item package-management">
+          <i class="fa-solid fa-box"></i> 包装管理
+        </div>
       </div>
-      <div class="menu-item">
-        <i class="fa-solid fa-building"></i> 基地信息
-      </div>
-      <div class="menu-item">
-        <i class="fa-solid fa-seedling"></i> 种植管理
-      </div>
-      <div class="menu-item">
-        <i class="fa-solid fa-temperature-half"></i> 环境监测
-      </div>
-      <div class="menu-item">
-        <i class="fa-solid fa-shield"></i> 植保管理
-      </div>
-      <div class="menu-item">
-        <i class="fa-solid fa-clipboard-list"></i> 作业管理
-      </div>
-      <div class="menu-item">
-        <i class="fa-solid fa-coins"></i> 薪酬管理
-      </div>
-      <div class="menu-item">
-        <i class="fa-solid fa-chart-line"></i> 产量预测
-      </div>
-      <div class="menu-item">
-        <i class="fa-solid fa-chart-column"></i> 实时数据大屏
-      </div>
-      <div class="menu-item active">
-        <i class="fa-solid fa-warehouse"></i> 库存管理
-      </div>
-      <div class="sub-menu">
-        <div class="menu-item">库存信息</div>
-        <div class="menu-item">物料信息</div>
-        <div class="menu-item">仓库信息</div>
-        <div class="menu-item active">订单信息</div>
-        <div class="menu-item">库存报表</div>
-        <div class="menu-item">运营报表</div>
-      </div>
-      <div class="menu-item package-management">
-        <i class="fa-solid fa-box"></i> 包装管理
+
+      <!-- Content area -->
+      <div class="content">
+        <!-- Header -->
+        <div class="header">
+          <div class="header-left">
+            <h1 class="header-title">生产管理系统</h1>
+            <div class="breadcrumb">库存管理 / 订单信息</div>
+          </div>
+          <div class="header-right">
+            <div class="location-info">
+              <span class="dot">●</span> 拜耳康普基地
+              <i
+                class="fa-solid fa-chevron-down"
+                style="margin-left: 4px; font-size: 10px"
+              ></i>
+            </div>
+            <div class="user-info" style="margin-left: 20px">
+              <div class="user-avatar">BP</div>
+              <span style="margin-left: 8px">拜耳产品 (集团管理)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main content -->
+        <div>
+          <!-- Order info header -->
+          <div class="order-info">
+            <div class="order-title">
+              订单信息
+              <div class="order-meta">
+                <div class="order-meta-item">
+                  <i class="fa-regular fa-circle"></i> 共: 247条订单
+                </div>
+                <div class="order-meta-item">
+                  <i class="fa-regular fa-clock"></i> 更新时间: 分钟前
+                </div>
+                <div class="order-meta-item urgent-order">
+                  <i class="fa-solid fa-triangle-exclamation"></i> 2条紧急订单
+                </div>
+              </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+              <div class="tab active">
+                全部
+                <span class="tab-count">247</span>
+              </div>
+              <div class="tab">
+                代发货
+                <span class="tab-count">0</span>
+              </div>
+              <div class="tab">
+                已发货
+                <span class="tab-count">0</span>
+              </div>
+              <div class="tab">
+                已完成
+                <span class="tab-count">156</span>
+              </div>
+              <div class="tab">
+                已取消
+                <span class="tab-count">12</span>
+              </div>
+            </div>
+
+            <!-- Search and filter bar -->
+            <div class="search-bar">
+              <div class="search-input">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="搜索订单、客户、路线..." />
+              </div>
+              <div class="filter-actions">
+                <div class="filter-button">
+                  退货状态
+                  <span class="count">3</span>
+                </div>
+                <div class="filter-button active">
+                  收货状态
+                  <span class="count">2</span>
+                </div>
+                <div class="dropdown-button">
+                  所有客户
+                  <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-button">
+                  日期
+                  <i class="fa-solid fa-calendar"></i>
+                </div>
+                <div class="dropdown-button">
+                  发货用途
+                  <i class="fa-solid fa-chevron-down"></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- Active filters -->
+            <div class="active-filters">
+              <div class="active-filters-label">活动筛选条件:</div>
+              <div class="filter-tag">
+                已发货
+                <i class="fa-solid fa-xmark"></i>
+              </div>
+              <div class="filter-option">未发货</div>
+              <div class="filter-option">清除全部</div>
+            </div>
+          </div>
+
+          <!-- Table -->
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 40px">
+                    <input type="checkbox" class="checkbox" />
+                  </th>
+                  <th>订单编号</th>
+                  <th>客户</th>
+                  <th>计划交货日期</th>
+                  <th>发货用途</th>
+                  <th>重量</th>
+                  <th>优先级</th>
+                  <th>状态</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="checkbox" />
+                  </td>
+                  <td>SO2503170002</td>
+                  <td>666-555</td>
+                  <td>2025-03-04</td>
+                  <td><span class="route-tag">@111</span></td>
+                  <td>63 kg</td>
+                  <td><span class="priority-normal">正常</span></td>
+                  <td><span class="status-pending">未发货</span></td>
+                  <td><a href="#" style="color: #1890ff">详情...</a></td>
+                </tr>
+                <tr class="warning-row">
+                  <td>
+                    <input type="checkbox" class="checkbox" />
+                  </td>
+                  <td>
+                    <i class="fa-solid fa-triangle-exclamation alert-icon"></i>
+                    SO2503170001
+                  </td>
+                  <td>这是一个测试-去去味</td>
+                  <td>2025-03-04</td>
+                  <td>-</td>
+                  <td>1 kg</td>
+                  <td><span class="priority-high">高</span></td>
+                  <td><span class="status-pending">未发货</span></td>
+                  <td><a href="#" style="color: #1890ff">详情...</a></td>
+                </tr>
+                <tr class="warning-row">
+                  <td>
+                    <input type="checkbox" class="checkbox" />
+                  </td>
+                  <td>
+                    <i class="fa-solid fa-triangle-exclamation alert-icon"></i>
+                    SO2503130001
+                  </td>
+                  <td>这是一个测试-去去味</td>
+                  <td>2025-03-13</td>
+                  <td><span class="route-tag">@111</span></td>
+                  <td>355 kg</td>
+                  <td><span class="priority-urgent">紧急</span></td>
+                  <td><span class="status-pending">未发货</span></td>
+                  <td><a href="#" style="color: #1890ff">详情...</a></td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="checkbox" />
+                  </td>
+                  <td>SO2503120003</td>
+                  <td>这是一个测试-去去味</td>
+                  <td>2025-03-04</td>
+                  <td><span class="route-tag">@111</span></td>
+                  <td>12 kg</td>
+                  <td><span class="priority-normal">正常</span></td>
+                  <td><span class="status-completed">已收货</span></td>
+                  <td><a href="#" style="color: #1890ff">详情...</a></td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="checkbox" />
+                  </td>
+                  <td>SO2503120002</td>
+                  <td>test - C02</td>
+                  <td>2025-03-19</td>
+                  <td><span class="route-tag">@销售</span></td>
+                  <td>-</td>
+                  <td><span class="priority-normal">正常</span></td>
+                  <td><span class="status-completed">已收货</span></td>
+                  <td><a href="#" style="color: #1890ff">详情...</a></td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="checkbox" />
+                  </td>
+                  <td>SO2503120001</td>
+                  <td>这是一个测试-去去味</td>
+                  <td>2025-03-12</td>
+                  <td><span class="route-tag">@222</span></td>
+                  <td>122 kg</td>
+                  <td><span class="priority-normal">正常</span></td>
+                  <td><span class="status-completed">已收货</span></td>
+                  <td><a href="#" style="color: #1890ff">详情...</a></td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="checkbox" />
+                  </td>
+                  <td>SO2503050002</td>
+                  <td>这是一个测试-去去味</td>
+                  <td>2025-03-05</td>
+                  <td><span class="route-tag">@222</span></td>
+                  <td>2 kg</td>
+                  <td><span class="priority-low">低</span></td>
+                  <td><span class="status-completed">已收货</span></td>
+                  <td><a href="#" style="color: #1890ff">详情...</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
-
-    <!-- Content area -->
-    <div class="content">
-      <!-- Header -->
-      <div class="header">
-        <div class="header-left">
-          <h1 class="header-title">生产管理系统</h1>
-          <div class="breadcrumb">库存管理 / 订单信息</div>
-        </div>
-        <div class="header-right">
-          <div class="location-info">
-            <span class="dot">●</span> 拜耳康普基地
-            <i class="fa-solid fa-chevron-down" style="margin-left: 4px; font-size: 10px;"></i>
-          </div>
-          <div class="user-info" style="margin-left: 20px;">
-            <div class="user-avatar">BP</div>
-            <span style="margin-left: 8px;">拜耳产品 (集团管理)</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Main content -->
-      <div>
-        <!-- Order info header -->
-        <div class="order-info">
-          <div class="order-title">
-            订单信息
-            <div class="order-meta">
-              <div class="order-meta-item">
-                <i class="fa-regular fa-circle"></i> 共: 247条订单
-              </div>
-              <div class="order-meta-item">
-                <i class="fa-regular fa-clock"></i> 更新时间: 分钟前
-              </div>
-              <div class="order-meta-item urgent-order">
-                <i class="fa-solid fa-triangle-exclamation"></i> 2条紧急订单
-              </div>
-            </div>
-          </div>
-
-          <!-- Tabs -->
-          <div class="tabs">
-            <div class="tab active">
-              全部
-              <span class="tab-count">247</span>
-            </div>
-            <div class="tab">
-              代发货
-              <span class="tab-count">0</span>
-            </div>
-            <div class="tab">
-              已发货
-              <span class="tab-count">0</span>
-            </div>
-            <div class="tab">
-              已完成
-              <span class="tab-count">156</span>
-            </div>
-            <div class="tab">
-              已取消
-              <span class="tab-count">12</span>
-            </div>
-          </div>
-
-          <!-- Search and filter bar -->
-          <div class="search-bar">
-            <div class="search-input">
-              <i class="fa-solid fa-magnifying-glass"></i>
-              <input type="text" placeholder="搜索订单、客户、路线...">
-            </div>
-            <div class="filter-actions">
-              <div class="filter-button">
-                退货状态
-                <span class="count">3</span>
-              </div>
-              <div class="filter-button active">
-                收货状态
-                <span class="count">2</span>
-              </div>
-              <div class="dropdown-button">
-                所有客户
-                <i class="fa-solid fa-chevron-down"></i>
-              </div>
-              <div class="dropdown-button">
-                日期
-                <i class="fa-solid fa-calendar"></i>
-              </div>
-              <div class="dropdown-button">
-                发货用途
-                <i class="fa-solid fa-chevron-down"></i>
-              </div>
-            </div>
-          </div>
-
-          <!-- Active filters -->
-          <div class="active-filters">
-            <div class="active-filters-label">活动筛选条件:</div>
-            <div class="filter-tag">
-              已发货
-              <i class="fa-solid fa-xmark"></i>
-            </div>
-            <div class="filter-option">未发货</div>
-            <div class="filter-option">清除全部</div>
-          </div>
-        </div>
-
-        <!-- Table -->
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th style="width: 40px;">
-                  <input type="checkbox" class="checkbox">
-                </th>
-                <th>订单编号</th>
-                <th>客户</th>
-                <th>计划交货日期</th>
-                <th>发货用途</th>
-                <th>重量</th>
-                <th>优先级</th>
-                <th>状态</th>
-                <th>操作</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <input type="checkbox" class="checkbox">
-                </td>
-                <td>SO2503170002</td>
-                <td>666-555</td>
-                <td>2025-03-04</td>
-                <td><span class="route-tag">@111</span></td>
-                <td>63 kg</td>
-                <td><span class="priority-normal">正常</span></td>
-                <td><span class="status-pending">未发货</span></td>
-                <td><a href="#" style="color:#1890ff">详情...</a></td>
-              </tr>
-              <tr class="warning-row">
-                <td>
-                  <input type="checkbox" class="checkbox">
-                </td>
-                <td>
-                  <i class="fa-solid fa-triangle-exclamation alert-icon"></i> SO2503170001
-                </td>
-                <td>这是一个测试-去去味</td>
-                <td>2025-03-04</td>
-                <td>-</td>
-                <td>1 kg</td>
-                <td><span class="priority-high">高</span></td>
-                <td><span class="status-pending">未发货</span></td>
-                <td><a href="#" style="color:#1890ff">详情...</a></td>
-              </tr>
-              <tr class="warning-row">
-                <td>
-                  <input type="checkbox" class="checkbox">
-                </td>
-                <td>
-                  <i class="fa-solid fa-triangle-exclamation alert-icon"></i> SO2503130001
-                </td>
-                <td>这是一个测试-去去味</td>
-                <td>2025-03-13</td>
-                <td><span class="route-tag">@111</span></td>
-                <td>355 kg</td>
-                <td><span class="priority-urgent">紧急</span></td>
-                <td><span class="status-pending">未发货</span></td>
-                <td><a href="#" style="color:#1890ff">详情...</a></td>
-              </tr>
-              <tr>
-                <td>
-                  <input type="checkbox" class="checkbox">
-                </td>
-                <td>SO2503120003</td>
-                <td>这是一个测试-去去味</td>
-                <td>2025-03-04</td>
-                <td><span class="route-tag">@111</span></td>
-                <td>12 kg</td>
-                <td><span class="priority-normal">正常</span></td>
-                <td><span class="status-completed">已收货</span></td>
-                <td><a href="#" style="color:#1890ff">详情...</a></td>
-              </tr>
-              <tr>
-                <td>
-                  <input type="checkbox" class="checkbox">
-                </td>
-                <td>SO2503120002</td>
-                <td>test - C02</td>
-                <td>2025-03-19</td>
-                <td><span class="route-tag">@销售</span></td>
-                <td>-</td>
-                <td><span class="priority-normal">正常</span></td>
-                <td><span class="status-completed">已收货</span></td>
-                <td><a href="#" style="color:#1890ff">详情...</a></td>
-              </tr>
-              <tr>
-                <td>
-                  <input type="checkbox" class="checkbox">
-                </td>
-                <td>SO2503120001</td>
-                <td>这是一个测试-去去味</td>
-                <td>2025-03-12</td>
-                <td><span class="route-tag">@222</span></td>
-                <td>122 kg</td>
-                <td><span class="priority-normal">正常</span></td>
-                <td><span class="status-completed">已收货</span></td>
-                <td><a href="#" style="color:#1890ff">详情...</a></td>
-              </tr>
-              <tr>
-                <td>
-                  <input type="checkbox" class="checkbox">
-                </td>
-                <td>SO2503050002</td>
-                <td>这是一个测试-去去味</td>
-                <td>2025-03-05</td>
-                <td><span class="route-tag">@222</span></td>
-                <td>2 kg</td>
-                <td><span class="priority-low">低</span></td>
-                <td><span class="status-completed">已收货</span></td>
-                <td><a href="#" style="color:#1890ff">详情...</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</body>
+  </body>
 </html>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuItems = document.querySelectorAll(".sub-menu .menu-item");
+    const currentPath = window.location.pathname;
+    menuItems.forEach((item) => {
+      if (currentPath.includes(item.getAttribute("data-menu"))) {
+        item.classList.add("active");
+      }
+    });
+
+    menuItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        menuItems.forEach((i) => i.classList.remove("active"));
+        item.classList.add("active");
+      });
+    });
+  });
+</script>
