@@ -89,6 +89,12 @@
       font-size: 16px;
     }
 
+    .menu-item img {
+      width: 18px;
+      height: 18px;
+      margin-right: 12px;
+    }
+
     .menu-item.active {
       background-color: #166534;
       width: 100%;
@@ -240,60 +246,71 @@
       font-size: 12px;
     }
 
-    .create {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
 
     .urgent-order {
       color: #ff4d4f;
     }
 
     /* Tabs */
-    .tabs {
-      display: flex;
-      border-bottom: none;
-      margin-top: 16px;
-      margin-bottom: 16px;
-    }
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
 
-    .tab {
-      padding: 8px 16px;
-      cursor: pointer;
-      border-radius: 8px;
-      margin-right: 8px;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-    }
+.tab {
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-right: 8px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; 
+  transform: scale(1); /* Default scale */
+}
 
-    .tab.active {
-      background-color: #1890ff;
-      color: white;
-      border-radius: 8px;
-    }
+.tab.active {
+  background-color: #2563EB;
+  color: white;
+  border-radius: 8px;
+  transform: scale(1.05); 
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); 
+}
 
-    .tab:not(.active) {
-      color: #666;
-    }
+.tab:not(.active) {
+  color: #666;
+}
 
-    .tab-count {
-      display: inline-block;
-      margin-left: 4px;
-      background: rgba(0, 0, 0, 0.1);
-      padding: 0 6px;
-      border-radius: 10px;
-      font-size: 12px;
-    }
+.tab-count {
+  background-color: #ddd;
+  border-radius: 10px;
+  padding: 2px 8px;
+  font-size: 12px;
+  margin-left: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease; 
+}
+
+.tab.active .tab-count {
+  background-color: #457AEE;
+  color: white;
+}
 
     /* Search and filter */
-    .search-bar {
+
+    .search-bar-container {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 16px;
       align-items: center;
+      margin-bottom: 16px;
       flex-wrap: wrap;
+    }
+
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
 
     .search-input {
@@ -324,40 +341,46 @@
     }
 
     .filter-button {
-      padding: 6px 16px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      font-size: 13px;
-      white-space: nowrap;
-      background: white;
-    }
+  padding: 6px 16px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 13px;
+  white-space: nowrap;
+  background: white;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Smooth transition */
+}
 
-    .filter-button.active {
-      background-color: #1890ff;
-      color: white;
-      border-color: #1890ff;
-    }
+.filter-button.active {
+  background-color: #1890ff;
+  color: white;
+  border-color: #1890ff;
+}
 
-    .filter-button:not(.active) {
-      background-color: white;
-      color: #666;
-    }
+.filter-button:not(.active) {
+  background-color: white;
+  color: #666;
+}
 
-    .filter-button .count {
-      margin-left: 4px;
-      background: rgba(0, 0, 0, 0.1);
-      padding: 0 6px;
-      border-radius: 10px;
-      font-size: 12px;
-    }
+.filter-button .count {
+  margin-left: 4px;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 0 6px;
+  border-radius: 10px;
+  font-size: 12px;
+  transition: background-color 0.3s ease; /* Smooth transition for count */
+}
+
+.filter-button.active .count {
+  background: rgba(255, 255, 255, 0.2); /* Slightly lighter for active state */
+}
 
     .dropdown-button {
       padding: 6px 16px;
       border: 1px solid #ddd;
-      border-radius: 2px;
+      border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -375,43 +398,55 @@
 
     /* Active filters */
     .active-filters {
-      display: flex;
-      align-items: center;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
 
-    .active-filters-label {
-      color: #666;
-      margin-right: 8px;
-    }
+.active-filters-label {
+  color: #666;
+  margin-right: 8px;
+}
 
-    .filter-tag {
-      background-color: #e6f7ff;
-      color: #1890ff;
-      padding: 6px 8px;
-      border-radius: 100px;
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      margin-right: 8px;
-      border: 1px solid #91d5ff;
-    }
+.filter-tag {
+  background-color: #e6f7ff;
+  color: #1890ff;
+  padding: 6px 8px;
+  border-radius: 100px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+  border: 1px solid #91d5ff;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+}
 
-    .filter-tag i {
-      margin-left: 4px;
-      cursor: pointer;
-    }
+.filter-tag i {
+  margin-left: 4px;
+  cursor: pointer;
+  transition: transform 0.3s ease; /* Smooth icon hover effect */
+}
 
-    .filter-option {
-      padding: 2px 8px;
-      font-size: 12px;
-      color: #666;
-      cursor: pointer;
-      border-radius: 2px;
-      margin-right: 8px;
-    }
+.filter-tag i:hover {
+  transform: scale(1.2); /* Slight scale on hover for remove icon */
+}
 
+.filter-option {
+  padding: 2px 8px;
+  font-size: 12px;
+  color: #666;
+  cursor: pointer;
+  border-radius: 2px;
+  margin-right: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+}
+
+.filter-option.active {
+  background-color: #1890ff;
+  color: white;
+  transform: scale(1.05); /* Slight scale for active option */
+}
     .icons {
       display: flex;
       align-items: center;
@@ -514,6 +549,18 @@
     }
 
     /* Create button */
+        .create {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .create a {
+      color: #1890ff;
+      text-decoration: none;
+      font-size: 16px;  
+    }
+
     .create-button {
       padding: 6px 16px;
       background-color: #16a34a;
@@ -530,6 +577,30 @@
     .create-button i {
       margin-right: 4px;
     }
+
+    .create-btn-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background-color: #16a34a;
+      padding: 12px;
+      border-radius: 8px;
+    }
+
+    .create-btn-wrapper img {
+      width: 12px;
+      height: 12px;
+      cursor: pointer;
+    }
+
+    .create-btn-wrapper button {
+      color: white;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      font-size: 13px;
+      background-color: #16a34a;
+    }
   </style>
 </head>
 
@@ -542,27 +613,27 @@
         <div class="logo-subtitle">农业智能系统</div>
       </div>
       <div class="menu-item">
-        <i class="fa-solid fa-building"></i> 基地信息
+        <img src="/icons/side1.svg" alt=""> 基地信息
       </div>
       <div class="menu-item">
-        <i class="fa-solid fa-seedling"></i> 种植管理
+         <img src="/icons/side2.svg" alt=""> 种植管理
       </div>
       <div class="menu-item">
-        <i class="fa-solid fa-temperature-half"></i> 环境监测
+         <img src="/icons/side3.svg" alt=""> 环境监测
       </div>
-      <div class="menu-item"><i class="fa-solid fa-shield"></i> 植保管理</div>
+      <div class="menu-item"> <img src="/icons/side4.svg" alt=""> 植保管理</div>
       <div class="menu-item">
-        <i class="fa-solid fa-clipboard-list"></i> 作业管理
+         <img src="/icons/side5.svg" alt=""> 作业管理
       </div>
-      <div class="menu-item"><i class="fa-solid fa-coins"></i> 薪酬管理</div>
+      <div class="menu-item"> <img src="/icons/side6.svg" alt=""> 薪酬管理</div>
       <div class="menu-item">
-        <i class="fa-solid fa-chart-line"></i> 产量预测
+         <img src="/icons/side7.svg" alt=""> 产量预测
       </div>
       <div class="menu-item">
-        <i class="fa-solid fa-chart-column"></i> 实时数据大屏
+        <img src="/icons/side8.svg" alt=""> 实时数据大屏
       </div>
       <div class="menu-item active">
-        <i class="fa-solid fa-warehouse"></i> 库存管理
+        <img src="/icons/side9.svg" alt=""> 库存管理
       </div>
       <div class="sub-menu">
         <div class="menu-item" data-menu="inventory">库存信息</div>
@@ -573,7 +644,7 @@
         <div class="menu-item" data-menu="operation-report">运营报表</div>
       </div>
       <div class="menu-item package-management">
-        <i class="fa-solid fa-box"></i> 包装管理
+         <img src="/icons/side10.svg" alt=""> 包装管理
       </div>
     </div>
 
@@ -619,7 +690,10 @@
             <div class="create">
               <a href="">订单排程报告</a>
               <a href="">客户信息</a>
-              <button>创建订单</button>
+              <div class="create-btn-wrapper">
+                <img src="/icons/plus.svg" alt="">
+                <button>创建订单</button>
+              </div>
             </div>
           </div>
           <!-- Tabs -->
@@ -647,43 +721,44 @@
           </div>
 
           <!-- Search and filter bar -->
-          <div class="search-bar">
-            <div class="search-input">
-              <i class="fa-solid fa-magnifying-glass"></i>
-              <input type="text" placeholder="搜索订单、客户、路线..." />
-            </div>
-            <div class="filter-actions">
-              <div class="filter-button">
-                退货状态
-                <span class="count">3</span>
+          <section class="search-bar-container">
+            <div class="search-bar">
+              <div class="search-input">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="搜索订单、客户、路线..." />
               </div>
-              <div class="filter-button">
-                退货状态
-                <span class="count">3</span>
-              </div>
-              <div class="filter-button active">
-                收货状态
-                <span class="count">2</span>
-              </div>
-              <div class="dropdown-button">
-                所有客户
-                <i class="fa-solid fa-chevron-down"></i>
-              </div>
-              <div class="dropdown-button">
-                日期
-                <i class="fa-solid fa-calendar"></i>
-              </div>
-              <div class="dropdown-button">
-                发货用途
-                <i class="fa-solid fa-chevron-down"></i>
+              <div class="filter-actions">
+                <div class="filter-button">
+                  退货状态
+                  <span class="count">3</span>
+                </div>
+                <div class="filter-button">
+                  退货状态
+                  <span class="count">3</span>
+                </div>
+                <div class="filter-button active">
+                  收货状态
+                  <span class="count">2</span>
+                </div>
+                <div class="dropdown-button">
+                  所有客户
+                  <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-button">
+                  日期
+                  <i class="fa-solid fa-calendar"></i>
+                </div>
+                <div class="dropdown-button">
+                  发货用途
+                  <i class="fa-solid fa-chevron-down"></i>
+                </div>
               </div>
             </div>
             <div class="icons">
               <img src="/icons/download.svg" alt="Download Icon" />
               <img src="/icons/setting.svg" alt="Settings Icon" />
             </div>
-          </div>
-
+          </section>
           <!-- Active filters -->
           <div class="active-filters">
             <div class="active-filters-label">活动筛选条件:</div>
@@ -839,4 +914,78 @@
       });
     });
   });
+
+  document.addEventListener('DOMContentLoaded', () => {
+  const tabs = document.querySelectorAll('.tab');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Remove active class from all tabs
+      tabs.forEach(t => t.classList.remove('active'));
+      // Add active class to the clicked tab
+      tab.classList.add('active');
+    });
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const filterButtons = document.querySelectorAll('.filter-button');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Remove active class from all filter buttons
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      // Add active class to the clicked button
+      button.classList.add('active');
+    });
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const filterOptions = document.querySelectorAll('.filter-option');
+  const activeFiltersContainer = document.querySelector('.active-filters');
+
+  // Handle filter option clicks
+  filterOptions.forEach(option => {
+    option.addEventListener('click', () => {
+      const filterText = option.textContent.trim();
+      const isActive = option.classList.contains('active');
+
+      if (!isActive) {
+        // Add active class to option
+        option.classList.add('active');
+        // Create new filter tag
+        const filterTag = document.createElement('div');
+        filterTag.className = 'filter-tag';
+        filterTag.innerHTML = `${filterText} <i class="fas fa-times"></i>`;
+        activeFiltersContainer.appendChild(filterTag);
+      } else {
+        // Remove active class from option
+        option.classList.remove('active');
+        // Remove corresponding filter tag
+        const filterTags = activeFiltersContainer.querySelectorAll('.filter-tag');
+        filterTags.forEach(tag => {
+          if (tag.textContent.includes(filterText)) {
+            tag.remove();
+          }
+        });
+      }
+    });
+  });
+
+  // Handle filter tag remove clicks (using event delegation)
+  activeFiltersContainer.addEventListener('click', (e) => {
+    if (e.target.classList.contains('fas') && e.target.classList.contains('fa-times')) {
+      const filterTag = e.target.parentElement;
+      const filterText = filterTag.textContent.replace('×', '').trim();
+      filterTag.remove();
+      // Update corresponding filter option
+      filterOptions.forEach(option => {
+        if (option.textContent.trim() === filterText) {
+          option.classList.remove('active');
+        }
+      });
+    }
+  });
+});
 </script>
