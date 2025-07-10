@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>生产管理系统 - 订单信息</title>
+  <title data-lang-zh="生产管理系统 - 订单信息" data-lang-en="Production Management System - Order Information">生产管理系统 - 订单信息</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
   <style>
@@ -46,7 +45,6 @@
     .sidebar {
       width: 180px;
       background: #16a34a;
-      /* Updated to exact color from image */
       height: 100vh;
       overflow-y: auto;
       min-width: 180px;
@@ -117,8 +115,7 @@
       margin-left: 43px;
       border-radius: 8px;
       padding: 10px;
-      transition: background-color 0.3s ease, color 0.3s ease,
-        transform 0.3s ease;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
     }
 
     .sub-menu .menu-item.active::before {
@@ -134,7 +131,6 @@
 
     .package-management {
       background-color: #16a34a;
-      /* Match main background */
     }
 
     /* Content area */
@@ -249,58 +245,56 @@
       font-size: 12px;
     }
 
-
     .urgent-order {
       color: #ff4d4f;
     }
 
     /* Tabs */
-.tabs {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
 
-.tab {
-  padding: 8px 16px;
-  cursor: pointer;
-  border-radius: 8px;
-  margin-right: 8px;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; 
-  transform: scale(1); /* Default scale */
-}
+    .tab {
+      padding: 8px 16px;
+      cursor: pointer;
+      border-radius: 8px;
+      margin-right: 8px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      transform: scale(1);
+    }
 
-.tab.active {
-  background-color: #2563EB;
-  color: white;
-  border-radius: 8px;
-  transform: scale(1.05); 
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); 
-}
+    .tab.active {
+      background-color: #2563EB;
+      color: white;
+      border-radius: 8px;
+      transform: scale(1.05);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
 
-.tab:not(.active) {
-  color: #666;
-}
+    .tab:not(.active) {
+      color: #666;
+    }
 
-.tab-count {
-  background-color: #ddd;
-  border-radius: 10px;
-  padding: 2px 8px;
-  font-size: 12px;
-  margin-left: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease; 
-}
+    .tab-count {
+      background-color: #ddd;
+      border-radius: 10px;
+      padding: 2px 8px;
+      font-size: 12px;
+      margin-left: 5px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
 
-.tab.active .tab-count {
-  background-color: #457AEE;
-  color: white;
-}
+    .tab.active .tab-count {
+      background-color: #457AEE;
+      color: white;
+    }
 
     /* Search and filter */
-
     .search-bar-container {
       display: flex;
       justify-content: space-between;
@@ -308,7 +302,6 @@
       margin-bottom: 16px;
       flex-wrap: wrap;
     }
-
 
     .search-bar {
       display: flex;
@@ -344,41 +337,41 @@
     }
 
     .filter-button {
-  padding: 6px 16px;
-  border: 1px solid #ddd;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  font-size: 13px;
-  white-space: nowrap;
-  background: white;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Smooth transition */
-}
+      padding: 6px 16px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      font-size: 13px;
+      white-space: nowrap;
+      background: white;
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
 
-.filter-button.active {
-  background-color: #1890ff;
-  color: white;
-  border-color: #1890ff;
-}
+    .filter-button.active {
+      background-color: #1890ff;
+      color: white;
+      border-color: #1890ff;
+    }
 
-.filter-button:not(.active) {
-  background-color: white;
-  color: #666;
-}
+    .filter-button:not(.active) {
+      background-color: white;
+      color: #666;
+    }
 
-.filter-button .count {
-  margin-left: 4px;
-  background: rgba(0, 0, 0, 0.1);
-  padding: 0 6px;
-  border-radius: 10px;
-  font-size: 12px;
-  transition: background-color 0.3s ease; /* Smooth transition for count */
-}
+    .filter-button .count {
+      margin-left: 4px;
+      background: rgba(0, 0, 0, 0.1);
+      padding: 0 6px;
+      border-radius: 10px;
+      font-size: 12px;
+      transition: background-color 0.3s ease;
+    }
 
-.filter-button.active .count {
-  background: rgba(255, 255, 255, 0.2); /* Slightly lighter for active state */
-}
+    .filter-button.active .count {
+      background: rgba(255, 255, 255, 0.2);
+    }
 
     .dropdown-button {
       padding: 6px 16px;
@@ -399,57 +392,69 @@
       font-size: 12px;
     }
 
+    /* Language switcher */
+    .language-switcher {
+      margin-left: 20px;
+      padding: 6px 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 13px;
+      background: white;
+      color: #666;
+    }
+
     /* Active filters */
     .active-filters {
-  display: flex;
-  align-items: center;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
-}
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
 
-.active-filters-label {
-  color: #666;
-  margin-right: 8px;
-}
+    .active-filters-label {
+      color: #666;
+      margin-right: 8px;
+    }
 
-.filter-tag {
-  background-color: #e6f7ff;
-  color: #1890ff;
-  padding: 6px 8px;
-  border-radius: 100px;
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  margin-right: 8px;
-  border: 1px solid #91d5ff;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
-}
+    .filter-tag {
+      background-color: #e6f7ff;
+      color: #1890ff;
+      padding: 6px 8px;
+      border-radius: 100px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      margin-right: 8px;
+      border: 1px solid #91d5ff;
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    }
 
-.filter-tag i {
-  margin-left: 4px;
-  cursor: pointer;
-  transition: transform 0.3s ease; /* Smooth icon hover effect */
-}
+    .filter-tag i {
+      margin-left: 4px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
 
-.filter-tag i:hover {
-  transform: scale(1.2); /* Slight scale on hover for remove icon */
-}
+    .filter-tag i:hover {
+      transform: scale(1.2);
+    }
 
-.filter-option {
-  padding: 2px 8px;
-  font-size: 12px;
-  color: #666;
-  cursor: pointer;
-  border-radius: 2px;
-  margin-right: 8px;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Smooth transition */
-}
+    .filter-option {
+      padding: 2px 8px;
+      font-size: 12px;
+      color: #666;
+      cursor: pointer;
+      border-radius: 2px;
+      margin-right: 8px;
+      transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    }
 
-.filter-option.active {
-  background-color: #1890ff;
-  color: white;
-  transform: scale(1.05); /* Slight scale for active option */
-}
+    .filter-option.active {
+      background-color: #1890ff;
+      color: white;
+      transform: scale(1.05);
+    }
+
     .icons {
       display: flex;
       align-items: center;
@@ -576,7 +581,7 @@
     }
 
     /* Create button */
-        .create {
+    .create {
       display: flex;
       align-items: center;
       gap: 20px;
@@ -585,7 +590,7 @@
     .create a {
       color: #1890ff;
       text-decoration: none;
-      font-size: 16px;  
+      font-size: 16px;
     }
 
     .create-button {
@@ -630,48 +635,51 @@
     }
   </style>
 </head>
-
 <body>
   <div class="main-container">
     <!-- Sidebar -->
     <div class="sidebar">
       <div class="logo-container">
-        <div class="logo-text">COSMOS 智能未来</div>
-        <div class="logo-subtitle">农业智能系统</div>
+        <div class="logo-text" data-lang-zh="COSMOS 智能未来" data-lang-en="COSMOS Smart Future">COSMOS 智能未来</div>
+        <div class="logo-subtitle" data-lang-zh="农业智能系统" data-lang-en="Agricultural Intelligence System">农业智能系统</div>
       </div>
       <div class="menu-item">
-        <img src="/icons/side1.svg" alt=""> 基地信息
+        <img src="/icons/side1.svg" alt=""> <span data-lang-zh="基地信息" data-lang-en="Base Information">基地信息</span>
       </div>
       <div class="menu-item">
-         <img src="/icons/side2.svg" alt=""> 种植管理
+        <img src="/icons/side2.svg" alt=""> <span data-lang-zh="种植管理" data-lang-en="Planting Management">种植管理</span>
       </div>
       <div class="menu-item">
-         <img src="/icons/side3.svg" alt=""> 环境监测
-      </div>
-      <div class="menu-item"> <img src="/icons/side4.svg" alt=""> 植保管理</div>
-      <div class="menu-item">
-         <img src="/icons/side5.svg" alt=""> 作业管理
-      </div>
-      <div class="menu-item"> <img src="/icons/side6.svg" alt=""> 薪酬管理</div>
-      <div class="menu-item">
-         <img src="/icons/side7.svg" alt=""> 产量预测
+        <img src="/icons/side3.svg" alt=""> <span data-lang-zh="环境监测" data-lang-en="Environmental Monitoring">环境监测</span>
       </div>
       <div class="menu-item">
-        <img src="/icons/side8.svg" alt=""> 实时数据大屏
+        <img src="/icons/side4.svg" alt=""> <span data-lang-zh="植保管理" data-lang-en="Plant Protection Management">植保管理</span>
+      </div>
+      <div class="menu-item">
+        <img src="/icons/side5.svg" alt=""> <span data-lang-zh="作业管理" data-lang-en="Operation Management">作业管理</span>
+      </div>
+      <div class="menu-item">
+        <img src="/icons/side6.svg" alt=""> <span data-lang-zh="薪酬管理" data-lang-en="Payroll Management">薪酬管理</span>
+      </div>
+      <div class="menu-item">
+        <img src="/icons/side7.svg" alt=""> <span data-lang-zh="产量预测" data-lang-en="Yield Prediction">产量预测</span>
+      </div>
+      <div class="menu-item">
+        <img src="/icons/side8.svg" alt=""> <span data-lang-zh="实时数据大屏" data-lang-en="Real-Time Data Dashboard">实时数据大屏</span>
       </div>
       <div class="menu-item active">
-        <img src="/icons/side9.svg" alt=""> 库存管理
+        <img src="/icons/side9.svg" alt=""> <span data-lang-zh="库存管理" data-lang-en="Inventory Management">库存管理</span>
       </div>
       <div class="sub-menu">
-        <div class="menu-item" data-menu="inventory">库存信息</div>
-        <div class="menu-item" data-menu="material">物料信息</div>
-        <div class="menu-item" data-menu="warehouse">仓库信息</div>
-        <div class="menu-item" data-menu="order">订单信息</div>
-        <div class="menu-item" data-menu="inventory-report">库存报表</div>
-        <div class="menu-item" data-menu="operation-report">运营报表</div>
+        <div class="menu-item" data-menu="inventory" data-lang-zh="库存信息" data-lang-en="Inventory Information">库存信息</div>
+        <div class="menu-item" data-menu="material" data-lang-zh="物料信息" data-lang-en="Material Information">物料信息</div>
+        <div class="menu-item" data-menu="warehouse" data-lang-zh="仓库信息" data-lang-en="Warehouse Information">仓库信息</div>
+        <div class="menu-item active" data-menu="order" data-lang-zh="订单信息" data-lang-en="Order Information">订单信息</div>
+        <div class="menu-item" data-menu="inventory-report" data-lang-zh="库存报表" data-lang-en="Inventory Report">库存报表</div>
+        <div class="menu-item" data-menu="operation-report" data-lang-zh="运营报表" data-lang-en="Operational Report">运营报表</div>
       </div>
       <div class="menu-item package-management">
-         <img src="/icons/side10.svg" alt=""> 包装管理
+        <img src="/icons/side10.svg" alt=""> <span data-lang-zh="包装管理" data-lang-en="Packaging Management">包装管理</span>
       </div>
     </div>
 
@@ -680,18 +688,22 @@
       <!-- Header -->
       <div class="header">
         <div class="header-left">
-          <h1 class="header-title">生产管理系统</h1>
-          <div class="breadcrumb">库存管理 / 订单信息</div>
+          <h1 class="header-title" data-lang-zh="生产管理系统" data-lang-en="Production Management System">生产管理系统</h1>
+          <div class="breadcrumb" data-lang-zh="库存管理 / 订单信息" data-lang-en="Inventory Management / Order Information">库存管理 / 订单信息</div>
         </div>
         <div class="header-right">
           <div class="location-info">
-            <span class="dot">●</span> 拜耳康普基地
+            <span class="dot">●</span> <span data-lang-zh="拜耳康普基地" data-lang-en="Bayer Comp Base">拜耳康普基地</span>
             <i class="fa-solid fa-chevron-down" style="margin-left: 4px; font-size: 10px"></i>
           </div>
           <div class="user-info" style="margin-left: 20px">
             <div class="user-avatar">BP</div>
-            <span style="margin-left: 8px">拜耳产品 (集团管理)</span>
+            <span style="margin-left: 8px" data-lang-zh="拜耳产品 (集团管理)" data-lang-en="Bayer Products (Group Management)">拜耳产品 (集团管理)</span>
           </div>
+          <select class="language-switcher" onchange="switchLanguage(this.value)">
+            <option value="zh">中文</option>
+            <option value="en">EN</option>
+          </select>
         </div>
       </div>
 
@@ -701,48 +713,48 @@
           <!-- Order info header -->
           <div class="order-info">
             <div class="order-title">
-              订单信息
+              <span data-lang-zh="订单信息" data-lang-en="Order Information">订单信息</span>
               <div class="order-meta">
                 <div class="order-meta-item">
-                  <i class="fa-regular fa-circle"></i> 共: 247条订单
+                  <i class="fa-regular fa-circle"></i> <span data-lang-zh="共: 247条订单" data-lang-en="Total: 247 Orders">共: 247条订单</span>
                 </div>
                 <div class="order-meta-item">
-                  <i class="fa-regular fa-clock"></i> 更新时间: 分钟前
+                  <i class="fa-regular fa-clock"></i> <span data-lang-zh="更新时间: 分钟前" data-lang-en="Update Time: Minutes Ago">更新时间: 分钟前</span>
                 </div>
                 <div class="order-meta-item urgent-order">
-                  <i class="fa-solid fa-triangle-exclamation"></i> 2条紧急订单
+                  <i class="fa-solid fa-triangle-exclamation"></i> <span data-lang-zh="2条紧急订单" data-lang-en="2 Urgent Orders">2条紧急订单</span>
                 </div>
               </div>
             </div>
             <div class="create">
-              <a href="">订单排程报告</a>
-              <a href="">客户信息</a>
+              <a href="" data-lang-zh="订单排程报告" data-lang-en="Order Schedule Report">订单排程报告</a>
+              <a href="" data-lang-zh="客户信息" data-lang-en="Customer Information">客户信息</a>
               <div class="create-btn-wrapper">
                 <img src="/icons/plus.svg" alt="">
-                <button>创建订单</button>
+                <button data-lang-zh="创建订单" data-lang-en="Create Order">创建订单</button>
               </div>
             </div>
           </div>
           <!-- Tabs -->
           <div class="tabs">
             <div class="tab active">
-              全部
+              <span data-lang-zh="全部" data-lang-en="All">全部</span>
               <span class="tab-count">247</span>
             </div>
             <div class="tab">
-              代发货
+              <span data-lang-zh="代发货" data-lang-en="Pending Shipment">代发货</span>
               <span class="tab-count">0</span>
             </div>
             <div class="tab">
-              已发货
+              <span data-lang-zh="已发货" data-lang-en="Shipped">已发货</span>
               <span class="tab-count">0</span>
             </div>
             <div class="tab">
-              已完成
+              <span data-lang-zh="已完成" data-lang-en="Completed">已完成</span>
               <span class="tab-count">156</span>
             </div>
             <div class="tab">
-              已取消
+              <span data-lang-zh="已取消" data-lang-en="Canceled">已取消</span>
               <span class="tab-count">12</span>
             </div>
           </div>
@@ -752,31 +764,31 @@
             <div class="search-bar">
               <div class="search-input">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="搜索订单、客户、路线..." />
+                <input type="text" data-lang-zh="搜索订单、客户、路线..." data-lang-en="Search orders, customers, routes..." placeholder="搜索订单、客户、路线..." />
               </div>
               <div class="filter-actions">
                 <div class="filter-button">
-                  退货状态
+                  <span data-lang-zh="退货状态" data-lang-en="Return Status">退货状态</span>
                   <span class="count">3</span>
                 </div>
                 <div class="filter-button">
-                  退货状态
+                  <span data-lang-zh="退货状态" data-lang-en="Return Status">退货状态</span>
                   <span class="count">3</span>
                 </div>
                 <div class="filter-button active">
-                  收货状态
+                  <span data-lang-zh="收货状态" data-lang-en="Received Status">收货状态</span>
                   <span class="count">2</span>
                 </div>
                 <div class="dropdown-button">
-                  所有客户
+                  <span data-lang-zh="所有客户" data-lang-en="All Customers">所有客户</span>
                   <i class="fa-solid fa-chevron-down"></i>
                 </div>
                 <div class="dropdown-button">
-                  日期
+                  <span data-lang-zh="日期" data-lang-en="Date">日期</span>
                   <i class="fa-solid fa-calendar"></i>
                 </div>
                 <div class="dropdown-button">
-                  发货用途
+                  <span data-lang-zh="发货用途" data-lang-en="Shipment Purpose">发货用途</span>
                   <i class="fa-solid fa-chevron-down"></i>
                 </div>
               </div>
@@ -788,13 +800,13 @@
           </section>
           <!-- Active filters -->
           <div class="active-filters">
-            <div class="active-filters-label">活动筛选条件:</div>
+            <div class="active-filters-label" data-lang-zh="活动筛选条件:" data-lang-en="Active Filter Conditions:">活动筛选条件:</div>
             <div class="filter-tag">
-              已发货
+              <span data-lang-zh="已发货" data-lang-en="Shipped">已发货</span>
               <i class="fa-solid fa-xmark"></i>
             </div>
-            <div class="filter-option">未发货</div>
-            <div class="filter-option">清除全部</div>
+            <div class="filter-option" data-lang-zh="未发货" data-lang-en="Not Shipped">未发货</div>
+            <div class="filter-option" data-lang-zh="清除全部" data-lang-en="Clear All">清除全部</div>
           </div>
         </div>
       </section>
@@ -806,14 +818,14 @@
               <th style="width: 40px">
                 <input type="checkbox" class="checkbox" />
               </th>
-              <th>订单编号</th>
-              <th>客户</th>
-              <th>计划交货日期</th>
-              <th>发货用途</th>
-              <th>重量</th>
-              <th>优先级</th>
-              <th>状态</th>
-              <th>操作</th>
+              <th data-lang-zh="订单编号" data-lang-en="Order Number">订单编号</th>
+              <th data-lang-zh="客户" data-lang-en="Customer">客户</th>
+              <th data-lang-zh="计划交货日期" data-lang-en="Planned Delivery Date">计划交货日期</th>
+              <th data-lang-zh="发货用途" data-lang-en="Shipment Purpose">发货用途</th>
+              <th data-lang-zh="重量" data-lang-en="Weight">重量</th>
+              <th data-lang-zh="优先级" data-lang-en="Priority">优先级</th>
+              <th data-lang-zh="状态" data-lang-en="Status">状态</th>
+              <th data-lang-zh="操作" data-lang-en="Actions">操作</th>
             </tr>
           </thead>
           <tbody>
@@ -826,9 +838,9 @@
               <td>2025-03-04</td>
               <td><span class="route-tag">@111</span></td>
               <td>63 kg</td>
-              <td><span class="priority-normal">正常</span></td>
-              <td><span class="status-pending">未发货</span></td>
-              <td><a href="#" style="color: #1890ff">详情...</a></td>
+              <td><span class="priority-normal" data-lang-zh="正常" data-lang-en="Normal">正常</span></td>
+              <td><span class="status-pending" data-lang-zh="未发货" data-lang-en="Not Shipped">未发货</span></td>
+              <td><a href="#" style="color: #1890ff" data-lang-zh="详情..." data-lang-en="Details...">详情...</a></td>
             </tr>
             <tr class="warning-row">
               <td>
@@ -838,13 +850,13 @@
                 <i class="fa-solid fa-triangle-exclamation alert-icon"></i>
                 SO2503170001
               </td>
-              <td>这是一个测试-去去味</td>
+              <td data-lang-zh="这是一个测试-去去味" data-lang-en="This is a test - Deodorize">这是一个测试-去去味</td>
               <td>2025-03-04</td>
               <td>-</td>
               <td>1 kg</td>
-              <td><span class="priority-high">高</span></td>
-              <td><span class="status-pending">未发货</span></td>
-              <td><a href="#" style="color: #1890ff">详情...</a></td>
+              <td><span class="priority-high" data-lang-zh="高" data-lang-en="High">高</span></td>
+              <td><span class="status-pending" data-lang-zh="未发货" data-lang-en="Not Shipped">未发货</span></td>
+              <td><a href="#" style="color: #1890ff" data-lang-zh="详情..." data-lang-en="Details...">详情...</a></td>
             </tr>
             <tr class="warning-row">
               <td>
@@ -854,26 +866,26 @@
                 <i class="fa-solid fa-triangle-exclamation alert-icon"></i>
                 SO2503130001
               </td>
-              <td>这是一个测试-去去味</td>
+              <td data-lang-zh="这是一个测试-去去味" data-lang-en="This is a test - Deodorize">这是一个测试-去去味</td>
               <td>2025-03-13</td>
               <td><span class="route-tag">@111</span></td>
               <td>355 kg</td>
-              <td><span class="priority-urgent">紧急</span></td>
-              <td><span class="status-pending">未发货</span></td>
-              <td><a href="#" style="color: #1890ff">详情...</a></td>
+              <td><span class="priority-urgent" data-lang-zh="紧急" data-lang-en="Urgent">紧急</span></td>
+              <td><span class="status-pending" data-lang-zh="未发货" data-lang-en="Not Shipped">未发货</span></td>
+              <td><a href="#" style="color: #1890ff" data-lang-zh="详情..." data-lang-en="Details...">详情...</a></td>
             </tr>
             <tr>
               <td>
                 <input type="checkbox" class="checkbox" />
               </td>
               <td>SO2503120003</td>
-              <td>这是一个测试-去去味</td>
+              <td data-lang-zh="这是一个测试-去去味" data-lang-en="This is a test - Deodorize">这是一个测试-去去味</td>
               <td>2025-03-04</td>
               <td><span class="route-tag">@111</span></td>
               <td>12 kg</td>
-              <td><span class="priority-normal">正常</span></td>
-              <td><span class="status-completed">已收货</span></td>
-              <td><a href="#" style="color: #1890ff">详情...</a></td>
+              <td><span class="priority-normal" data-lang-zh="正常" data-lang-en="Normal">正常</span></td>
+              <td><span class="status-completed" data-lang-zh="已收货" data-lang-en="Received">已收货</span></td>
+              <td><a href="#" style="color: #1890ff" data-lang-zh="详情..." data-lang-en="Details...">详情...</a></td>
             </tr>
             <tr>
               <td>
@@ -882,137 +894,134 @@
               <td>SO2503120002</td>
               <td>test - C02</td>
               <td>2025-03-19</td>
-              <td><span class="route-tag">@销售</span></td>
+              <td><span class="route-tag" data-lang-zh="@销售" data-lang-en="@Sales">@销售</span></td>
               <td>-</td>
-              <td><span class="priority-normal">正常</span></td>
-              <td><span class="status-completed">已收货</span></td>
-              <td><a href="#" style="color: #1890ff">详情...</a></td>
+              <td><span class="priority-normal" data-lang-zh="正常" data-lang-en="Normal">正常</span></td>
+              <td><span class="status-completed" data-lang-zh="已收货" data-lang-en="Received">已收货</span></td>
+              <td><a href="#" style="color: #1890ff" data-lang-zh="详情..." data-lang-en="Details...">详情...</a></td>
             </tr>
             <tr>
               <td>
                 <input type="checkbox" class="checkbox" />
               </td>
               <td>SO2503120001</td>
-              <td>这是一个测试-去去味</td>
+              <td data-lang-zh="这是一个测试-去去味" data-lang-en="This is a test - Deodorize">这是一个测试-去去味</td>
               <td>2025-03-12</td>
               <td><span class="route-tag">@222</span></td>
               <td>122 kg</td>
-              <td><span class="priority-normal">正常</span></td>
-              <td><span class="status-completed">已收货</span></td>
-              <td><a href="#" style="color: #1890ff">详情...</a></td>
+              <td><span class="priority-normal" data-lang-zh="正常" data-lang-en="Normal">正常</span></td>
+              <td><span class="status-completed" data-lang-zh="已收货" data-lang-en="Received">已收货</span></td>
+              <td><a href="#" style="color: #1890ff" data-lang-zh="详情..." data-lang-en="Details...">详情...</a></td>
             </tr>
             <tr>
               <td>
                 <input type="checkbox" class="checkbox" />
               </td>
               <td>SO2503050002</td>
-              <td>这是一个测试-去去味</td>
+              <td data-lang-zh="这是一个测试-去去味" data-lang-en="This is a test - Deodorize">这是一个测试-去去味</td>
               <td>2025-03-05</td>
               <td><span class="route-tag">@222</span></td>
               <td>2 kg</td>
-              <td><span class="priority-low">低</span></td>
-              <td><span class="status-completed">已收货</span></td>
-              <td><a href="#" style="color: #1890ff">详情...</a></td>
+              <td><span class="priority-low" data-lang-zh="低" data-lang-en="Low">低</span></td>
+              <td><span class="status-completed" data-lang-zh="已收货" data-lang-en="Received">已收货</span></td>
+              <td><a href="#" style="color: #1890ff" data-lang-zh="详情..." data-lang-en="Details...">详情...</a></td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
   </div>
-  </div>
-</body>
-
-</html>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const menuItems = document.querySelectorAll(".sub-menu .menu-item");
-    const currentPath = window.location.pathname;
-    menuItems.forEach((item) => {
-      if (currentPath.includes(item.getAttribute("data-menu"))) {
-        item.classList.add("active");
-      }
-    });
-
-    menuItems.forEach((item) => {
-      item.addEventListener("click", () => {
-        menuItems.forEach((i) => i.classList.remove("active"));
-        item.classList.add("active");
-      });
-    });
-  });
-
-  document.addEventListener('DOMContentLoaded', () => {
-  const tabs = document.querySelectorAll('.tab');
-
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      // Remove active class from all tabs
-      tabs.forEach(t => t.classList.remove('active'));
-      // Add active class to the clicked tab
-      tab.classList.add('active');
-    });
-  });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  const filterButtons = document.querySelectorAll('.filter-button');
-
-  filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      // Remove active class from all filter buttons
-      filterButtons.forEach(btn => btn.classList.remove('active'));
-      // Add active class to the clicked button
-      button.classList.add('active');
-    });
-  });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  const filterOptions = document.querySelectorAll('.filter-option');
-  const activeFiltersContainer = document.querySelector('.active-filters');
-
-  // Handle filter option clicks
-  filterOptions.forEach(option => {
-    option.addEventListener('click', () => {
-      const filterText = option.textContent.trim();
-      const isActive = option.classList.contains('active');
-
-      if (!isActive) {
-        // Add active class to option
-        option.classList.add('active');
-        // Create new filter tag
-        const filterTag = document.createElement('div');
-        filterTag.className = 'filter-tag';
-        filterTag.innerHTML = `${filterText} <i class="fas fa-times"></i>`;
-        activeFiltersContainer.appendChild(filterTag);
-      } else {
-        // Remove active class from option
-        option.classList.remove('active');
-        // Remove corresponding filter tag
-        const filterTags = activeFiltersContainer.querySelectorAll('.filter-tag');
-        filterTags.forEach(tag => {
-          if (tag.textContent.includes(filterText)) {
-            tag.remove();
-          }
-        });
-      }
-    });
-  });
-
-  // Handle filter tag remove clicks (using event delegation)
-  activeFiltersContainer.addEventListener('click', (e) => {
-    if (e.target.classList.contains('fas') && e.target.classList.contains('fa-times')) {
-      const filterTag = e.target.parentElement;
-      const filterText = filterTag.textContent.replace('×', '').trim();
-      filterTag.remove();
-      // Update corresponding filter option
-      filterOptions.forEach(option => {
-        if (option.textContent.trim() === filterText) {
-          option.classList.remove('active');
+  <script>
+    function switchLanguage(lang) {
+      const elements = document.querySelectorAll('[data-lang-zh], [data-lang-en]');
+      elements.forEach(el => {
+        const text = el.getAttribute(`data-lang-${lang}`);
+        if (text) {
+          el.textContent = text;
         }
       });
+      // Update placeholder for search input
+      const searchInput = document.querySelector('.search-input input');
+      searchInput.placeholder = searchInput.getAttribute(`data-lang-${lang}`);
     }
-  });
-});
-</script>
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuItems = document.querySelectorAll(".sub-menu .menu-item");
+      const currentPath = window.location.pathname;
+      menuItems.forEach((item) => {
+        if (currentPath.includes(item.getAttribute("data-menu"))) {
+          item.classList.add("active");
+        }
+      });
+
+      menuItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          menuItems.forEach((i) => i.classList.remove("active"));
+          item.classList.add("active");
+        });
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabs = document.querySelectorAll('.tab');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+        });
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterButtons = document.querySelectorAll('.filter-button');
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+        });
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterOptions = document.querySelectorAll('.filter-option');
+      const activeFiltersContainer = document.querySelector('.active-filters');
+      filterOptions.forEach(option => {
+        option.addEventListener('click', () => {
+          const filterText = option.getAttribute(`data-lang-${document.querySelector('.language-switcher').value || 'zh'}`);
+          const isActive = option.classList.contains('active');
+          if (!isActive) {
+            option.classList.add('active');
+            const filterTag = document.createElement('div');
+            filterTag.className = 'filter-tag';
+            filterTag.innerHTML = `${filterText} <i class="fas fa-times"></i>`;
+            filterTag.setAttribute('data-lang-zh', option.getAttribute('data-lang-zh'));
+            filterTag.setAttribute('data-lang-en', option.getAttribute('data-lang-en'));
+            activeFiltersContainer.appendChild(filterTag);
+          } else {
+            option.classList.remove('active');
+            const filterTags = activeFiltersContainer.querySelectorAll('.filter-tag');
+            filterTags.forEach(tag => {
+              if (tag.getAttribute(`data-lang-${document.querySelector('.language-switcher').value || 'zh'}`) === filterText) {
+                tag.remove();
+              }
+            });
+          }
+        });
+      });
+
+      activeFiltersContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('fas') && e.target.classList.contains('fa-times')) {
+          const filterTag = e.target.parentElement;
+          const filterText = filterTag.getAttribute(`data-lang-${document.querySelector('.language-switcher').value || 'zh'}`);
+          filterTag.remove();
+          filterOptions.forEach(option => {
+            if (option.getAttribute(`data-lang-${document.querySelector('.language-switcher').value || 'zh'}`) === filterText) {
+              option.classList.remove('active');
+            }
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
